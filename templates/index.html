@@ -78,6 +78,14 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .contact-badge:hover, .contact-badge:active {
+            background: #E2E8F0;
+            transform: scale(0.98);
         }
 
         /* Hero */
@@ -222,7 +230,7 @@
             <img src="/static/logo.png" alt="Cinderella Travel" class="brand-logo" onerror="this.style.display='none'">
             <div class="brand-title">Cinderella <span>Travel</span></div>
         </div>
-        <div class="contact-badge">📞 +221 78 184 00 00</div>
+        <a href="tel:+221781840000" class="contact-badge">📞 +221 78 184 00 00</a>
     </header>
 
     <section class="hero">
