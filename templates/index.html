@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cinderella Travel - Voyages & Tourisme</title>
+    <link rel="icon" href="/static/logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A365D;       /* Royal Blue */
+            --accent-cyan: #00D4FF;    /* Cyan */
+            --accent-magenta: #E91E63; /* Pink */
+            --bg-light: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-muted: #64748B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background: #FFFFFF;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #E2E8F0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .brand-logo {
+            height: 48px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .brand-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.1;
+        }
+
+        .brand-title span {
+            color: var(--accent-magenta);
+            font-weight: 600;
+        }
+
+        .contact-badge {
+            font-size: 13px;
+            font-weight: 600;
+            background: #F1F5F9;
+            color: var(--primary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid #CBD5E1;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 28px 16px 18px;
+        }
+
+        .hero h1 {
+            font-size: 24px;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Container & Card */
+        .container {
+            width: 100%;
+            max-width: 520px;
+            margin: 0 auto 35px;
+            padding: 0 16px;
+        }
+
+        .booking-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 24px 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            border-top: 5px solid var(--accent-magenta);
+        }
+
+        .trip-type-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            background: #E2E8F0;
+            padding: 4px;
+            border-radius: 12px;
+        }
+
+        .trip-type-selector label {
+            flex: 1;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .trip-type-selector input[type="radio"] {
+            display: none;
+        }
+
+        .trip-type-selector span {
+            display: block;
+            padding: 9px 0;
+            border-radius: 9px;
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+        }
+
+        .trip-type-selector input[type="radio"]:checked + span {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 2px 8px rgba(26, 54, 93, 0.25);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--primary);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+            background: #F8FAFC;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--accent-cyan);
+            background: #FFFFFF;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        #return-date-container {
+            display: none;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            margin-top: 10px;
+            background: linear-gradient(135deg, var(--accent-magenta) 0%, #C2185B 100%);
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(233, 30, 99, 0.35);
+            transition: transform 0.15s ease;
+        }
+
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+
+        @media (max-width: 480px) {
+            .brand-logo { height: 40px; }
+            .brand-title { font-size: 18px; }
+            .contact-badge { font-size: 11px; padding: 5px 10px; }
+            .grid-2 { grid-template-columns: 1fr; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand-container">
+            <img src="/static/logo.png" alt="Cinderella Travel" class="brand-logo" onerror="this.style.display='none'">
+            <div class="brand-title">Cinderella <span>Travel</span></div>
+        </div>
+        <div class="contact-badge">📞 +221 78 184 00 00</div>
+    </header>
+
+    <section class="hero">
+        <h1>Travel Booking & Inquiries</h1>
+        <p>Flights, Visas, Hotels & Holiday Packages</p>
+    </section>
+
+    <div class="container">
+        <div class="booking-card">
+            <form id="bookingForm" onsubmit="sendToWhatsApp(event)">
+                
+                <div class="trip-type-selector">
+                    <label>
+                        <input type="radio" name="trip_type" value="One Way" checked onchange="toggleReturnDate()">
+                        <span>One Way</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="trip_type" value="Round Trip" onchange="toggleReturnDate()">
+                        <span>Round Trip</span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="full_name" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Service Required</label>
+                    <select id="service_type">
+                        <option value="Flight Ticket">Flight Ticket</option>
+                        <option value="Visa Assistance">Visa Assistance</option>
+                        <option value="Hotel Reservation">Hotel Reservation</option>
+                        <option value="Holiday Package">Holiday Package</option>
+                    </select>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Departure City</label>
+                        <input type="text" id="departure" placeholder="e.g. Dakar" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Destination City</label>
+                        <input type="text" id="destination" placeholder="e.g. Paris, Dubai" required>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Departure Date</label>
+                        <input type="date" id="departure_date" required>
+                    </div>
+                    <div class="form-group" id="return-date-container">
+                        <label>Return Date</label>
+                        <input type="date" id="return_date">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Number of Passengers</label>
+                    <input type="number" id="passengers" value="1" min="1" max="50" required>
+                </div>
+
+                <button type="submit" class="btn-submit">Inquire on WhatsApp 💬</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function toggleReturnDate() {
+            const isRoundTrip = document.querySelector('input[name="trip_type"]:checked').value === "Round Trip";
+            const returnContainer = document.getElementById('return-date-container');
+            const returnInput = document.getElementById('return_date');
+            
+            if (isRoundTrip) {
+                returnContainer.style.display = 'block';
+                returnInput.required = true;
+            } else {
+                returnContainer.style.display = 'none';
+                returnInput.required = false;
+                returnInput.value = '';
+            }
+        }
+
+        function sendToWhatsApp(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('full_name').value.trim();
+            const service = document.getElementById('service_type').value;
+            const tripType = document.querySelector('input[name="trip_type"]:checked').value;
+            const dep = document.getElementById('departure').value.trim();
+            const des = document.getElementById('destination').value.trim();
+            const depDate = document.getElementById('departure_date').value;
+            const retDate = document.getElementById('return_date').value;
+            const pax = document.getElementById('passengers').value;
+
+            let dateMsg = `📅 *Departure:* ${depDate}`;
+            if (tripType === 'Round Trip' && retDate) {
+                dateMsg += `\n📅 *Return:* ${retDate}`;
+            }
+
+            const message = 
+                `✈️ *Cinderella Travel Inquiry*\n` +
+                `---------------------------\n` +
+                `👤 *Name:* ${name}\n` +
+                `🛎️ *Service:* ${service}\n` +
+                `🔄 *Trip Type:* ${tripType}\n` +
+                `🛫 *From:* ${dep}\n` +
+                `🛬 *To:* ${des}\n` +
+                `${dateMsg}\n` +
+                `👥 *Passengers:* ${pax}\n` +
+                `---------------------------`;
+
+            const phone = "221781840000";
+            const encoded = encodeURIComponent(message);
+            window.location.href = `https://api.whatsapp.com/send?phone=${phone}&text=${encoded}`;
+        }
+    </script>
+</body>
+</html>
