@@ -879,59 +879,67 @@
         }
 
         // Send formatted WhatsApp message
-        function sendToWhatsApp(e) {
-            e.preventDefault();
+   function sendToWhatsApp(e) {
+            if (e) e.preventDefault();
             
-            const name = document.getElementById('full_name').value.trim();
-            const service = document.getElementById('service_type').value;
-            const cabinClass = document.getElementById('cabin_class').value;
-            const tripType = document.querySelector('input[name="trip_type"]:checked').value;
-            const directOnly = document.getElementById('direct_flights_only').checked ? "Yes (Non-Stop)" : "No preference";
-            
-            const adults = document.getElementById('pax_adults').value;
-            const children = document.getElementById('pax_children').value;
-            const infants = document.getElementById('pax_infants').value;
-            const notes = document.getElementById('special_notes').value.trim();
+            try {
+                const name = (document.getElementById('full_name')?.value || '').trim();
+                const service = document.getElementById('service_type')?.value || 'Flight Ticket';
+                const cabinClass = document.getElementById('cabin_class')?.value || 'Economy';
+                const tripTypeEl = document.querySelector('input[name="trip_type"]:checked');
+                const tripType = tripTypeEl ? tripTypeEl.value : 'One Way';
+                const isDirect = document.getElementById('direct_flights_only')?.checked ? "Yes (Direct / Non-Stop)" : "No preference";
+                
+                const adults = document.getElementById('pax_adults')?.value || '1';
+                const children = document.getElementById('pax_children')?.value || '0';
+                const infants = document.getElementById('pax_infants')?.value || '0';
+                const notes = (document.getElementById('special_notes')?.value || '').trim();
 
-            let itineraryText = "";
-            if (tripType === 'Multi-City') {
-                const legs = document.querySelectorAll('.multi-leg');
-                legs.forEach((leg, index) => {
-                    const from = leg.querySelector('.multi-from').value.trim();
-                    const to = leg.querySelector('.multi-to').value.trim();
-                    const date = leg.querySelector('.multi-date').value;
-                    if (from && to) {
-                        itineraryText += `\n✈️ *Leg ${index + 1}:*${from} ➔ ${to} (${date || 'Open Date'})`;
+                let routeDetails = "";
+
+                if (tripType === 'Multi-City') {
+                    const legs = document.querySelectorAll('.multi-leg');
+                    legs.forEach((leg, idx) => {
+                        const from = leg.querySelector('.multi-from')?.value.trim();
+                        const to = leg.querySelector('.multi-to')?.value.trim();
+                        const date = leg.querySelector('.multi-date')?.value;
+                        if (from || to) {
+                            routeDetails += `\n✈️ *Vol ${idx + 1}:*${from || 'N/A'} ➔ ${to \vert{}\vert{} 'N/A'} (${date || 'Open Date'})`;
+                        }
+                    });
+                } else {
+                    const dep = (document.getElementById('departure')?.value || '').trim();
+                    const des = (document.getElementById('destination')?.value || '').trim();
+                    const depDate = document.getElementById('departure_date')?.value || '';
+                    const retDate = document.getElementById('return_date')?.value || '';
+
+                    routeDetails = `🛫 *From:* ${dep}\n🛬 *To:* ${des}\n📅 *Departure Date:* \${depDate}`;
+                    if (tripType === 'Round Trip' && retDate) {
+                        routeDetails += `\n📅 *Return Date:* \${retDate}`;
                     }
-                });
-            } else {
-                const dep = document.getElementById('departure').value.trim();
-                const des = document.getElementById('destination').value.trim();
-                const depDate = document.getElementById('departure_date').value;
-                const retDate = document.getElementById('return_date').value;
-
-                itineraryText = `🛫 *From:* ${dep}\n🛬 *To:* ${des}\n📅 *Departure Date:* \${depDate}`;
-                if (tripType === 'Round Trip' && retDate) {
-                    itineraryText += `\n📅 *Return Date:* \${retDate}`;
                 }
+
+                let message = 
+                    `🌟 *Cinderella Travel Dakar - New Inquiry*\n` +
+                    `===============================\n` +
+                    `👤 *Client Name:* \${name}\n` +
+                    `🛎️ *Service:* \${service}\n` +
+                    (service === 'Flight Ticket' ? `🎫 *Class:* \${cabinClass}\n🔄 *Trip Type:* \${tripType}\n${routeDetails}\n⚡ *Direct Only:*${isDirect}\n` : ``) +
+                    `👥 *Passengers:* \${adults} Adult(s), ${children} Child,${infants} Infant\n` +
+                    (notes ? `📝 *Notes/Preferences:* \${notes}\n` : ``) +
+                    `===============================`;
+
+                const phone = "221781840000";
+                const encodedMsg = encodeURIComponent(message);
+                
+                // Direct WhatsApp URL (works seamlessly on Android, iPhone & Desktop)
+                const waUrl = `https://wa.me/${phone}?text=${encodedMsg}`;
+                window.location.href = waUrl;
+
+            } catch (err) {
+                console.error("Error creating WhatsApp message:", err);
+                alert("Please ensure all required fields are filled.");
             }
-
-            const message = 
-                `🌟 *Cinderella Travel Dakar - New Inquiry*\n` +
-                `===============================\n` +
-                `👤 *Client Name:* \${name}\n` +
-                `🛎️ *Service:* \${service}\n` +
-                `🎫 *Travel Class:* \${cabinClass}\n` +
-                `🔄 *Trip Type:* \${tripType}\n` +
-                `\${itineraryText}\n` +
-                `👥 *Pax:* \${adults} Adult(s), ${children} Child(ren),${infants} Infant(s)\n` +
-                `⚡ *Direct Flight Only:* \${directOnly}\n` +
-                (notes ? `📝 *Notes/Preferences:* \${notes}\n` : ``) +
-                `===============================`;
-
-            const phone = "221781840000";
-            const encoded = encodeURIComponent(message);
-            window.location.href = `https://api.whatsapp.com/send?phone=${phone}&text=${encoded}`;
         }
     </script>
 </body>
