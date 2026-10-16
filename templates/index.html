@@ -138,55 +138,6 @@
             flex: 1;
         }
 
-        /* Popular Offers */
-        .offers-section {
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .offers-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-
-        .offer-card {
-            background: #FFFFFF;
-            border: 1.5px solid #E2E8F0;
-            border-radius: 12px;
-            padding: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .offer-card:hover {
-            border-color: var(--accent-magenta);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(233, 30, 99, 0.15);
-        }
-
-        .offer-card .route {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .offer-card .tag {
-            font-size: 10px;
-            color: var(--accent-magenta);
-            font-weight: 600;
-        }
-
         /* Booking Card */
         .booking-card {
             background: var(--card-bg);
@@ -410,13 +361,6 @@
             z-index: 999;
             text-decoration: none;
             font-size: 28px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
         /* Footer */
@@ -451,7 +395,6 @@
             .brand-logo { height: 38px; }
             .brand-title { font-size: 16px; }
             .contact-badge { font-size: 10px; padding: 5px 8px; }
-            .offers-grid { grid-template-columns: 1fr 1fr; }
             .grid-2 { grid-template-columns: 1fr; }
             .grid-3 { grid-template-columns: 1fr; }
         }
@@ -479,61 +422,45 @@
     </section>
 
     <div class="container">
-        
-        <!-- Popular Deals Section -->
-        <div class="offers-section">
-            <div class="section-title">🔥 <span id="txt-popular">Popular Routes from Dakar</span></div>
-            <div class="offers-grid">
-                <div class="offer-card" onclick="quickFill('DSS', 'CDG')">
-                    <div class="route">DSS ➔ Paris (CDG)</div>
-                    <div class="tag" id="txt-direct1">Direct / Transit</div>
-                </div>
-                <div class="offer-card" onclick="quickFill('DSS', 'DXB')">
-                    <div class="route">DSS ➔ Dubai (DXB)</div>
-                    <div class="tag">Top Holiday</div>
-                </div>
-                <div class="offer-card" onclick="quickFill('DSS', 'CMN')">
-                    <div class="route">DSS ➔ Casablanca</div>
-                    <div class="tag">Daily Flights</div>
-                </div>
-            </div>
-        </div>
-
         <div class="booking-card">
             <form id="bookingForm" onsubmit="sendToWhatsApp(event)">
                 
-                <!-- Trip Type Tabs -->
-                <div class="trip-type-selector">
-                    <label>
-                        <input type="radio" name="trip_type" value="One Way" checked onchange="handleTripTypeChange()">
-                        <span id="tab-oneway">One Way</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="trip_type" value="Round Trip" onchange="handleTripTypeChange()">
-                        <span id="tab-round">Round Trip</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="trip_type" value="Multi-City" onchange="handleTripTypeChange()">
-                        <span id="tab-multi">Multi-City</span>
-                    </label>
+                <!-- Service Selector (First Choice) -->
+                <div class="form-group">
+                    <label id="lbl-service">Service Required</label>
+                    <select id="service_type" onchange="handleServiceChange()">
+                        <option value="Flight Ticket">Flight Ticket (Billet d'avion)</option>
+                        <option value="Visa Assistance">Visa Assistance</option>
+                        <option value="Hotel Reservation">Hotel Reservation</option>
+                        <option value="Holiday Package">Holiday Package (Séjour)</option>
+                    </select>
                 </div>
 
+                <!-- Client Name -->
                 <div class="form-group">
                     <label id="lbl-fullname">Full Name</label>
                     <input type="text" id="full_name" placeholder="Enter your full name" required>
                 </div>
 
-                <div class="grid-2">
-                    <div class="form-group">
-                        <label id="lbl-service">Service Required</label>
-                        <select id="service_type" onchange="handleServiceChange()">
-                            <option value="Flight Ticket">Flight Ticket</option>
-                            <option value="Visa Assistance">Visa Assistance</option>
-                            <option value="Hotel Reservation">Hotel Reservation</option>
-                            <option value="Holiday Package">Holiday Package</option>
-                        </select>
+                <!-- ================= 1. FLIGHT TICKET SECTION ================= -->
+                <div id="flight-section">
+                    <!-- Trip Type Tabs (Only for Flights) -->
+                    <div class="trip-type-selector">
+                        <label>
+                            <input type="radio" name="trip_type" value="One Way" checked onchange="handleFlightTripType()">
+                            <span id="tab-oneway">One Way</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="trip_type" value="Round Trip" onchange="handleFlightTripType()">
+                            <span id="tab-round">Round Trip</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="trip_type" value="Multi-City" onchange="handleFlightTripType()">
+                            <span id="tab-multi">Multi-City</span>
+                        </label>
                     </div>
-                    <div class="form-group" id="cabin-class-container">
+
+                    <div class="form-group">
                         <label id="lbl-class">Travel Class</label>
                         <select id="cabin_class">
                             <option value="Economy">Economy</option>
@@ -542,73 +469,139 @@
                             <option value="First Class">First Class</option>
                         </select>
                     </div>
+
+                    <!-- Normal Flight Leg -->
+                    <div id="standard-flight-inputs">
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label id="lbl-dep">Departure City / Airport</label>
+                                <input type="text" id="departure" placeholder="e.g. Dakar (DSS)" autocomplete="off" oninput="searchAirport(this, 'dep-suggestions')">
+                                <div id="dep-suggestions" class="suggestions-list"></div>
+                            </div>
+                            <div class="form-group">
+                                <label id="lbl-des">Destination City / Airport</label>
+                                <input type="text" id="destination" placeholder="e.g. Paris (CDG)" autocomplete="off" oninput="searchAirport(this, 'des-suggestions')">
+                                <div id="des-suggestions" class="suggestions-list"></div>
+                            </div>
+                        </div>
+
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label id="lbl-depdate">Departure Date</label>
+                                <input type="date" id="departure_date">
+                            </div>
+                            <div class="form-group" id="return-date-container" style="display: none;">
+                                <label id="lbl-retdate">Return Date</label>
+                                <input type="date" id="return_date">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Multi City Section -->
+                    <div id="multicity-section" style="display: none;">
+                        <div id="multi-legs-container">
+                            <div class="multi-leg">
+                                <div class="multi-leg-title">Flight 1</div>
+                                <div class="grid-2">
+                                    <div class="form-group">
+                                        <input type="text" class="multi-from" placeholder="From (e.g. DSS)" oninput="searchAirport(this, 'm-sug-1')">
+                                        <div id="m-sug-1" class="suggestions-list"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="multi-to" placeholder="To (e.g. CDG)" oninput="searchAirport(this, 'm-sug-2')">
+                                        <div id="m-sug-2" class="suggestions-list"></div>
+                                    </div>
+                                </div>
+                                <input type="date" class="multi-date">
+                            </div>
+                            <div class="multi-leg">
+                                <div class="multi-leg-title">Flight 2</div>
+                                <div class="grid-2">
+                                    <div class="form-group">
+                                        <input type="text" class="multi-from" placeholder="From (e.g. CDG)" oninput="searchAirport(this, 'm-sug-3')">
+                                        <div id="m-sug-3" class="suggestions-list"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="multi-to" placeholder="To (e.g. DXB)" oninput="searchAirport(this, 'm-sug-4')">
+                                        <div id="m-sug-4" class="suggestions-list"></div>
+                                    </div>
+                                </div>
+                                <input type="date" class="multi-date">
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add-leg" onclick="addFlightLeg()">+ Add Another Flight</button>
+                    </div>
+
+                    <!-- Direct Flight Only Checkbox -->
+                    <label class="checkbox-row">
+                        <input type="checkbox" id="direct_flights_only">
+                        <span id="txt-direct-only">Prefer Direct / Non-Stop Flights only</span>
+                    </label>
                 </div>
 
-                <!-- Standard Flights (One Way & Round Trip) -->
-                <div id="standard-flight-section">
+                <!-- ================= 2. VISA ASSISTANCE SECTION ================= -->
+                <div id="visa-section" style="display: none;">
                     <div class="grid-2">
                         <div class="form-group">
-                            <label id="lbl-dep">Departure City / Airport</label>
-                            <input type="text" id="departure" placeholder="Code, City, Country" autocomplete="off" required oninput="searchAirport(this, 'dep-suggestions')">
-                            <div id="dep-suggestions" class="suggestions-list"></div>
+                            <label id="lbl-visa-country">Destination Country for Visa</label>
+                            <input type="text" id="visa_country" placeholder="e.g. France, UAE, Canada, UK">
                         </div>
                         <div class="form-group">
-                            <label id="lbl-des">Destination City / Airport</label>
-                            <input type="text" id="destination" placeholder="Code, City, Country" autocomplete="off" required oninput="searchAirport(this, 'des-suggestions')">
-                            <div id="des-suggestions" class="suggestions-list"></div>
+                            <label id="lbl-visa-nat">Your Nationality / Passport</label>
+                            <input type="text" id="visa_nationality" placeholder="e.g. Senegalese, Indian, French">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label id="lbl-visa-date">Intended Travel Date</label>
+                        <input type="date" id="visa_travel_date">
+                    </div>
+                </div>
 
+                <!-- ================= 3. HOTEL RESERVATION SECTION ================= -->
+                <div id="hotel-section" style="display: none;">
                     <div class="grid-2">
                         <div class="form-group">
-                            <label id="lbl-depdate">Departure Date</label>
-                            <input type="date" id="departure_date" required>
+                            <label id="lbl-hotel-city">City / Destination for Hotel</label>
+                            <input type="text" id="hotel_city" placeholder="e.g. Paris, Dubai, Dakar">
                         </div>
-                        <div class="form-group" id="return-date-container" style="display: none;">
-                            <label id="lbl-retdate">Return Date</label>
-                            <input type="date" id="return_date">
+                        <div class="form-group">
+                            <label id="lbl-hotel-nat">Guest Nationality</label>
+                            <input type="text" id="hotel_nationality" placeholder="e.g. Senegalese, Indian, French">
+                        </div>
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label id="lbl-checkin">Check-in Date</label>
+                            <input type="date" id="hotel_checkin">
+                        </div>
+                        <div class="form-group">
+                            <label id="lbl-checkout">Check-out Date</label>
+                            <input type="date" id="hotel_checkout">
                         </div>
                     </div>
                 </div>
 
-                <!-- Multi-City Flight Section -->
-                <div id="multicity-section" style="display: none;">
-                    <div id="multi-legs-container">
-                        <div class="multi-leg">
-                            <div class="multi-leg-title">Flight 1</div>
-                            <div class="grid-2">
-                                <div class="form-group">
-                                    <input type="text" class="multi-from" placeholder="From (e.g. DSS)" oninput="searchAirport(this, 'multi-sug-1')">
-                                    <div id="multi-sug-1" class="suggestions-list"></div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="multi-to" placeholder="To (e.g. CDG)" oninput="searchAirport(this, 'multi-sug-2')">
-                                    <div id="multi-sug-2" class="suggestions-list"></div>
-                                </div>
-                            </div>
-                            <input type="date" class="multi-date">
+                <!-- ================= 4. HOLIDAY PACKAGE SECTION ================= -->
+                <div id="holiday-section" style="display: none;">
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label id="lbl-holiday-dest">Holiday Destination Country / City</label>
+                            <input type="text" id="holiday_dest" placeholder="e.g. Dubai, Turkey, Maldives, Bali">
                         </div>
-                        <div class="multi-leg">
-                            <div class="multi-leg-title">Flight 2</div>
-                            <div class="grid-2">
-                                <div class="form-group">
-                                    <input type="text" class="multi-from" placeholder="From (e.g. CDG)" oninput="searchAirport(this, 'multi-sug-3')">
-                                    <div id="multi-sug-3" class="suggestions-list"></div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="multi-to" placeholder="To (e.g. DXB)" oninput="searchAirport(this, 'multi-sug-4')">
-                                    <div id="multi-sug-4" class="suggestions-list"></div>
-                                </div>
-                            </div>
-                            <input type="date" class="multi-date">
+                        <div class="form-group">
+                            <label id="lbl-holiday-duration">Trip Duration (Kitne din / Days)</label>
+                            <input type="text" id="holiday_duration" placeholder="e.g. 5 Days / 4 Nights, 1 Week">
                         </div>
                     </div>
-                    <button type="button" class="btn-add-leg" onclick="addFlightLeg()">+ Add Another Flight</button>
+                    <div class="form-group">
+                        <label id="lbl-holiday-date">Preferred Travel Date</label>
+                        <input type="date" id="holiday_travel_date">
+                    </div>
                 </div>
 
-                <!-- Passenger Breakdown -->
-                <div class="form-group">
-                    <label id="lbl-pax-title">Passengers Breakdown</label>
+                <!-- Common: Passenger / Guest Breakdown -->
+                <div class="form-group" id="pax-group">
+                    <label id="lbl-pax-title">Number of Passengers / Guests</label>
                     <div class="grid-3">
                         <div>
                             <span style="font-size: 11px; color: var(--text-muted);">Adults (12y+)</span>
@@ -625,16 +618,10 @@
                     </div>
                 </div>
 
-                <!-- Direct Flights Only Checkbox -->
-                <label class="checkbox-row" id="direct-flight-row">
-                    <input type="checkbox" id="direct_flights_only">
-                    <span id="txt-direct-only">Prefer Direct / Non-Stop Flights only</span>
-                </label>
-
-                <!-- Special Requests / Notes -->
+                <!-- Common: Special Requests / Notes -->
                 <div class="form-group">
-                    <label id="lbl-notes">Special Requests / Airline Preferences</label>
-                    <textarea id="special_notes" placeholder="e.g. Prefer Emirates, Extra luggage 2x23kg, Vegetarian meal..."></textarea>
+                    <label id="lbl-notes">Special Requests / Preferences</label>
+                    <textarea id="special_notes" placeholder="e.g. Preferred airline/hotel, extra luggage, meal preference..."></textarea>
                 </div>
 
                 <button type="submit" class="btn-submit" id="btn-submit">Inquire on WhatsApp 💬</button>
@@ -643,7 +630,7 @@
     </div>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/221781840000?text=Hello%20Cinderella%20Travel,%20I%20have%20an%20inquiry." target="_blank" class="floating-wa" title="Chat on WhatsApp">💬</a>
+    <a href="https://wa.me/221781840000?text=Hello%20Cinderella%20Travel,%20I%20have%20an%20inquiry." target="_blank" class="floating-wa" title="WhatsApp">💬</a>
 
     <!-- Footer -->
     <footer>
@@ -653,11 +640,9 @@
             <a href="tel:+221781840000">Direct Call</a> • 
             <a href="https://wa.me/221781840000" target="_blank">WhatsApp</a>
         </div>
-        <p style="margin-top: 6px; font-size: 11px;">Mon - Sat: 09:00 AM - 07:00 PM</p>
     </footer>
 
     <script>
-        // Airport Database (West Africa, Europe, Middle East, India, World)
         const airports = [
             { code: "DSS", city: "Dakar (Blaise Diagne)", country: "Senegal" },
             { code: "DKR", city: "Dakar (Yoff)", country: "Senegal" },
@@ -667,30 +652,20 @@
             { code: "BJL", city: "Banjul", country: "Gambia" },
             { code: "CKY", city: "Conakry", country: "Guinea" },
             { code: "BKO", city: "Bamako", country: "Mali" },
-            { code: "LFW", city: "Lome", country: "Togo" },
-            { code: "COO", city: "Cotonou", country: "Benin" },
             { code: "CMN", city: "Casablanca", country: "Morocco" },
-            { code: "DEL", city: "New Delhi (Indira Gandhi)", country: "India" },
-            { code: "BOM", city: "Mumbai (CSMIA)", country: "India" },
+            { code: "DEL", city: "New Delhi", country: "India" },
+            { code: "BOM", city: "Mumbai", country: "India" },
             { code: "BLR", city: "Bengaluru", country: "India" },
-            { code: "HYD", city: "Hyderabad", country: "India" },
-            { code: "AMD", city: "Ahmedabad", country: "India" },
-            { code: "JAI", city: "Jaipur", country: "India" },
-            { code: "JDH", city: "Jodhpur", country: "India" },
             { code: "DXB", city: "Dubai", country: "UAE" },
             { code: "AUH", city: "Abu Dhabi", country: "UAE" },
             { code: "DOH", city: "Doha", country: "Qatar" },
             { code: "JED", city: "Jeddah", country: "Saudi Arabia" },
-            { code: "MED", city: "Medina", country: "Saudi Arabia" },
-            { code: "CDG", city: "Paris (Charles de Gaulle)", country: "France" },
+            { code: "CDG", city: "Paris (CDG)", country: "France" },
             { code: "ORY", city: "Paris (Orly)", country: "France" },
-            { code: "LHR", city: "London (Heathrow)", country: "United Kingdom" },
+            { code: "LHR", city: "London", country: "UK" },
             { code: "IST", city: "Istanbul", country: "Turkey" },
             { code: "MAD", city: "Madrid", country: "Spain" },
-            { code: "LPA", city: "Gran Canaria", country: "Spain" },
-            { code: "LIS", city: "Lisbon", country: "Portugal" },
-            { code: "JFK", city: "New York (JFK)", country: "USA" },
-            { code: "MNL", city: "Manila", country: "Philippines" }
+            { code: "JFK", city: "New York", country: "USA" }
         ];
 
         // Language Dictionary
@@ -698,39 +673,57 @@
             en: {
                 heroTitle: "Travel Booking & Inquiries",
                 heroSub: "Flights, Visas, Hotels & Custom Holiday Packages",
-                popular: "Popular Routes from Dakar",
+                service: "Service Required",
+                fullName: "Full Name",
                 tabOneWay: "One Way",
                 tabRound: "Round Trip",
                 tabMulti: "Multi-City",
-                fullName: "Full Name",
-                service: "Service Required",
                 travelClass: "Travel Class",
                 dep: "Departure City / Airport",
                 des: "Destination City / Airport",
                 depDate: "Departure Date",
                 retDate: "Return Date",
-                paxTitle: "Passengers Breakdown",
                 directOnly: "Prefer Direct / Non-Stop Flights only",
-                notes: "Special Requests / Airline Preferences",
+                visaCountry: "Destination Country for Visa",
+                visaNat: "Your Nationality / Passport",
+                visaDate: "Intended Travel Date",
+                hotelCity: "City / Destination for Hotel",
+                hotelNat: "Guest Nationality",
+                checkin: "Check-in Date",
+                checkout: "Check-out Date",
+                holidayDest: "Holiday Destination Country / City",
+                holidayDuration: "Trip Duration (Kitne din / Days)",
+                holidayDate: "Preferred Travel Date",
+                paxTitle: "Number of Passengers / Guests",
+                notes: "Special Requests / Preferences",
                 submit: "Inquire on WhatsApp 💬"
             },
             fr: {
                 heroTitle: "Réservations & Informations Voyages",
                 heroSub: "Billets d'avion, Visas, Hôtels & Séjours sur mesure",
-                popular: "Destinations Populaires au départ de Dakar",
+                service: "Service Demandé",
+                fullName: "Nom et Prénom",
                 tabOneWay: "Aller Simple",
                 tabRound: "Aller-Retour",
                 tabMulti: "Multi-Destinations",
-                fullName: "Nom et Prénom",
-                service: "Service Demandé",
                 travelClass: "Classe de Voyage",
                 dep: "Ville / Aéroport de Départ",
                 des: "Ville / Aéroport d'Arrivée",
                 depDate: "Date de Départ",
                 retDate: "Date de Retour",
-                paxTitle: "Nombre de Passagers",
                 directOnly: "Vols directs sans escale uniquement",
-                notes: "Demandes particulières / Préférences de compagnie",
+                visaCountry: "Pays de Destination pour le Visa",
+                visaNat: "Nationalité / Passeport",
+                visaDate: "Date prévue de Voyage",
+                hotelCity: "Ville / Destination pour l'Hôtel",
+                hotelNat: "Nationalité des Voyageurs",
+                checkin: "Date d'arrivée (Check-in)",
+                checkout: "Date de départ (Check-out)",
+                holidayDest: "Destination de Vacances / Ville",
+                holidayDuration: "Durée du séjour (Nombre de jours)",
+                holidayDate: "Date souhaitée de départ",
+                paxTitle: "Nombre de Passagers / Clients",
+                notes: "Demandes particulières / Préférences",
                 submit: "Demander sur WhatsApp 💬"
             }
         };
@@ -739,33 +732,154 @@
             const t = translations[lang];
             document.getElementById('txt-hero-title').innerText = t.heroTitle;
             document.getElementById('txt-hero-sub').innerText = t.heroSub;
-            document.getElementById('txt-popular').innerText = t.popular;
+            document.getElementById('lbl-service').innerText = t.service;
+            document.getElementById('lbl-fullname').innerText = t.fullName;
             document.getElementById('tab-oneway').innerText = t.tabOneWay;
             document.getElementById('tab-round').innerText = t.tabRound;
             document.getElementById('tab-multi').innerText = t.tabMulti;
-            document.getElementById('lbl-fullname').innerText = t.fullName;
-            document.getElementById('lbl-service').innerText = t.service;
             document.getElementById('lbl-class').innerText = t.travelClass;
             document.getElementById('lbl-dep').innerText = t.dep;
             document.getElementById('lbl-des').innerText = t.des;
             document.getElementById('lbl-depdate').innerText = t.depDate;
             document.getElementById('lbl-retdate').innerText = t.retDate;
-            document.getElementById('lbl-pax-title').innerText = t.paxTitle;
             document.getElementById('txt-direct-only').innerText = t.directOnly;
+            document.getElementById('lbl-visa-country').innerText = t.visaCountry;
+            document.getElementById('lbl-visa-nat').innerText = t.visaNat;
+            document.getElementById('lbl-visa-date').innerText = t.visaDate;
+            document.getElementById('lbl-hotel-city').innerText = t.hotelCity;
+            document.getElementById('lbl-hotel-nat').innerText = t.hotelNat;
+            document.getElementById('lbl-checkin').innerText = t.checkin;
+            document.getElementById('lbl-checkout').innerText = t.checkout;
+            document.getElementById('lbl-holiday-dest').innerText = t.holidayDest;
+            document.getElementById('lbl-holiday-duration').innerText = t.holidayDuration;
+            document.getElementById('lbl-holiday-date').innerText = t.holidayDate;
+            document.getElementById('lbl-pax-title').innerText = t.paxTitle;
             document.getElementById('lbl-notes').innerText = t.notes;
             document.getElementById('btn-submit').innerText = t.submit;
         }
 
-        // Quick Fill Route from promo cards
-        function quickFill(originCode, destCode) {
-            const orig = airports.find(a => a.code === originCode);
-            const dest = airports.find(a => a.code === destCode);
-            if (orig) document.getElementById('departure').value = `${orig.city} (${orig.code})`;
-            if (dest) document.getElementById('destination').value = `${dest.city} (${dest.code})`;
-            window.scrollTo({ top: 220, behavior: 'smooth' });
+        // Dynamic Form Visibility according to Service
+        function handleServiceChange() {
+            const service = document.getElementById('service_type').value;
+
+            const flightSec = document.getElementById('flight-section');
+            const visaSec = document.getElementById('visa-section');
+            const hotelSec = document.getElementById('hotel-section');
+            const holidaySec = document.getElementById('holiday-section');
+
+            // Hide all first
+            flightSec.style.display = 'none';
+            visaSec.style.display = 'none';
+            hotelSec.style.display = 'none';
+            holidaySec.style.display = 'none';
+
+            // Reset required flags
+            setFlightRequired(false);
+            setVisaRequired(false);
+            setHotelRequired(false);
+            setHolidayRequired(false);
+
+            if (service === 'Flight Ticket') {
+                flightSec.style.display = 'block';
+                handleFlightTripType();
+            } else if (service === 'Visa Assistance') {
+                visaSec.style.display = 'block';
+                setVisaRequired(true);
+            } else if (service === 'Hotel Reservation') {
+                hotelSec.style.display = 'block';
+                setHotelRequired(true);
+            } else if (service === 'Holiday Package') {
+                holidaySec.style.display = 'block';
+                setHolidayRequired(true);
+            }
         }
 
-        // Search Autocomplete
+        function setFlightRequired(req) {
+            const tripType = document.querySelector('input[name="trip_type"]:checked')?.value;
+            if (req && tripType !== 'Multi-City') {
+                document.getElementById('departure').required = true;
+                document.getElementById('destination').required = true;
+                document.getElementById('departure_date').required = true;
+            } else {
+                document.getElementById('departure').required = false;
+                document.getElementById('destination').required = false;
+                document.getElementById('departure_date').required = false;
+                document.getElementById('return_date').required = false;
+            }
+        }
+
+        function setVisaRequired(req) {
+            document.getElementById('visa_country').required = req;
+            document.getElementById('visa_nationality').required = req;
+        }
+
+        function setHotelRequired(req) {
+            document.getElementById('hotel_city').required = req;
+            document.getElementById('hotel_checkin').required = req;
+            document.getElementById('hotel_checkout').required = req;
+            document.getElementById('hotel_nationality').required = req;
+        }
+
+        function setHolidayRequired(req) {
+            document.getElementById('holiday_dest').required = req;
+            document.getElementById('holiday_duration').required = req;
+        }
+
+        function handleFlightTripType() {
+            const type = document.querySelector('input[name="trip_type"]:checked').value;
+            const standardInputs = document.getElementById('standard-flight-inputs');
+            const multicitySec = document.getElementById('multicity-section');
+            const retCont = document.getElementById('return-date-container');
+            const retDate = document.getElementById('return_date');
+
+            if (type === 'Multi-City') {
+                standardInputs.style.display = 'none';
+                multicitySec.style.display = 'block';
+                document.getElementById('departure').required = false;
+                document.getElementById('destination').required = false;
+                document.getElementById('departure_date').required = false;
+                retDate.required = false;
+            } else {
+                standardInputs.style.display = 'block';
+                multicitySec.style.display = 'none';
+                document.getElementById('departure').required = true;
+                document.getElementById('destination').required = true;
+                document.getElementById('departure_date').required = true;
+
+                if (type === 'Round Trip') {
+                    retCont.style.display = 'block';
+                    retDate.required = true;
+                } else {
+                    retCont.style.display = 'none';
+                    retDate.required = false;
+                    retDate.value = '';
+                }
+            }
+        }
+
+        let legCount = 2;
+        function addFlightLeg() {
+            legCount++;
+            const container = document.getElementById('multi-legs-container');
+            const newLeg = document.createElement('div');
+            newLeg.className = 'multi-leg';
+            newLeg.innerHTML = `
+                <div class="multi-leg-title">Flight \${legCount}</div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <input type="text" class="multi-from" placeholder="From (Airport)" oninput="searchAirport(this, 'm-sug-\${legCount}-a')">
+                        <div id="m-sug-\${legCount}-a" class="suggestions-list"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="multi-to" placeholder="To (Airport)" oninput="searchAirport(this, 'm-sug-\${legCount}-b')">
+                        <div id="m-sug-\${legCount}-b" class="suggestions-list"></div>
+                    </div>
+                </div>
+                <input type="date" class="multi-date">
+            `;
+            container.appendChild(newLeg);
+        }
+
         function searchAirport(input, listId) {
             const query = input.value.trim().toLowerCase();
             const list = document.getElementById(listId);
@@ -801,144 +915,103 @@
             list.style.display = 'block';
         }
 
-        // Close dropdowns on outside click
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.form-group')) {
                 document.querySelectorAll('.suggestions-list').forEach(el => el.style.display = 'none');
             }
         });
 
-        // Trip Type handler
-        function handleTripTypeChange() {
-            const type = document.querySelector('input[name="trip_type"]:checked').value;
-            const standardSec = document.getElementById('standard-flight-section');
-            const multiSec = document.getElementById('multicity-section');
-            const retCont = document.getElementById('return-date-container');
-            const retInput = document.getElementById('return_date');
+        // Initialize form on first load
+        window.onload = function() {
+            handleServiceChange();
+        };
 
-            if (type === 'Multi-City') {
-                standardSec.style.display = 'none';
-                multiSec.style.display = 'block';
-                document.getElementById('departure').required = false;
-                document.getElementById('destination').required = false;
-                document.getElementById('departure_date').required = false;
-                retInput.required = false;
-            } else {
-                standardSec.style.display = 'block';
-                multiSec.style.display = 'none';
-                document.getElementById('departure').required = true;
-                document.getElementById('destination').required = true;
-                document.getElementById('departure_date').required = true;
-
-                if (type === 'Round Trip') {
-                    retCont.style.display = 'block';
-                    retInput.required = true;
-                } else {
-                    retCont.style.display = 'none';
-                    retInput.required = false;
-                    retInput.value = '';
-                }
-            }
-        }
-
-        // Multi City add leg
-        let legCount = 2;
-        function addFlightLeg() {
-            legCount++;
-            const container = document.getElementById('multi-legs-container');
-            const newLeg = document.createElement('div');
-            newLeg.className = 'multi-leg';
-            newLeg.innerHTML = `
-                <div class="multi-leg-title">Flight \${legCount}</div>
-                <div class="grid-2">
-                    <div class="form-group">
-                        <input type="text" class="multi-from" placeholder="From (Airport)" oninput="searchAirport(this, 'multi-sug-\${legCount}-a')">
-                        <div id="multi-sug-\${legCount}-a" class="suggestions-list"></div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="multi-to" placeholder="To (Airport)" oninput="searchAirport(this, 'multi-sug-\${legCount}-b')">
-                        <div id="multi-sug-\${legCount}-b" class="suggestions-list"></div>
-                    </div>
-                </div>
-                <input type="date" class="multi-date">
-            `;
-            container.appendChild(newLeg);
-        }
-
-        function handleServiceChange() {
-            const service = document.getElementById('service_type').value;
-            const cabin = document.getElementById('cabin-class-container');
-            const direct = document.getElementById('direct-flight-row');
-            if (service !== 'Flight Ticket') {
-                cabin.style.display = 'none';
-                direct.style.display = 'none';
-            } else {
-                cabin.style.display = 'block';
-                direct.style.display = 'flex';
-            }
-        }
-
-        // Send formatted WhatsApp message
-   function sendToWhatsApp(e) {
+        // Send to WhatsApp Function
+        function sendToWhatsApp(e) {
             if (e) e.preventDefault();
             
             try {
                 const name = (document.getElementById('full_name')?.value || '').trim();
                 const service = document.getElementById('service_type')?.value || 'Flight Ticket';
-                const cabinClass = document.getElementById('cabin_class')?.value || 'Economy';
-                const tripTypeEl = document.querySelector('input[name="trip_type"]:checked');
-                const tripType = tripTypeEl ? tripTypeEl.value : 'One Way';
-                const isDirect = document.getElementById('direct_flights_only')?.checked ? "Yes (Direct / Non-Stop)" : "No preference";
-                
                 const adults = document.getElementById('pax_adults')?.value || '1';
                 const children = document.getElementById('pax_children')?.value || '0';
                 const infants = document.getElementById('pax_infants')?.value || '0';
                 const notes = (document.getElementById('special_notes')?.value || '').trim();
 
-                let routeDetails = "";
+                let specificDetails = "";
 
-                if (tripType === 'Multi-City') {
-                    const legs = document.querySelectorAll('.multi-leg');
-                    legs.forEach((leg, idx) => {
-                        const from = leg.querySelector('.multi-from')?.value.trim();
-                        const to = leg.querySelector('.multi-to')?.value.trim();
-                        const date = leg.querySelector('.multi-date')?.value;
-                        if (from || to) {
-                            routeDetails += `\n✈️ *Vol ${idx + 1}:*${from || 'N/A'} ➔ ${to \vert{}\vert{} 'N/A'} (${date || 'Open Date'})`;
+                if (service === 'Flight Ticket') {
+                    const cabinClass = document.getElementById('cabin_class')?.value || 'Economy';
+                    const tripType = document.querySelector('input[name="trip_type"]:checked')?.value || 'One Way';
+                    const isDirect = document.getElementById('direct_flights_only')?.checked ? "Yes (Non-Stop)" : "No preference";
+
+                    specificDetails += `🎫 *Class:* \${cabinClass}\n🔄 *Trip Type:* \${tripType}\n`;
+
+                    if (tripType === 'Multi-City') {
+                        const legs = document.querySelectorAll('.multi-leg');
+                        legs.forEach((leg, idx) => {
+                            const from = leg.querySelector('.multi-from')?.value.trim();
+                            const to = leg.querySelector('.multi-to')?.value.trim();
+                            const date = leg.querySelector('.multi-date')?.value;
+                            if (from || to) {
+                                specificDetails += `✈️ *Flight ${idx + 1}:*${from || 'N/A'} ➔ ${to \vert{}\vert{} 'N/A'} (${date || 'Open Date'})\n`;
+                            }
+                        });
+                    } else {
+                        const dep = (document.getElementById('departure')?.value || '').trim();
+                        const des = (document.getElementById('destination')?.value || '').trim();
+                        const depDate = document.getElementById('departure_date')?.value || '';
+                        const retDate = document.getElementById('return_date')?.value || '';
+
+                        specificDetails += `🛫 *From:* ${dep}\n🛬 *To:* ${des}\n📅 *Departure Date:* \${depDate}\n`;
+                        if (tripType === 'Round Trip' && retDate) {
+                            specificDetails += `📅 *Return Date:* \${retDate}\n`;
                         }
-                    });
-                } else {
-                    const dep = (document.getElementById('departure')?.value || '').trim();
-                    const des = (document.getElementById('destination')?.value || '').trim();
-                    const depDate = document.getElementById('departure_date')?.value || '';
-                    const retDate = document.getElementById('return_date')?.value || '';
-
-                    routeDetails = `🛫 *From:* ${dep}\n🛬 *To:* ${des}\n📅 *Departure Date:* \${depDate}`;
-                    if (tripType === 'Round Trip' && retDate) {
-                        routeDetails += `\n📅 *Return Date:* \${retDate}`;
                     }
+                    specificDetails += `⚡ *Direct Flight Only:* \${isDirect}\n`;
+
+                } else if (service === 'Visa Assistance') {
+                    const vCountry = (document.getElementById('visa_country')?.value || '').trim();
+                    const vNat = (document.getElementById('visa_nationality')?.value || '').trim();
+                    const vDate = document.getElementById('visa_travel_date')?.value || '';
+
+                    specificDetails += `🌍 *Visa Country:* \${vCountry}\n🪪 *Applicant Nationality:* \${vNat}\n`;
+                    if (vDate) specificDetails += `📅 *Intended Travel Date:* \${vDate}\n`;
+
+                } else if (service === 'Hotel Reservation') {
+                    const hCity = (document.getElementById('hotel_city')?.value || '').trim();
+                    const hNat = (document.getElementById('hotel_nationality')?.value || '').trim();
+                    const cin = document.getElementById('hotel_checkin')?.value || '';
+                    const cout = document.getElementById('hotel_checkout')?.value || '';
+
+                    specificDetails += `🏨 *Destination/City:* \${hCity}\n🪪 *Guest Nationality:* \${hNat}\n📅 *Check-in:* ${cin}\n📅 *Check-out:* ${cout}\n`;
+
+                } else if (service === 'Holiday Package') {
+                    const holDest = (document.getElementById('holiday_dest')?.value || '').trim();
+                    const holDur = (document.getElementById('holiday_duration')?.value || '').trim();
+                    const holDate = document.getElementById('holiday_travel_date')?.value || '';
+
+                    specificDetails += `🏖️ *Holiday Destination:* ${holDest}\n⏳ *Duration:*${holDur}\n`;
+                    if (holDate) specificDetails += `📅 *Travel Date:* \${holDate}\n`;
                 }
 
-                let message = 
+                const message = 
                     `🌟 *Cinderella Travel Dakar - New Inquiry*\n` +
                     `===============================\n` +
                     `👤 *Client Name:* \${name}\n` +
                     `🛎️ *Service:* \${service}\n` +
-                    (service === 'Flight Ticket' ? `🎫 *Class:* \${cabinClass}\n🔄 *Trip Type:* \${tripType}\n${routeDetails}\n⚡ *Direct Only:*${isDirect}\n` : ``) +
-                    `👥 *Passengers:* \${adults} Adult(s), ${children} Child,${infants} Infant\n` +
+                    specificDetails +
+                    `👥 *Pax/Guests:* \${adults} Adult(s), ${children} Child,${infants} Infant\n` +
                     (notes ? `📝 *Notes/Preferences:* \${notes}\n` : ``) +
                     `===============================`;
 
                 const phone = "221781840000";
-                const encodedMsg = encodeURIComponent(message);
-                
-                // Direct WhatsApp URL (works seamlessly on Android, iPhone & Desktop)
-                const waUrl = `https://wa.me/${phone}?text=${encodedMsg}`;
+                const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
                 window.location.href = waUrl;
 
             } catch (err) {
-                console.error("Error creating WhatsApp message:", err);
-                alert("Please ensure all required fields are filled.");
+                console.error("WhatsApp Link Error:", err);
+                alert("Please check all required inputs.");
             }
         }
     </script>
