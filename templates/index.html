@@ -79,7 +79,6 @@
             gap: 10px;
         }
 
-        /* Language Toggle Button */
         .lang-toggle {
             display: inline-flex;
             background: #EEF2F6;
@@ -91,7 +90,7 @@
         .lang-btn {
             border: none;
             background: transparent;
-            padding: 4px 10px;
+            padding: 5px 12px;
             border-radius: 16px;
             font-size: 11px;
             font-weight: 800;
@@ -119,10 +118,10 @@
             text-decoration: none;
         }
 
-        /* 3-Column Layout: Left Photos | Main Form | Right Photos */
+        /* 3-Column Layout */
         .layout-container {
             width: 100%;
-            max-width: 1260px;
+            max-width: 1320px;
             margin: 18px auto 25px;
             padding: 0 16px;
             display: grid;
@@ -135,7 +134,7 @@
         .side-column {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 14px;
         }
 
         .side-title {
@@ -144,16 +143,16 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: var(--accent-magenta);
-            margin-bottom: -5px;
+            margin-bottom: -4px;
             display: flex;
             align-items: center;
             gap: 5px;
         }
 
-        /* Destination Cards (Left & Right 3 each) */
+        /* Destination Cards */
         .dest-card {
             position: relative;
-            height: 155px;
+            height: 140px;
             border-radius: 16px;
             overflow: hidden;
             cursor: pointer;
@@ -195,7 +194,7 @@
 
         .dest-name {
             color: #FFFFFF;
-            font-size: 15px;
+            font-size: 14.5px;
             font-weight: 800;
             letter-spacing: 0.5px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.6);
@@ -203,7 +202,7 @@
 
         .dest-hint {
             color: #E2E8F0;
-            font-size: 10.5px;
+            font-size: 10px;
             font-weight: 500;
             display: flex;
             align-items: center;
@@ -216,16 +215,15 @@
             color: #fff;
             padding: 1px 5px;
             border-radius: 4px;
-            font-size: 9px;
+            font-size: 8.5px;
             font-weight: 700;
         }
 
-        /* Center Column */
         .center-column {
             width: 100%;
         }
 
-        /* Point 2: Umrah & Hajj Special Banner */
+        /* Umrah Banner */
         .umrah-banner {
             background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
             border: 1.5px solid #F59E0B;
@@ -286,7 +284,7 @@
             white-space: nowrap;
         }
 
-        /* 4 Big Direct Service Tabs */
+        /* 4 Service Tabs */
         .service-tabs {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -377,7 +375,6 @@
             gap: 10px;
         }
 
-        /* Flight Sub-Tabs */
         .flight-type-selector {
             display: flex;
             gap: 6px;
@@ -433,7 +430,6 @@
             color: var(--text-dark);
         }
 
-        /* Autocomplete List */
         .suggestions-list {
             position: absolute;
             top: 100%;
@@ -474,7 +470,6 @@
             font-size: 10px;
         }
 
-        /* Multi City Leg */
         .multi-leg {
             background: #F8FAFC;
             border: 1px dashed #CBD5E1;
@@ -504,7 +499,6 @@
             margin-bottom: 15px;
         }
 
-        /* Submit Button */
         .btn-submit {
             width: 100%;
             padding: 14px;
@@ -518,7 +512,7 @@
             box-shadow: 0 6px 20px rgba(233, 30, 99, 0.35);
         }
 
-        /* Point 3: Airline Partners Strip */
+        /* Airline Partners Strip */
         .airlines-section {
             margin-top: 18px;
             background: #FFFFFF;
@@ -563,7 +557,7 @@
             border-color: #0F172A;
         }
 
-        /* Destination Details Modal */
+        /* Modal */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -698,7 +692,6 @@
             cursor: pointer;
         }
 
-        /* Floating WhatsApp Button */
         .floating-wa {
             position: fixed;
             bottom: 22px;
@@ -717,7 +710,6 @@
             font-size: 30px;
         }
 
-        /* Updated Agency Footer with Google Maps Button */
         footer {
             background: #FFFFFF;
             border-top: 1px solid #E2E8F0;
@@ -743,7 +735,6 @@
             max-width: 580px;
         }
 
-        /* Point 5: Direct Google Maps Button */
         .btn-google-maps {
             display: inline-flex;
             align-items: center;
@@ -780,31 +771,30 @@
             font-weight: 700;
         }
 
-        /* Responsive */
         @media (max-width: 992px) {
             .layout-container {
                 grid-template-columns: 1fr;
             }
             .side-column {
                 display: grid;
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(4, 1fr);
                 gap: 10px;
             }
             .side-title {
                 grid-column: 1 / -1;
             }
             .dest-card {
-                height: 125px;
+                height: 120px;
             }
         }
 
         @media (max-width: 600px) {
-            header { padding: 10px 14px; }
-            .brand-title { font-size: 15px; }
-            .contact-badge { font-size: 11px; padding: 6px 10px; }
             .side-column {
                 grid-template-columns: 1fr 1fr;
             }
+            header { padding: 10px 14px; }
+            .brand-title { font-size: 15px; }
+            .contact-badge { font-size: 11px; padding: 6px 10px; }
             .umrah-banner {
                 flex-direction: column;
                 align-items: flex-start;
@@ -823,13 +813,14 @@
 </head>
 <body>
 
-    <!-- Header with Language Switcher (Point 6) -->
+    <!-- Header -->
     <header>
         <div class="brand-container">
             <img src="/static/logo.png" alt="Cinderella Travel" class="brand-logo" onerror="this.style.display='none'">
             <div class="brand-title">Cinderella <span>Travel Dakar</span></div>
         </div>
         <div class="header-right">
+            <!-- Corrected EN / FR Toggle -->
             <div class="lang-toggle">
                 <button type="button" class="lang-btn active" id="btnLangEN">EN</button>
                 <button type="button" class="lang-btn" id="btnLangFR">FR</button>
@@ -840,7 +831,7 @@
 
     <div class="layout-container">
 
-        <!-- LEFT SIDE: 3 PHOTOS (Paris, Dubai, London) -->
+        <!-- LEFT SIDE: 4 PHOTOS -->
         <aside class="side-column">
             <div class="side-title" id="txt-left-title">✨ Popular Spots</div>
             
@@ -848,7 +839,7 @@
                 <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=500&auto=format&fit=crop&q=80" alt="Paris">
                 <div class="dest-info">
                     <div class="dest-name">PARIS</div>
-                    <div class="dest-hint"><span class="badge">VIEW</span> Eiffel Tower & Flights</div>
+                    <div class="dest-hint"><span class="badge">VIEW</span> Eiffel Tower</div>
                 </div>
             </div>
 
@@ -856,7 +847,7 @@
                 <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=500&auto=format&fit=crop&q=80" alt="Dubai">
                 <div class="dest-info">
                     <div class="dest-name">DUBAI</div>
-                    <div class="dest-hint"><span class="badge">VIEW</span> Burj Khalifa & Visa</div>
+                    <div class="dest-hint"><span class="badge">VIEW</span> Burj Khalifa</div>
                 </div>
             </div>
 
@@ -864,7 +855,15 @@
                 <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=500&auto=format&fit=crop&q=80" alt="London">
                 <div class="dest-info">
                     <div class="dest-name">LONDON</div>
-                    <div class="dest-hint"><span class="badge">VIEW</span> Big Ben & UK Deals</div>
+                    <div class="dest-hint"><span class="badge">VIEW</span> Big Ben & UK</div>
+                </div>
+            </div>
+
+            <div class="dest-card" data-dest="tokyo">
+                <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=500&auto=format&fit=crop&q=80" alt="Tokyo">
+                <div class="dest-info">
+                    <div class="dest-name">TOKYO</div>
+                    <div class="dest-hint"><span class="badge">VIEW</span> Japan Tours</div>
                 </div>
             </div>
         </aside>
@@ -872,7 +871,6 @@
         <!-- CENTER: MAIN BOOKING FORM -->
         <main class="center-column">
 
-            <!-- Point 2: Umrah & Hajj Special Banner -->
             <div class="umrah-banner" id="umrahBanner">
                 <div class="umrah-left">
                     <div class="umrah-icon">🕋</div>
@@ -884,7 +882,6 @@
                 <div class="umrah-cta" id="txt-umrah-btn">Inquire Umrah ➔</div>
             </div>
 
-            <!-- 4 DIRECT SERVICE BUTTONS -->
             <div class="service-tabs">
                 <button type="button" class="service-tab-btn active" data-service="Flight">
                     <span class="icon">✈️</span>
@@ -911,7 +908,7 @@
                         <input type="text" id="full_name" placeholder="Enter your full name" required>
                     </div>
 
-                    <!-- ================= 1. ONLY FLIGHTS ================= -->
+                    <!-- FLIGHTS -->
                     <div id="form-flight" style="display: block;">
                         <div class="flight-type-selector">
                             <label>
@@ -931,10 +928,10 @@
                         <div class="form-group">
                             <label id="lbl-flight-class">Travel Class</label>
                             <select id="flight_class">
-                                <option value="Economy">Economy</option>
-                                <option value="Premium Economy">Premium Economy</option>
-                                <option value="Business Class">Business Class</option>
-                                <option value="First Class">First Class</option>
+                                <option value="Economy" id="opt-eco">Economy</option>
+                                <option value="Premium Economy" id="opt-peco">Premium Economy</option>
+                                <option value="Business Class" id="opt-biz">Business Class</option>
+                                <option value="First Class" id="opt-first">First Class</option>
                             </select>
                         </div>
 
@@ -1007,22 +1004,22 @@
                             <label id="lbl-f-pax">Passengers</label>
                             <div class="grid-3">
                                 <div>
-                                    <span style="font-size: 11px; color: var(--text-muted);">Adults (12y+)</span>
+                                    <span style="font-size: 11px; color: var(--text-muted);" id="lbl-adults">Adults (12y+)</span>
                                     <input type="number" id="flight_adults" value="1" min="1" max="25">
                                 </div>
                                 <div>
-                                    <span style="font-size: 11px; color: var(--text-muted);">Children (2-11y)</span>
+                                    <span style="font-size: 11px; color: var(--text-muted);" id="lbl-children">Children (2-11y)</span>
                                     <input type="number" id="flight_children" value="0" min="0" max="10">
                                 </div>
                                 <div>
-                                    <span style="font-size: 11px; color: var(--text-muted);">Infants (&lt;2y)</span>
+                                    <span style="font-size: 11px; color: var(--text-muted);" id="lbl-infants">Infants (&lt;2y)</span>
                                     <input type="number" id="flight_infants" value="0" min="0" max="5">
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- ================= 2. ONLY VISA ================= -->
+                    <!-- VISA -->
                     <div id="form-visa" style="display: none;">
                         <div class="form-group">
                             <label id="lbl-v-country">Destination Country for Visa</label>
@@ -1037,10 +1034,10 @@
                             <div class="form-group">
                                 <label id="lbl-v-type">Visa Type</label>
                                 <select id="visa_category">
-                                    <option value="Tourist / Visitor Visa">Tourist / Visitor Visa</option>
-                                    <option value="Business Visa">Business Visa</option>
-                                    <option value="Umrah / Religious Visa">Umrah / Religious Visa</option>
-                                    <option value="Student Visa">Student Visa</option>
+                                    <option value="Tourist / Visitor Visa" id="v-opt-tourist">Tourist / Visitor Visa</option>
+                                    <option value="Business Visa" id="v-opt-business">Business Visa</option>
+                                    <option value="Umrah / Religious Visa" id="v-opt-umrah">Umrah / Religious Visa</option>
+                                    <option value="Student Visa" id="v-opt-student">Student Visa</option>
                                 </select>
                             </div>
                         </div>
@@ -1057,7 +1054,7 @@
                         </div>
                     </div>
 
-                    <!-- ================= 3. ONLY HOTEL ================= -->
+                    <!-- HOTEL -->
                     <div id="form-hotel" style="display: none;">
                         <div class="form-group">
                             <label id="lbl-h-city">City / Location for Hotel</label>
@@ -1087,7 +1084,7 @@
                         </div>
                     </div>
 
-                    <!-- ================= 4. ONLY HOLIDAY PACKAGE ================= -->
+                    <!-- HOLIDAY -->
                     <div id="form-holiday" style="display: none;">
                         <div class="form-group">
                             <label id="lbl-hol-dest">Holiday / Package Destination</label>
@@ -1096,7 +1093,7 @@
 
                         <div class="grid-2">
                             <div class="form-group">
-                                <label id="lbl-hol-dur">Duration (Kitne Din / Nights)</label>
+                                <label id="lbl-hol-dur">Duration (Days / Nights)</label>
                                 <input type="text" id="holiday_duration" placeholder="e.g. 7 Days / 6 Nights, 2 Weeks">
                             </div>
                             <div class="form-group">
@@ -1111,7 +1108,6 @@
                         </div>
                     </div>
 
-                    <!-- Common Special Notes -->
                     <div class="form-group">
                         <label id="lbl-notes">Special Requests / Preferences</label>
                         <textarea id="special_notes" placeholder="e.g. Preferred airline/hotel star rating, extra baggage, meal..."></textarea>
@@ -1121,7 +1117,6 @@
                 </form>
             </div>
 
-            <!-- Point 3: Airline Partners Strip -->
             <div class="airlines-section">
                 <div class="airlines-title" id="txt-airlines-title">Official Ticketing & Global Airline Partners</div>
                 <div class="airlines-badges">
@@ -1138,7 +1133,7 @@
             </div>
         </main>
 
-        <!-- RIGHT SIDE: 3 PHOTOS (India, New York, Istanbul) -->
+        <!-- RIGHT SIDE: 4 PHOTOS -->
         <aside class="side-column">
             <div class="side-title" id="txt-right-title">🌍 Top Destinations</div>
 
@@ -1165,11 +1160,19 @@
                     <div class="dest-hint"><span class="badge">VIEW</span> Bosphorus & Holidays</div>
                 </div>
             </div>
+
+            <div class="dest-card" data-dest="bangkok">
+                <img src="https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=500&auto=format&fit=crop&q=80" alt="Bangkok">
+                <div class="dest-info">
+                    <div class="dest-name">BANGKOK</div>
+                    <div class="dest-hint"><span class="badge">VIEW</span> Thailand Getaways</div>
+                </div>
+            </div>
         </aside>
 
     </div>
 
-    <!-- Destination Modal -->
+    <!-- Modal -->
     <div id="destModal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header-img">
@@ -1182,15 +1185,15 @@
             </div>
             <div class="modal-body">
                 <div class="modal-section">
-                    <div class="modal-section-title">🌟 Key Highlights</div>
+                    <div class="modal-section-title" id="modal-sec-1">🌟 Key Highlights</div>
                     <p id="modalDesc"></p>
                 </div>
                 <div class="modal-section">
-                    <div class="modal-section-title">📍 Top Attractions & Places to Visit</div>
+                    <div class="modal-section-title" id="modal-sec-2">📍 Top Attractions & Places to Visit</div>
                     <div id="modalSpots" class="spots-tags"></div>
                 </div>
                 <div class="modal-section">
-                    <div class="modal-section-title">🗓️ Travel Tips & Visa Info</div>
+                    <div class="modal-section-title" id="modal-sec-3">🗓️ Travel Tips & Visa Info</div>
                     <p id="modalTravelTips" style="color: var(--text-muted); font-size: 12px;"></p>
                 </div>
             </div>
@@ -1200,21 +1203,17 @@
         </div>
     </div>
 
-    <!-- Floating WhatsApp -->
     <a href="https://wa.me/221781840000?text=Hello%20Cinderella%20Travel,%20I%20have%20an%20inquiry." target="_blank" class="floating-wa" title="WhatsApp">💬</a>
 
-    <!-- Footer with Direct Google Maps Navigation (Point 5) -->
     <footer>
         <div class="footer-brand">Cinderella Travel Dakar</div>
         <div id="txt-footer-sub">Agence de Voyages & de Tourisme — Billetterie, Visas, Omra, Hôtels & Séjours</div>
         <div class="footer-address">
             📍 14, Rue Amadou Assane Ndoye X Berrenger Féraud (Immeuble SICAP), Dakar, Senegal
         </div>
-        
         <a href="https://www.google.com/maps/search/?api=1&query=14+Rue+Amadou+Assane+Ndoye+X+Berrenger+Feraud+Immeuble+SICAP+Dakar+Senegal" target="_blank" class="btn-google-maps" id="btn-maps-txt">
             🗺️ Open Office Location in Google Maps
         </a>
-
         <div class="footer-contact">
             <a href="tel:+221781840000">📞 +221 78 184 00 00</a>
             <span>•</span>
@@ -1225,7 +1224,6 @@
     </footer>
 
     <script>
-        // Translations Dictionary (Point 6: Full EN / FR Support)
         const i18n = {
             en: {
                 leftTitle: "✨ Popular Spots",
@@ -1242,15 +1240,26 @@
                 subRound: "Round Trip",
                 subMulti: "Multi-City",
                 flightClass: "Travel Class",
+                optEco: "Economy",
+                optPeco: "Premium Economy",
+                optBiz: "Business Class",
+                optFirst: "First Class",
                 fDep: "Departure City / Airport",
                 fDes: "Destination City / Airport",
                 fDepDate: "Departure Date",
                 fRetDate: "Return Date",
                 directOnly: "Prefer Direct / Non-Stop Flights only",
                 fPax: "Passengers",
+                lblAdults: "Adults (12y+)",
+                lblChildren: "Children (2-11y)",
+                lblInfants: "Infants (<2y)",
                 vCountry: "Destination Country for Visa",
                 vNat: "Your Nationality / Passport",
                 vType: "Visa Type",
+                vOptTourist: "Tourist / Visitor Visa",
+                vOptBusiness: "Business Visa",
+                vOptUmrah: "Umrah / Religious Visa",
+                vOptStudent: "Student Visa",
                 vDate: "Intended Travel Date",
                 vPax: "Number of Applicants",
                 hCity: "City / Location for Hotel",
@@ -1265,13 +1274,18 @@
                 notes: "Special Requests / Preferences",
                 submitBtn: "Inquire on WhatsApp 💬",
                 airlinesTitle: "Official Ticketing & Global Airline Partners",
-                mapsBtn: "🗺️ Open Office Location in Google Maps"
+                mapsBtn: "🗺️ Open Office Location in Google Maps",
+                modalSec1: "🌟 Key Highlights",
+                modalSec2: "📍 Top Attractions & Places to Visit",
+                modalSec3: "🗓️ Travel Tips & Visa Info",
+                modalApply: "Book / Inquire for this Destination ✈️",
+                footerSub: "Travel & Tourism Agency — Ticketing, Visas, Umrah, Hotels & Tours"
             },
             fr: {
                 leftTitle: "✨ Destinations Phares",
                 rightTitle: "🌍 Top Voyages",
                 umrahTitle: "Forfaits Omra, Hajj & Ziarat (La Mecque / Médine)",
-                umrahSub: "Visa, Billets, Hôtels & Séjours organisés VIP / Groupe depuis Dakar",
+                umrahSub: "Visa, Billets d'avion, Hôtels & Séjours organisés VIP / Groupe depuis Dakar",
                 umrahBtn: "Réserver Omra ➔",
                 tabFlight: "Vols",
                 tabVisa: "Visas",
@@ -1282,30 +1296,46 @@
                 subRound: "Aller-Retour",
                 subMulti: "Multi-Villes",
                 flightClass: "Classe de Voyage",
+                optEco: "Économique",
+                optPeco: "Économique Premium",
+                optBiz: "Classe Affaires",
+                optFirst: "Première Classe",
                 fDep: "Ville / Aéroport de Départ",
                 fDes: "Ville / Aéroport d'Arrivée",
                 fDepDate: "Date de Départ",
                 fRetDate: "Date de Retour",
                 directOnly: "Vols directs sans escale uniquement",
                 fPax: "Passagers",
+                lblAdults: "Adultes (12 ans+)",
+                lblChildren: "Enfants (2-11 ans)",
+                lblInfants: "Bébés (<2 ans)",
                 vCountry: "Pays de Destination pour le Visa",
                 vNat: "Votre Nationalité / Passeport",
                 vType: "Type de Visa",
+                vOptTourist: "Visa Touriste / Visiteur",
+                vOptBusiness: "Visa Affaires",
+                vOptUmrah: "Visa Omra / Religieux",
+                vOptStudent: "Visa Étudiant",
                 vDate: "Date de Voyage Prévue",
                 vPax: "Nombre de Demandeurs",
                 hCity: "Ville / Emplacement de l'Hôtel",
                 hIn: "Date d'Arrivée (Check-in)",
                 hOut: "Date de Départ (Check-out)",
-                hNat: "Nationalité du Client",
-                hRooms: "Nombre de Clients / Chambres",
+                hNat: "Nationalité des Clients",
+                hRooms: "Nombre de Voyageurs / Chambres",
                 holDest: "Destination Vacances / Séjour",
-                holDur: "Durée (Jours / Nuits)",
-                holDate: "Date de Départ Souhaitée",
+                holDur: "Durée du Séjour (Jours / Nuits)",
+                holDate: "Date Souhaitée de Départ",
                 holPax: "Nombre de Voyageurs",
                 notes: "Demandes Particulières / Préférences",
                 submitBtn: "Demander sur WhatsApp 💬",
                 airlinesTitle: "Billetterie Officielle & Compagnies Partenaires",
-                mapsBtn: "🗺️ Ouvrir l'adresse sur Google Maps"
+                mapsBtn: "🗺️ Ouvrir l'adresse sur Google Maps",
+                modalSec1: "🌟 Points Forts",
+                modalSec2: "📍 Principales Attractions & Lieux à Visiter",
+                modalSec3: "🗓️ Conseils de Voyage & Infos Visa",
+                modalApply: "Réserver / Demander pour cette Destination ✈️",
+                footerSub: "Agence de Voyages & de Tourisme — Billetterie, Visas, Omra, Hôtels & Séjours"
             }
         };
 
@@ -1337,6 +1367,15 @@
                 tips: "Regular flight connections from Dakar. Full UK Visitor Visa support.",
                 autoFill: "London (LHR)"
             },
+            tokyo: {
+                title: "Tokyo, Japan (NRT / HND)",
+                tagline: "Blend of Ultra-Modern Technology and Ancient Tradition",
+                img: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=700&auto=format&fit=crop&q=80",
+                desc: "Tokyo offers serene shrines, neon-lit skyscrapers, incredible cuisine, and unmatched safety and efficiency.",
+                spots: ["Shibuya Crossing", "Tokyo Tower & Skytree", "Senso-ji Temple", "Mount Fuji Day Trip", "Akihabara"],
+                tips: "Amazing year-round destination. Visa support and connecting flights available.",
+                autoFill: "Tokyo (NRT)"
+            },
             india: {
                 title: "India (Delhi, Mumbai, Jaipur)",
                 tagline: "Incredible Culture, Royal Palaces & Cuisine",
@@ -1363,6 +1402,15 @@
                 spots: ["Hagia Sophia", "Blue Mosque", "Bosphorus Cruise", "Grand Bazaar", "Topkapi Palace", "Galata Tower"],
                 tips: "Daily direct flights with Turkish Airlines from Dakar. Quick Turkey E-Visa services.",
                 autoFill: "Istanbul (IST)"
+            },
+            bangkok: {
+                title: "Bangkok, Thailand (BKK)",
+                tagline: "Vibrant Street Life, Ornate Shrines & Floating Markets",
+                img: "https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=700&auto=format&fit=crop&q=80",
+                desc: "Bangkok is famous for ornate Buddhist temples, lively night markets, delicious street food, and luxury malls.",
+                spots: ["Grand Palace & Wat Phra Kaew", "Wat Arun", "Chatuchak Weekend Market", "Khaosan Road", "Chao Phraya River Cruise"],
+                tips: "Great tropical destination. Holiday packages and flight reservations ready.",
+                autoFill: "Bangkok (BKK)"
             }
         };
 
@@ -1386,8 +1434,9 @@
             { code: "ORY", city: "Paris (Orly)", country: "France" },
             { code: "LHR", city: "London (Heathrow)", country: "UK" },
             { code: "IST", city: "Istanbul", country: "Turkey" },
+            { code: "NRT", city: "Tokyo (Narita)", country: "Japan" },
+            { code: "BKK", city: "Bangkok", country: "Thailand" },
             { code: "MAD", city: "Madrid", country: "Spain" },
-            { code: "LPA", city: "Gran Canaria", country: "Spain" },
             { code: "JFK", city: "New York", country: "USA" }
         ];
 
@@ -1425,15 +1474,26 @@
             document.getElementById('subtab-round').innerText = t.subRound;
             document.getElementById('subtab-multi').innerText = t.subMulti;
             document.getElementById('lbl-flight-class').innerText = t.flightClass;
+            document.getElementById('opt-eco').innerText = t.optEco;
+            document.getElementById('opt-peco').innerText = t.optPeco;
+            document.getElementById('opt-biz').innerText = t.optBiz;
+            document.getElementById('opt-first').innerText = t.optFirst;
             document.getElementById('lbl-f-dep').innerText = t.fDep;
             document.getElementById('lbl-f-des').innerText = t.fDes;
             document.getElementById('lbl-f-depdate').innerText = t.fDepDate;
             document.getElementById('lbl-f-retdate').innerText = t.fRetDate;
             document.getElementById('lbl-direct-only').innerText = t.directOnly;
             document.getElementById('lbl-f-pax').innerText = t.fPax;
+            document.getElementById('lbl-adults').innerText = t.lblAdults;
+            document.getElementById('lbl-children').innerText = t.lblChildren;
+            document.getElementById('lbl-infants').innerText = t.lblInfants;
             document.getElementById('lbl-v-country').innerText = t.vCountry;
             document.getElementById('lbl-v-nat').innerText = t.vNat;
             document.getElementById('lbl-v-type').innerText = t.vType;
+            document.getElementById('v-opt-tourist').innerText = t.vOptTourist;
+            document.getElementById('v-opt-business').innerText = t.vOptBusiness;
+            document.getElementById('v-opt-umrah').innerText = t.vOptUmrah;
+            document.getElementById('v-opt-student').innerText = t.vOptStudent;
             document.getElementById('lbl-v-date').innerText = t.vDate;
             document.getElementById('lbl-v-pax').innerText = t.vPax;
             document.getElementById('lbl-h-city').innerText = t.hCity;
@@ -1449,15 +1509,18 @@
             document.getElementById('btn-submit-txt').innerText = t.submitBtn;
             document.getElementById('txt-airlines-title').innerText = t.airlinesTitle;
             document.getElementById('btn-maps-txt').innerText = t.mapsBtn;
+            document.getElementById('txt-footer-sub').innerText = t.footerSub;
+            document.getElementById('modal-sec-1').innerText = t.modalSec1;
+            document.getElementById('modal-sec-2').innerText = t.modalSec2;
+            document.getElementById('modal-sec-3').innerText = t.modalSec3;
+            document.getElementById('btnModalApply').innerText = t.modalApply;
         }
 
         document.addEventListener('DOMContentLoaded', () => {
 
-            // Language Switcher Events
             document.getElementById('btnLangEN').addEventListener('click', () => applyLanguage('en'));
             document.getElementById('btnLangFR').addEventListener('click', () => applyLanguage('fr'));
 
-            // Umrah Banner Click -> Switches to Holiday Package & Fills Umrah
             document.getElementById('umrahBanner').addEventListener('click', () => {
                 activateTab('Holiday');
                 document.getElementById('holiday_dest').value = 'Umrah Package (Makkah & Madinah)';
@@ -1465,14 +1528,12 @@
                 document.getElementById('holiday_dest').focus();
             });
 
-            // 1. Service Tab Click Listeners
             document.querySelectorAll('.service-tab-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     activateTab(btn.getAttribute('data-service'));
                 });
             });
 
-            // 2. Flight Sub-tabs
             document.querySelectorAll('input[name="flight_trip_type"]').forEach(radio => {
                 radio.addEventListener('change', () => {
                     const val = document.querySelector('input[name="flight_trip_type"]:checked').value;
@@ -1492,7 +1553,6 @@
                 });
             });
 
-            // 3. Destination Card Click Listeners
             document.querySelectorAll('.dest-card').forEach(card => {
                 card.addEventListener('click', () => {
                     const key = card.getAttribute('data-dest');
@@ -1542,11 +1602,9 @@
                 document.querySelector('.center-column').scrollIntoView({ behavior: 'smooth' });
             });
 
-            // Autocomplete
             setupAutocomplete(document.getElementById('flight_dep'), document.getElementById('sug-f-dep'));
             setupAutocomplete(document.getElementById('flight_des'), document.getElementById('sug-f-des'));
 
-            // Multi City Add Leg
             let legCounter = 2;
             document.getElementById('btnAddLeg').addEventListener('click', () => {
                 legCounter++;
@@ -1572,7 +1630,6 @@
                 setupAutocomplete(div.querySelector('.m-to'), div.querySelectorAll('.suggestions-list')[1]);
             });
 
-            // Form Submit WhatsApp
             document.getElementById('bookingForm').addEventListener('submit', (e) => {
                 e.preventDefault();
 
