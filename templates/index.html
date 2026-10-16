@@ -11,6 +11,7 @@
             --primary: #0F172A;
             --accent-magenta: #E91E63;
             --accent-cyan: #0284C7;
+            --accent-purple: #8B5CF6;
             --gold: #D97706;
             --whatsapp-green: #25D366;
             --bg-body: #F8FAFC;
@@ -70,7 +71,9 @@
         }
 
         .brand-title span {
-            color: var(--accent-magenta);
+            background: linear-gradient(135deg, var(--accent-magenta), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .header-right {
@@ -100,7 +103,7 @@
         }
 
         .lang-btn.active {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--accent-magenta), var(--accent-purple));
             color: #FFFFFF;
         }
 
@@ -108,7 +111,7 @@
             font-size: 13px;
             font-weight: 700;
             background: #F1F5F9;
-            color: var(--primary);
+            color: var(--accent-purple);
             padding: 7px 14px;
             border-radius: 20px;
             border: 1px solid #CBD5E1;
@@ -118,7 +121,7 @@
             text-decoration: none;
         }
 
-        /* 3-Column Layout */
+        /* Layout */
         .layout-container {
             width: 100%;
             max-width: 1320px;
@@ -142,14 +145,15 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: var(--accent-magenta);
+            background: linear-gradient(135deg, var(--accent-magenta), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: -4px;
             display: flex;
             align-items: center;
             gap: 5px;
         }
 
-        /* Destination Cards */
         .dest-card {
             position: relative;
             height: 140px;
@@ -163,7 +167,7 @@
 
         .dest-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.22);
+            box-shadow: 0 10px 24px rgba(139, 92, 246, 0.25);
         }
 
         .dest-card img {
@@ -211,7 +215,7 @@
         }
 
         .dest-hint span.badge {
-            background: var(--accent-magenta);
+            background: linear-gradient(135deg, var(--accent-magenta), var(--accent-purple));
             color: #fff;
             padding: 1px 5px;
             border-radius: 4px;
@@ -284,7 +288,69 @@
             white-space: nowrap;
         }
 
-        /* 4 Service Tabs */
+        /* Trending Routes with Full Names */
+        .trending-routes {
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin-bottom: 16px;
+            border: 1px solid #E2E8F0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .trending-title {
+            font-size: 11.5px;
+            font-weight: 800;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--accent-magenta), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: 0.6px;
+        }
+
+        .routes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 8px;
+        }
+
+        .route-pill {
+            background: #F8FAFC;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 10px;
+            padding: 9px 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .route-pill:hover {
+            border-color: var(--accent-purple);
+            background: #F5F3FF;
+            transform: translateY(-2px);
+        }
+
+        .route-header {
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .route-airline {
+            font-size: 10px;
+            color: var(--accent-magenta);
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        .route-duration {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 1px;
+        }
+
+        /* Service Tabs */
         .service-tabs {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -316,12 +382,12 @@
         }
 
         .service-tab-btn.active {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), #1E293B);
             color: #FFFFFF;
             box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25);
+            border-bottom: 3px solid var(--accent-magenta);
         }
 
-        /* Booking Form Card */
         .booking-card {
             background: var(--card-bg);
             border-radius: 20px;
@@ -359,8 +425,9 @@
         }
 
         input:focus, select:focus, textarea:focus {
-            border-color: var(--accent-cyan);
+            border-color: var(--accent-purple);
             background: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
         }
 
         .grid-2 {
@@ -502,7 +569,7 @@
         .btn-submit {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, var(--accent-magenta) 0%, #BE185D 100%);
+            background: linear-gradient(135deg, var(--accent-magenta), var(--accent-purple));
             border: none;
             color: #FFFFFF;
             font-size: 15px;
@@ -510,9 +577,14 @@
             border-radius: 12px;
             cursor: pointer;
             box-shadow: 0 6px 20px rgba(233, 30, 99, 0.35);
+            transition: transform 0.2s;
         }
 
-        /* Airline Partners Strip */
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+        }
+
         .airlines-section {
             margin-top: 18px;
             background: #FFFFFF;
@@ -557,7 +629,26 @@
             border-color: #0F172A;
         }
 
-        /* Modal */
+        .support-banner {
+            margin-top: 14px;
+            background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%);
+            border: 1px solid #DDD6FE;
+            border-radius: 12px;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 11.5px;
+            color: #5B21B6;
+            font-weight: 600;
+        }
+
+        .support-banner span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -683,7 +774,7 @@
         .btn-modal-select {
             width: 100%;
             padding: 12px;
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--accent-magenta), var(--accent-purple));
             color: #FFFFFF;
             border: none;
             border-radius: 10px;
@@ -752,9 +843,9 @@
         }
 
         .btn-google-maps:hover {
-            background: var(--primary);
+            background: var(--accent-purple);
             color: #FFFFFF;
-            border-color: var(--primary);
+            border-color: var(--accent-purple);
         }
 
         .footer-contact {
@@ -881,6 +972,38 @@
                 <div class="umrah-cta" id="txt-umrah-btn">Inquire Umrah ➔</div>
             </div>
 
+            <!-- Trending Routes with Full Route Names & Timings -->
+            <div class="trending-routes">
+                <div class="trending-title" id="txt-trending-title">🔥 Trending Routes from Dakar (DSS)</div>
+                <div class="routes-grid">
+                    <div class="route-pill" onclick="selectRoute('Dakar (DSS)', 'Casablanca (CMN)', 'Air Sénégal & Royal Air Maroc')">
+                        <div class="route-header">Dakar to Casablanca</div>
+                        <div class="route-airline">Air Sénégal (HC) & Air Maroc</div>
+                        <div class="route-duration">Duration: ~3h 20m</div>
+                    </div>
+                    <div class="route-pill" onclick="selectRoute('Dakar (DSS)', 'Paris (CDG)', 'Air Sénégal & Air France')">
+                        <div class="route-header">Dakar to Paris</div>
+                        <div class="route-airline">Air Sénégal (HC) & Air France</div>
+                        <div class="route-duration">Duration: ~5h 40m</div>
+                    </div>
+                    <div class="route-pill" onclick="selectRoute('Dakar (DSS)', 'Dubai (DXB)', 'Emirates & Partners')">
+                        <div class="route-header">Dakar to Dubai</div>
+                        <div class="route-airline">Emirates & Partners</div>
+                        <div class="route-duration">Duration: ~9h 45m</div>
+                    </div>
+                    <div class="route-pill" onclick="selectRoute('Dakar (DSS)', 'Guangzhou (CAN)', 'Connecting Flights')">
+                        <div class="route-header">Dakar to Guangzhou</div>
+                        <div class="route-airline">Connecting Airlines</div>
+                        <div class="route-duration">Duration: ~19h 50m</div>
+                    </div>
+                    <div class="route-pill" onclick="selectRoute('Dakar (DSS)', 'Istanbul (IST)', 'Turkish Airlines')">
+                        <div class="route-header">Dakar to Istanbul</div>
+                        <div class="route-airline">Turkish Airlines (Direct)</div>
+                        <div class="route-duration">Duration: ~6h 55m</div>
+                    </div>
+                </div>
+            </div>
+
             <div class="service-tabs">
                 <button type="button" class="service-tab-btn active" data-service="Flight">
                     <span class="icon">✈️</span>
@@ -938,7 +1061,7 @@
                             <div class="grid-2">
                                 <div class="form-group">
                                     <label id="lbl-f-dep">Departure City / Airport</label>
-                                    <input type="text" id="flight_dep" placeholder="e.g. Dakar (DSS)" autocomplete="off">
+                                    <input type="text" id="flight_dep" value="Dakar (DSS)" autocomplete="off">
                                     <div id="sug-f-dep" class="suggestions-list"></div>
                                 </div>
                                 <div class="form-group">
@@ -1116,18 +1239,22 @@
                 </form>
             </div>
 
+            <!-- 24/7 Support Banner -->
+            <div class="support-banner">
+                <span id="txt-support-1">🕒 24/7 Dedicated Customer Support & Assistance</span>
+                <span style="font-weight: 800;" id="txt-support-2">Always Here For You</span>
+            </div>
+
             <div class="airlines-section">
                 <div class="airlines-title" id="txt-airlines-title">Official Ticketing & Global Airline Partners</div>
                 <div class="airlines-badges">
                     <span class="airline-pill iata">🌐 IATA Accredited</span>
-                    <span class="airline-pill">✈️ Air Sénégal</span>
+                    <span class="airline-pill">✈️ Air Sénégal (HC)</span>
                     <span class="airline-pill">✈️ Air France</span>
+                    <span class="airline-pill">✈️ Royal Air Maroc</span>
                     <span class="airline-pill">✈️ Emirates</span>
                     <span class="airline-pill">✈️ Turkish Airlines</span>
-                    <span class="airline-pill">✈️ Royal Air Maroc</span>
-                    <span class="airline-pill">✈️ Brussels Airlines</span>
                     <span class="airline-pill">✈️ Qatar Airways</span>
-                    <span class="airline-pill">✈️ Binter Canarias</span>
                 </div>
             </div>
         </main>
@@ -1210,7 +1337,6 @@
         <div class="footer-address">
             📍 <strong>14, Rue Amadou Assane Ndoye X Berrenger Féraud (Immeuble SICAP), Plateau, Dakar, Sénégal</strong>
         </div>
-        <!-- Exact Coordinates Google Maps Link -->
         <a href="https://www.google.com/maps/search/?api=1&query=14.668637872791972,-17.430309150916006" target="_blank" class="btn-google-maps" id="btn-maps-txt">
             🗺️ Open Office Location in Google Maps
         </a>
@@ -1231,6 +1357,7 @@
                 umrahTitle: "Umrah, Hajj & Ziarat Packages (Makkah / Madinah)",
                 umrahSub: "Complete Visa, Flights, Hotel & Guided Group / VIP Packages from Dakar",
                 umrahBtn: "Inquire Umrah ➔",
+                trendingTitle: "🔥 Trending Routes from Dakar (DSS)",
                 tabFlight: "Flights",
                 tabVisa: "Visa",
                 tabHotel: "Hotels",
@@ -1279,7 +1406,9 @@
                 modalSec2: "📍 Top Attractions & Places to Visit",
                 modalSec3: "🗓️ Travel Tips & Visa Info",
                 modalApply: "Book / Inquire for this Destination ✈️",
-                footerSub: "Travel & Tourism Agency — Ticketing, Visas, Umrah, Hotels & Tours"
+                footerSub: "Travel & Tourism Agency — Ticketing, Visas, Omra, Hotels & Tours",
+                support1: "🕒 24/7 Dedicated Customer Support & Assistance",
+                support2: "Always Here For You"
             },
             fr: {
                 leftTitle: "✨ Destinations Phares",
@@ -1287,6 +1416,7 @@
                 umrahTitle: "Forfaits Omra, Hajj & Ziarat (La Mecque / Médine)",
                 umrahSub: "Visa, Billets d'avion, Hôtels & Séjours organisés VIP / Groupe depuis Dakar",
                 umrahBtn: "Réserver Omra ➔",
+                trendingTitle: "🔥 Vols Populaires au départ de Dakar (DSS)",
                 tabFlight: "Vols",
                 tabVisa: "Visas",
                 tabHotel: "Hôtels",
@@ -1335,7 +1465,9 @@
                 modalSec2: "📍 Principales Attractions & Lieux à Visiter",
                 modalSec3: "🗓️ Conseils de Voyage & Infos Visa",
                 modalApply: "Réserver / Demander pour cette Destination ✈️",
-                footerSub: "Agence de Voyages & de Tourisme — Billetterie, Visas, Omra, Hôtels & Séjours"
+                footerSub: "Agence de Voyages & de Tourisme — Billetterie, Visas, Omra, Hôtels & Séjours",
+                support1: "🕒 Support Client Dédié 24h/24 et 7j/7",
+                support2: "Toujours à Votre Service"
             }
         };
 
@@ -1346,7 +1478,7 @@
                 img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=700&auto=format&fit=crop&q=80",
                 desc: "Paris is renowned for iconic architecture, museums, romantic Seine river cruises, and vibrant shopping streets.",
                 spots: ["Eiffel Tower", "Louvre Museum", "Champs-Élysées & Arc de Triomphe", "Seine River Cruise", "Disneyland Paris", "Montmartre"],
-                tips: "Direct flights available from Dakar (DSS). Full Schengen Visa guidance provided.",
+                tips: "Direct flights available from Dakar (DSS) via Air Sénégal & Air France. Full Schengen Visa guidance provided.",
                 autoFill: "Paris (CDG)"
             },
             dubai: {
@@ -1416,28 +1548,14 @@
 
         const airports = [
             { code: "DSS", city: "Dakar (Blaise Diagne)", country: "Senegal" },
-            { code: "JED", city: "Jeddah (Makkah / Umrah)", country: "Saudi Arabia" },
-            { code: "MED", city: "Madinah", country: "Saudi Arabia" },
-            { code: "ABJ", city: "Abidjan", country: "Ivory Coast" },
-            { code: "ACC", city: "Accra", country: "Ghana" },
-            { code: "LOS", city: "Lagos", country: "Nigeria" },
-            { code: "BJL", city: "Banjul", country: "Gambia" },
-            { code: "CKY", city: "Conakry", country: "Guinea" },
-            { code: "BKO", city: "Bamako", country: "Mali" },
-            { code: "CMN", city: "Casablanca", country: "Morocco" },
-            { code: "DEL", city: "New Delhi", country: "India" },
-            { code: "BOM", city: "Mumbai", country: "India" },
-            { code: "DXB", city: "Dubai", country: "UAE" },
-            { code: "AUH", city: "Abu Dhabi", country: "UAE" },
-            { code: "DOH", city: "Doha", country: "Qatar" },
+            { code: "CMN", city: "Casablanca (CMN)", country: "Morocco" },
             { code: "CDG", city: "Paris (CDG)", country: "France" },
-            { code: "ORY", city: "Paris (Orly)", country: "France" },
-            { code: "LHR", city: "London (Heathrow)", country: "UK" },
-            { code: "IST", city: "Istanbul", country: "Turkey" },
-            { code: "NRT", city: "Tokyo (Narita)", country: "Japan" },
-            { code: "BKK", city: "Bangkok", country: "Thailand" },
-            { code: "MAD", city: "Madrid", country: "Spain" },
-            { code: "JFK", city: "New York", country: "USA" }
+            { code: "DXB", city: "Dubai (DXB)", country: "UAE" },
+            { code: "CAN", city: "Guangzhou (CAN)", country: "China" },
+            { code: "IST", city: "Istanbul (IST)", country: "Turkey" },
+            { code: "JED", city: "Jeddah (Makkah / Umrah)", country: "Saudi Arabia" },
+            { code: "DEL", city: "New Delhi", country: "India" },
+            { code: "LHR", city: "London (Heathrow)", country: "UK" }
         ];
 
         let activeService = 'Flight';
@@ -1455,6 +1573,14 @@
             document.getElementById('form-holiday').style.display = (selected === 'Holiday') ? 'block' : 'none';
         }
 
+        function selectRoute(dep, des, airlineNote) {
+            activateTab('Flight');
+            document.getElementById('flight_dep').value = dep;
+            document.getElementById('flight_des').value = des;
+            document.getElementById('special_notes').value = `Preferred Route: ${dep} to ${des} (${airlineNote})`;
+            document.querySelector('.center-column').scrollIntoView({ behavior: 'smooth' });
+        }
+
         function applyLanguage(lang) {
             const t = i18n[lang];
             document.getElementById('btnLangEN').classList.toggle('active', lang === 'en');
@@ -1465,6 +1591,7 @@
             document.getElementById('txt-umrah-title').innerText = t.umrahTitle;
             document.getElementById('txt-umrah-sub').innerText = t.umrahSub;
             document.getElementById('txt-umrah-btn').innerText = t.umrahBtn;
+            document.getElementById('txt-trending-title').innerText = t.trendingTitle;
             document.getElementById('tab-lbl-flight').innerText = t.tabFlight;
             document.getElementById('tab-lbl-visa').innerText = t.tabVisa;
             document.getElementById('tab-lbl-hotel').innerText = t.tabHotel;
@@ -1514,6 +1641,8 @@
             document.getElementById('modal-sec-2').innerText = t.modalSec2;
             document.getElementById('modal-sec-3').innerText = t.modalSec3;
             document.getElementById('btnModalApply').innerText = t.modalApply;
+            document.getElementById('txt-support-1').innerText = t.support1;
+            document.getElementById('txt-support-2').innerText = t.support2;
         }
 
         document.addEventListener('DOMContentLoaded', () => {
