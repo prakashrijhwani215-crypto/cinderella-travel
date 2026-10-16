@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cinderella Travel Dakar - Flights, Visas, Hotels & Tours</title>
+    <title>Cinderella Travel Dakar - Flights, Visas, Umrah, Hotels & Tours</title>
     <link rel="icon" href="/static/logo.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -11,6 +11,7 @@
             --primary: #0F172A;
             --accent-magenta: #E91E63;
             --accent-cyan: #0284C7;
+            --gold: #D97706;
             --whatsapp-green: #25D366;
             --bg-body: #F8FAFC;
             --card-bg: #FFFFFF;
@@ -45,6 +46,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
         }
 
         .brand-container {
@@ -71,6 +73,38 @@
             color: var(--accent-magenta);
         }
 
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Language Toggle Button */
+        .lang-toggle {
+            display: inline-flex;
+            background: #EEF2F6;
+            border-radius: 20px;
+            padding: 3px;
+            border: 1px solid #CBD5E1;
+        }
+
+        .lang-btn {
+            border: none;
+            background: transparent;
+            padding: 4px 10px;
+            border-radius: 16px;
+            font-size: 11px;
+            font-weight: 800;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active {
+            background: var(--primary);
+            color: #FFFFFF;
+        }
+
         .contact-badge {
             font-size: 13px;
             font-weight: 700;
@@ -88,8 +122,8 @@
         /* 3-Column Layout: Left Photos | Main Form | Right Photos */
         .layout-container {
             width: 100%;
-            max-width: 1250px;
-            margin: 20px auto 30px;
+            max-width: 1260px;
+            margin: 18px auto 25px;
             padding: 0 16px;
             display: grid;
             grid-template-columns: 240px 1fr 240px;
@@ -186,9 +220,70 @@
             font-weight: 700;
         }
 
-        /* Center Column (Form) */
+        /* Center Column */
         .center-column {
             width: 100%;
+        }
+
+        /* Point 2: Umrah & Hajj Special Banner */
+        .umrah-banner {
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            border: 1.5px solid #F59E0B;
+            border-radius: 16px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #FFFFFF;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(217, 119, 6, 0.15);
+            transition: transform 0.2s ease;
+        }
+
+        .umrah-banner:hover {
+            transform: translateY(-2px);
+        }
+
+        .umrah-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .umrah-icon {
+            font-size: 26px;
+            background: rgba(245, 158, 11, 0.15);
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(245, 158, 11, 0.4);
+        }
+
+        .umrah-text h4 {
+            font-size: 13.5px;
+            font-weight: 800;
+            color: #FBBF24;
+            line-height: 1.2;
+        }
+
+        .umrah-text p {
+            font-size: 11px;
+            color: #E2E8F0;
+            margin-top: 2px;
+        }
+
+        .umrah-cta {
+            background: #F59E0B;
+            color: #0F172A;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 6px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
         }
 
         /* 4 Big Direct Service Tabs */
@@ -262,7 +357,7 @@
 
         textarea {
             resize: vertical;
-            height: 75px;
+            height: 70px;
         }
 
         input:focus, select:focus, textarea:focus {
@@ -423,6 +518,51 @@
             box-shadow: 0 6px 20px rgba(233, 30, 99, 0.35);
         }
 
+        /* Point 3: Airline Partners Strip */
+        .airlines-section {
+            margin-top: 18px;
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 14px 16px;
+            border: 1px solid #E2E8F0;
+            text-align: center;
+        }
+
+        .airlines-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            letter-spacing: 0.6px;
+        }
+
+        .airlines-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .airline-pill {
+            background: #F8FAFC;
+            border: 1px solid #CBD5E1;
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 5px 11px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .airline-pill.iata {
+            background: #0F172A;
+            color: #38BDF8;
+            border-color: #0F172A;
+        }
+
         /* Destination Details Modal */
         .modal-overlay {
             position: fixed;
@@ -577,11 +717,11 @@
             font-size: 30px;
         }
 
-        /* Updated Agency Footer */
+        /* Updated Agency Footer with Google Maps Button */
         footer {
             background: #FFFFFF;
             border-top: 1px solid #E2E8F0;
-            padding: 26px 20px;
+            padding: 28px 20px;
             text-align: center;
             font-size: 12.5px;
             color: var(--text-muted);
@@ -590,7 +730,7 @@
         }
 
         .footer-brand {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 800;
             color: var(--primary);
             margin-bottom: 4px;
@@ -598,13 +738,36 @@
 
         .footer-address {
             color: var(--text-dark);
-            font-weight: 500;
-            margin: 6px auto;
-            max-width: 550px;
+            font-weight: 600;
+            margin: 8px auto 12px;
+            max-width: 580px;
+        }
+
+        /* Point 5: Direct Google Maps Button */
+        .btn-google-maps {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #EEF2F6;
+            color: var(--primary);
+            border: 1.5px solid #CBD5E1;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            margin-bottom: 14px;
+            transition: all 0.2s;
+        }
+
+        .btn-google-maps:hover {
+            background: var(--primary);
+            color: #FFFFFF;
+            border-color: var(--primary);
         }
 
         .footer-contact {
-            margin-top: 8px;
+            margin-top: 6px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -636,10 +799,21 @@
         }
 
         @media (max-width: 600px) {
+            header { padding: 10px 14px; }
+            .brand-title { font-size: 15px; }
+            .contact-badge { font-size: 11px; padding: 6px 10px; }
             .side-column {
                 grid-template-columns: 1fr 1fr;
             }
-            .brand-title { font-size: 16px; }
+            .umrah-banner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .umrah-cta {
+                align-self: stretch;
+                text-align: center;
+            }
             .service-tab-btn { font-size: 11px; padding: 8px 2px; }
             .service-tab-btn span.icon { font-size: 17px; }
             .grid-2 { grid-template-columns: 1fr; }
@@ -649,22 +823,27 @@
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- Header with Language Switcher (Point 6) -->
     <header>
         <div class="brand-container">
             <img src="/static/logo.png" alt="Cinderella Travel" class="brand-logo" onerror="this.style.display='none'">
             <div class="brand-title">Cinderella <span>Travel Dakar</span></div>
         </div>
-        <a href="tel:+221781840000" class="contact-badge">📞 +221 78 184 00 00</a>
+        <div class="header-right">
+            <div class="lang-toggle">
+                <button type="button" class="lang-btn active" id="btnLangEN">EN</button>
+                <button type="button" class="lang-btn" id="btnLangFR">FR</button>
+            </div>
+            <a href="tel:+221781840000" class="contact-badge">📞 +221 78 184 00 00</a>
+        </div>
     </header>
 
     <div class="layout-container">
 
         <!-- LEFT SIDE: 3 PHOTOS (Paris, Dubai, London) -->
         <aside class="side-column">
-            <div class="side-title">✨ Popular Spots</div>
+            <div class="side-title" id="txt-left-title">✨ Popular Spots</div>
             
-            <!-- 1. Paris -->
             <div class="dest-card" data-dest="paris">
                 <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=500&auto=format&fit=crop&q=80" alt="Paris">
                 <div class="dest-info">
@@ -673,7 +852,6 @@
                 </div>
             </div>
 
-            <!-- 2. Dubai -->
             <div class="dest-card" data-dest="dubai">
                 <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=500&auto=format&fit=crop&q=80" alt="Dubai">
                 <div class="dest-info">
@@ -682,7 +860,6 @@
                 </div>
             </div>
 
-            <!-- 3. London -->
             <div class="dest-card" data-dest="london">
                 <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=500&auto=format&fit=crop&q=80" alt="London">
                 <div class="dest-info">
@@ -694,30 +871,43 @@
 
         <!-- CENTER: MAIN BOOKING FORM -->
         <main class="center-column">
+
+            <!-- Point 2: Umrah & Hajj Special Banner -->
+            <div class="umrah-banner" id="umrahBanner">
+                <div class="umrah-left">
+                    <div class="umrah-icon">🕋</div>
+                    <div class="umrah-text">
+                        <h4 id="txt-umrah-title">Umrah, Hajj & Ziarat Packages (Makkah / Madinah)</h4>
+                        <p id="txt-umrah-sub">Complete Visa, Flights, Hotel & Guided Group / VIP Packages from Dakar</p>
+                    </div>
+                </div>
+                <div class="umrah-cta" id="txt-umrah-btn">Inquire Umrah ➔</div>
+            </div>
+
             <!-- 4 DIRECT SERVICE BUTTONS -->
             <div class="service-tabs">
                 <button type="button" class="service-tab-btn active" data-service="Flight">
                     <span class="icon">✈️</span>
-                    <span>Flights</span>
+                    <span id="tab-lbl-flight">Flights</span>
                 </button>
                 <button type="button" class="service-tab-btn" data-service="Visa">
                     <span class="icon">🛂</span>
-                    <span>Visa</span>
+                    <span id="tab-lbl-visa">Visa</span>
                 </button>
                 <button type="button" class="service-tab-btn" data-service="Hotel">
                     <span class="icon">🏨</span>
-                    <span>Hotels</span>
+                    <span id="tab-lbl-hotel">Hotels</span>
                 </button>
                 <button type="button" class="service-tab-btn" data-service="Holiday">
                     <span class="icon">🏖️</span>
-                    <span>Holidays</span>
+                    <span id="tab-lbl-holiday">Holidays</span>
                 </button>
             </div>
 
             <div class="booking-card">
                 <form id="bookingForm">
                     <div class="form-group">
-                        <label>Your Full Name</label>
+                        <label id="lbl-fullname">Your Full Name</label>
                         <input type="text" id="full_name" placeholder="Enter your full name" required>
                     </div>
 
@@ -726,20 +916,20 @@
                         <div class="flight-type-selector">
                             <label>
                                 <input type="radio" name="flight_trip_type" value="One Way" checked>
-                                <span>One Way</span>
+                                <span id="subtab-oneway">One Way</span>
                             </label>
                             <label>
                                 <input type="radio" name="flight_trip_type" value="Round Trip">
-                                <span>Round Trip</span>
+                                <span id="subtab-round">Round Trip</span>
                             </label>
                             <label>
                                 <input type="radio" name="flight_trip_type" value="Multi-City">
-                                <span>Multi-City</span>
+                                <span id="subtab-multi">Multi-City</span>
                             </label>
                         </div>
 
                         <div class="form-group">
-                            <label>Travel Class</label>
+                            <label id="lbl-flight-class">Travel Class</label>
                             <select id="flight_class">
                                 <option value="Economy">Economy</option>
                                 <option value="Premium Economy">Premium Economy</option>
@@ -751,12 +941,12 @@
                         <div id="standard-flight-box">
                             <div class="grid-2">
                                 <div class="form-group">
-                                    <label>Departure City / Airport</label>
+                                    <label id="lbl-f-dep">Departure City / Airport</label>
                                     <input type="text" id="flight_dep" placeholder="e.g. Dakar (DSS)" autocomplete="off">
                                     <div id="sug-f-dep" class="suggestions-list"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Destination City / Airport</label>
+                                    <label id="lbl-f-des">Destination City / Airport</label>
                                     <input type="text" id="flight_des" placeholder="e.g. Paris (CDG)" autocomplete="off">
                                     <div id="sug-f-des" class="suggestions-list"></div>
                                 </div>
@@ -764,11 +954,11 @@
 
                             <div class="grid-2">
                                 <div class="form-group">
-                                    <label>Departure Date</label>
+                                    <label id="lbl-f-depdate">Departure Date</label>
                                     <input type="date" id="flight_dep_date">
                                 </div>
                                 <div class="form-group" id="flight-return-container" style="display: none;">
-                                    <label>Return Date</label>
+                                    <label id="lbl-f-retdate">Return Date</label>
                                     <input type="date" id="flight_ret_date">
                                 </div>
                             </div>
@@ -810,11 +1000,11 @@
 
                         <label class="checkbox-row">
                             <input type="checkbox" id="flight_direct_only">
-                            <span>Prefer Direct / Non-Stop Flights only</span>
+                            <span id="lbl-direct-only">Prefer Direct / Non-Stop Flights only</span>
                         </label>
 
                         <div class="form-group">
-                            <label>Passengers</label>
+                            <label id="lbl-f-pax">Passengers</label>
                             <div class="grid-3">
                                 <div>
                                     <span style="font-size: 11px; color: var(--text-muted);">Adults (12y+)</span>
@@ -835,33 +1025,33 @@
                     <!-- ================= 2. ONLY VISA ================= -->
                     <div id="form-visa" style="display: none;">
                         <div class="form-group">
-                            <label>Destination Country for Visa</label>
-                            <input type="text" id="visa_country" placeholder="e.g. France, UAE, UK, Canada, USA">
+                            <label id="lbl-v-country">Destination Country for Visa</label>
+                            <input type="text" id="visa_country" placeholder="e.g. France, UAE, UK, Canada, Saudi Arabia">
                         </div>
 
                         <div class="grid-2">
                             <div class="form-group">
-                                <label>Your Nationality / Passport</label>
+                                <label id="lbl-v-nat">Your Nationality / Passport</label>
                                 <input type="text" id="visa_nationality" placeholder="e.g. Senegalese, Indian, French">
                             </div>
                             <div class="form-group">
-                                <label>Visa Type</label>
+                                <label id="lbl-v-type">Visa Type</label>
                                 <select id="visa_category">
                                     <option value="Tourist / Visitor Visa">Tourist / Visitor Visa</option>
                                     <option value="Business Visa">Business Visa</option>
+                                    <option value="Umrah / Religious Visa">Umrah / Religious Visa</option>
                                     <option value="Student Visa">Student Visa</option>
-                                    <option value="Transit Visa">Transit Visa</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="grid-2">
                             <div class="form-group">
-                                <label>Intended Travel Date</label>
+                                <label id="lbl-v-date">Intended Travel Date</label>
                                 <input type="date" id="visa_travel_date">
                             </div>
                             <div class="form-group">
-                                <label>Number of Applicants</label>
+                                <label id="lbl-v-pax">Number of Applicants</label>
                                 <input type="number" id="visa_applicants" value="1" min="1" max="20">
                             </div>
                         </div>
@@ -870,28 +1060,28 @@
                     <!-- ================= 3. ONLY HOTEL ================= -->
                     <div id="form-hotel" style="display: none;">
                         <div class="form-group">
-                            <label>City / Location for Hotel</label>
-                            <input type="text" id="hotel_city" placeholder="e.g. Paris, Dubai, Dakar, London">
+                            <label id="lbl-h-city">City / Location for Hotel</label>
+                            <input type="text" id="hotel_city" placeholder="e.g. Paris, Dubai, Dakar, Makkah">
                         </div>
 
                         <div class="grid-2">
                             <div class="form-group">
-                                <label>Check-in Date</label>
+                                <label id="lbl-h-in">Check-in Date</label>
                                 <input type="date" id="hotel_checkin">
                             </div>
                             <div class="form-group">
-                                <label>Check-out Date</label>
+                                <label id="lbl-h-out">Check-out Date</label>
                                 <input type="date" id="hotel_checkout">
                             </div>
                         </div>
 
                         <div class="grid-2">
                             <div class="form-group">
-                                <label>Guest Nationality</label>
+                                <label id="lbl-h-nat">Guest Nationality</label>
                                 <input type="text" id="hotel_nationality" placeholder="e.g. Senegalese, Indian, French">
                             </div>
                             <div class="form-group">
-                                <label>Total Guests / Rooms</label>
+                                <label id="lbl-h-rooms">Total Guests / Rooms</label>
                                 <input type="text" id="hotel_guests_rooms" placeholder="e.g. 2 Adults, 1 Room">
                             </div>
                         </div>
@@ -900,43 +1090,58 @@
                     <!-- ================= 4. ONLY HOLIDAY PACKAGE ================= -->
                     <div id="form-holiday" style="display: none;">
                         <div class="form-group">
-                            <label>Holiday Destination (Kahan Ghumna Hai)</label>
-                            <input type="text" id="holiday_dest" placeholder="e.g. Dubai, Turkey, Bali, Maldives, Morocco">
+                            <label id="lbl-hol-dest">Holiday / Package Destination</label>
+                            <input type="text" id="holiday_dest" placeholder="e.g. Dubai, Umrah (Makkah), Turkey, Maldives">
                         </div>
 
                         <div class="grid-2">
                             <div class="form-group">
-                                <label>Duration (Kitne Din / Nights)</label>
-                                <input type="text" id="holiday_duration" placeholder="e.g. 5 Days / 4 Nights, 1 Week">
+                                <label id="lbl-hol-dur">Duration (Kitne Din / Nights)</label>
+                                <input type="text" id="holiday_duration" placeholder="e.g. 7 Days / 6 Nights, 2 Weeks">
                             </div>
                             <div class="form-group">
-                                <label>Preferred Travel Date</label>
+                                <label id="lbl-hol-date">Preferred Travel Date</label>
                                 <input type="date" id="holiday_date">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label>Number of Persons</label>
-                            <input type="text" id="holiday_people" placeholder="e.g. 2 Adults, 1 Child (Family)">
+                            <label id="lbl-hol-pax">Number of Travelers</label>
+                            <input type="text" id="holiday_people" placeholder="e.g. 2 Adults, 1 Child (Family / Group)">
                         </div>
                     </div>
 
                     <!-- Common Special Notes -->
                     <div class="form-group">
-                        <label>Special Requests / Preferences</label>
-                        <textarea id="special_notes" placeholder="e.g. Preferred airline/hotel star rating, extra baggage, veg meal..."></textarea>
+                        <label id="lbl-notes">Special Requests / Preferences</label>
+                        <textarea id="special_notes" placeholder="e.g. Preferred airline/hotel star rating, extra baggage, meal..."></textarea>
                     </div>
 
-                    <button type="submit" class="btn-submit">Inquire on WhatsApp 💬</button>
+                    <button type="submit" class="btn-submit" id="btn-submit-txt">Inquire on WhatsApp 💬</button>
                 </form>
+            </div>
+
+            <!-- Point 3: Airline Partners Strip -->
+            <div class="airlines-section">
+                <div class="airlines-title" id="txt-airlines-title">Official Ticketing & Global Airline Partners</div>
+                <div class="airlines-badges">
+                    <span class="airline-pill iata">🌐 IATA Accredited</span>
+                    <span class="airline-pill">✈️ Air Sénégal</span>
+                    <span class="airline-pill">✈️ Air France</span>
+                    <span class="airline-pill">✈️ Emirates</span>
+                    <span class="airline-pill">✈️ Turkish Airlines</span>
+                    <span class="airline-pill">✈️ Royal Air Maroc</span>
+                    <span class="airline-pill">✈️ Brussels Airlines</span>
+                    <span class="airline-pill">✈️ Qatar Airways</span>
+                    <span class="airline-pill">✈️ Binter Canarias</span>
+                </div>
             </div>
         </main>
 
         <!-- RIGHT SIDE: 3 PHOTOS (India, New York, Istanbul) -->
         <aside class="side-column">
-            <div class="side-title">🌍 Top Destinations</div>
+            <div class="side-title" id="txt-right-title">🌍 Top Destinations</div>
 
-            <!-- 4. India -->
             <div class="dest-card" data-dest="india">
                 <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?w=500&auto=format&fit=crop&q=80" alt="India">
                 <div class="dest-info">
@@ -945,7 +1150,6 @@
                 </div>
             </div>
 
-            <!-- 5. New York -->
             <div class="dest-card" data-dest="newyork">
                 <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=500&auto=format&fit=crop&q=80" alt="New York">
                 <div class="dest-info">
@@ -954,7 +1158,6 @@
                 </div>
             </div>
 
-            <!-- 6. Istanbul / Turkey -->
             <div class="dest-card" data-dest="istanbul">
                 <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=500&auto=format&fit=crop&q=80" alt="Istanbul">
                 <div class="dest-info">
@@ -1000,13 +1203,18 @@
     <!-- Floating WhatsApp -->
     <a href="https://wa.me/221781840000?text=Hello%20Cinderella%20Travel,%20I%20have%20an%20inquiry." target="_blank" class="floating-wa" title="WhatsApp">💬</a>
 
-    <!-- Footer -->
+    <!-- Footer with Direct Google Maps Navigation (Point 5) -->
     <footer>
         <div class="footer-brand">Cinderella Travel Dakar</div>
-        <div>Agence de Voyages & de Tourisme — Billetterie, Visas, Hôtels & Séjours</div>
+        <div id="txt-footer-sub">Agence de Voyages & de Tourisme — Billetterie, Visas, Omra, Hôtels & Séjours</div>
         <div class="footer-address">
-            📍 <strong>14, Rue Amadou Assane Ndoye X Berrenger Féraud (Immeuble SICAP), Dakar, Senegal</strong>
+            📍 14, Rue Amadou Assane Ndoye X Berrenger Féraud (Immeuble SICAP), Dakar, Senegal
         </div>
+        
+        <a href="https://www.google.com/maps/search/?api=1&query=14+Rue+Amadou+Assane+Ndoye+X+Berrenger+Feraud+Immeuble+SICAP+Dakar+Senegal" target="_blank" class="btn-google-maps" id="btn-maps-txt">
+            🗺️ Open Office Location in Google Maps
+        </a>
+
         <div class="footer-contact">
             <a href="tel:+221781840000">📞 +221 78 184 00 00</a>
             <span>•</span>
@@ -1017,7 +1225,90 @@
     </footer>
 
     <script>
-        // Data for Destinations
+        // Translations Dictionary (Point 6: Full EN / FR Support)
+        const i18n = {
+            en: {
+                leftTitle: "✨ Popular Spots",
+                rightTitle: "🌍 Top Destinations",
+                umrahTitle: "Umrah, Hajj & Ziarat Packages (Makkah / Madinah)",
+                umrahSub: "Complete Visa, Flights, Hotel & Guided Group / VIP Packages from Dakar",
+                umrahBtn: "Inquire Umrah ➔",
+                tabFlight: "Flights",
+                tabVisa: "Visa",
+                tabHotel: "Hotels",
+                tabHoliday: "Holidays",
+                fullName: "Your Full Name",
+                subOneWay: "One Way",
+                subRound: "Round Trip",
+                subMulti: "Multi-City",
+                flightClass: "Travel Class",
+                fDep: "Departure City / Airport",
+                fDes: "Destination City / Airport",
+                fDepDate: "Departure Date",
+                fRetDate: "Return Date",
+                directOnly: "Prefer Direct / Non-Stop Flights only",
+                fPax: "Passengers",
+                vCountry: "Destination Country for Visa",
+                vNat: "Your Nationality / Passport",
+                vType: "Visa Type",
+                vDate: "Intended Travel Date",
+                vPax: "Number of Applicants",
+                hCity: "City / Location for Hotel",
+                hIn: "Check-in Date",
+                hOut: "Check-out Date",
+                hNat: "Guest Nationality",
+                hRooms: "Total Guests / Rooms",
+                holDest: "Holiday / Package Destination",
+                holDur: "Duration (Days / Nights)",
+                holDate: "Preferred Travel Date",
+                holPax: "Number of Travelers",
+                notes: "Special Requests / Preferences",
+                submitBtn: "Inquire on WhatsApp 💬",
+                airlinesTitle: "Official Ticketing & Global Airline Partners",
+                mapsBtn: "🗺️ Open Office Location in Google Maps"
+            },
+            fr: {
+                leftTitle: "✨ Destinations Phares",
+                rightTitle: "🌍 Top Voyages",
+                umrahTitle: "Forfaits Omra, Hajj & Ziarat (La Mecque / Médine)",
+                umrahSub: "Visa, Billets, Hôtels & Séjours organisés VIP / Groupe depuis Dakar",
+                umrahBtn: "Réserver Omra ➔",
+                tabFlight: "Vols",
+                tabVisa: "Visas",
+                tabHotel: "Hôtels",
+                tabHoliday: "Séjours",
+                fullName: "Nom et Prénom",
+                subOneWay: "Aller Simple",
+                subRound: "Aller-Retour",
+                subMulti: "Multi-Villes",
+                flightClass: "Classe de Voyage",
+                fDep: "Ville / Aéroport de Départ",
+                fDes: "Ville / Aéroport d'Arrivée",
+                fDepDate: "Date de Départ",
+                fRetDate: "Date de Retour",
+                directOnly: "Vols directs sans escale uniquement",
+                fPax: "Passagers",
+                vCountry: "Pays de Destination pour le Visa",
+                vNat: "Votre Nationalité / Passeport",
+                vType: "Type de Visa",
+                vDate: "Date de Voyage Prévue",
+                vPax: "Nombre de Demandeurs",
+                hCity: "Ville / Emplacement de l'Hôtel",
+                hIn: "Date d'Arrivée (Check-in)",
+                hOut: "Date de Départ (Check-out)",
+                hNat: "Nationalité du Client",
+                hRooms: "Nombre de Clients / Chambres",
+                holDest: "Destination Vacances / Séjour",
+                holDur: "Durée (Jours / Nuits)",
+                holDate: "Date de Départ Souhaitée",
+                holPax: "Nombre de Voyageurs",
+                notes: "Demandes Particulières / Préférences",
+                submitBtn: "Demander sur WhatsApp 💬",
+                airlinesTitle: "Billetterie Officielle & Compagnies Partenaires",
+                mapsBtn: "🗺️ Ouvrir l'adresse sur Google Maps"
+            }
+        };
+
         const destinationDetails = {
             paris: {
                 title: "Paris, France (CDG / ORY)",
@@ -1041,7 +1332,7 @@
                 title: "London, United Kingdom (LHR)",
                 tagline: "Royal Palaces, Culture, History & Theaters",
                 img: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=700&auto=format&fit=crop&q=80",
-                desc: "Historic castles, West End musicals, red buses, and world-class museums with pleasant summer weather.",
+                desc: "Historic castles, West End musicals, red buses, and world-class museums.",
                 spots: ["Big Ben & Parliament", "London Eye", "Tower Bridge", "Buckingham Palace", "British Museum", "Oxford Street"],
                 tips: "Regular flight connections from Dakar. Full UK Visitor Visa support.",
                 autoFill: "London (LHR)"
@@ -1077,7 +1368,8 @@
 
         const airports = [
             { code: "DSS", city: "Dakar (Blaise Diagne)", country: "Senegal" },
-            { code: "DKR", city: "Dakar (Yoff)", country: "Senegal" },
+            { code: "JED", city: "Jeddah (Makkah / Umrah)", country: "Saudi Arabia" },
+            { code: "MED", city: "Madinah", country: "Saudi Arabia" },
             { code: "ABJ", city: "Abidjan", country: "Ivory Coast" },
             { code: "ACC", city: "Accra", country: "Ghana" },
             { code: "LOS", city: "Lagos", country: "Nigeria" },
@@ -1087,11 +1379,9 @@
             { code: "CMN", city: "Casablanca", country: "Morocco" },
             { code: "DEL", city: "New Delhi", country: "India" },
             { code: "BOM", city: "Mumbai", country: "India" },
-            { code: "BLR", city: "Bengaluru", country: "India" },
             { code: "DXB", city: "Dubai", country: "UAE" },
             { code: "AUH", city: "Abu Dhabi", country: "UAE" },
             { code: "DOH", city: "Doha", country: "Qatar" },
-            { code: "JED", city: "Jeddah", country: "Saudi Arabia" },
             { code: "CDG", city: "Paris (CDG)", country: "France" },
             { code: "ORY", city: "Paris (Orly)", country: "France" },
             { code: "LHR", city: "London (Heathrow)", country: "UK" },
@@ -1104,36 +1394,86 @@
         let activeService = 'Flight';
         let currentModalAutoFill = '';
 
-        // Safe DOM Load
+        function activateTab(selected) {
+            activeService = selected;
+            document.querySelectorAll('.service-tab-btn').forEach(b => {
+                b.classList.toggle('active', b.getAttribute('data-service') === selected);
+            });
+
+            document.getElementById('form-flight').style.display = (selected === 'Flight') ? 'block' : 'none';
+            document.getElementById('form-visa').style.display = (selected === 'Visa') ? 'block' : 'none';
+            document.getElementById('form-hotel').style.display = (selected === 'Hotel') ? 'block' : 'none';
+            document.getElementById('form-holiday').style.display = (selected === 'Holiday') ? 'block' : 'none';
+        }
+
+        function applyLanguage(lang) {
+            const t = i18n[lang];
+            document.getElementById('btnLangEN').classList.toggle('active', lang === 'en');
+            document.getElementById('btnLangFR').classList.toggle('active', lang === 'fr');
+
+            document.getElementById('txt-left-title').innerText = t.leftTitle;
+            document.getElementById('txt-right-title').innerText = t.rightTitle;
+            document.getElementById('txt-umrah-title').innerText = t.umrahTitle;
+            document.getElementById('txt-umrah-sub').innerText = t.umrahSub;
+            document.getElementById('txt-umrah-btn').innerText = t.umrahBtn;
+            document.getElementById('tab-lbl-flight').innerText = t.tabFlight;
+            document.getElementById('tab-lbl-visa').innerText = t.tabVisa;
+            document.getElementById('tab-lbl-hotel').innerText = t.tabHotel;
+            document.getElementById('tab-lbl-holiday').innerText = t.tabHoliday;
+            document.getElementById('lbl-fullname').innerText = t.fullName;
+            document.getElementById('subtab-oneway').innerText = t.subOneWay;
+            document.getElementById('subtab-round').innerText = t.subRound;
+            document.getElementById('subtab-multi').innerText = t.subMulti;
+            document.getElementById('lbl-flight-class').innerText = t.flightClass;
+            document.getElementById('lbl-f-dep').innerText = t.fDep;
+            document.getElementById('lbl-f-des').innerText = t.fDes;
+            document.getElementById('lbl-f-depdate').innerText = t.fDepDate;
+            document.getElementById('lbl-f-retdate').innerText = t.fRetDate;
+            document.getElementById('lbl-direct-only').innerText = t.directOnly;
+            document.getElementById('lbl-f-pax').innerText = t.fPax;
+            document.getElementById('lbl-v-country').innerText = t.vCountry;
+            document.getElementById('lbl-v-nat').innerText = t.vNat;
+            document.getElementById('lbl-v-type').innerText = t.vType;
+            document.getElementById('lbl-v-date').innerText = t.vDate;
+            document.getElementById('lbl-v-pax').innerText = t.vPax;
+            document.getElementById('lbl-h-city').innerText = t.hCity;
+            document.getElementById('lbl-h-in').innerText = t.hIn;
+            document.getElementById('lbl-h-out').innerText = t.hOut;
+            document.getElementById('lbl-h-nat').innerText = t.hNat;
+            document.getElementById('lbl-h-rooms').innerText = t.hRooms;
+            document.getElementById('lbl-hol-dest').innerText = t.holDest;
+            document.getElementById('lbl-hol-dur').innerText = t.holDur;
+            document.getElementById('lbl-hol-date').innerText = t.holDate;
+            document.getElementById('lbl-hol-pax').innerText = t.holPax;
+            document.getElementById('lbl-notes').innerText = t.notes;
+            document.getElementById('btn-submit-txt').innerText = t.submitBtn;
+            document.getElementById('txt-airlines-title').innerText = t.airlinesTitle;
+            document.getElementById('btn-maps-txt').innerText = t.mapsBtn;
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
 
-            // 1. Service Tab Click Listeners (Guaranteed response)
-            const tabButtons = document.querySelectorAll('.service-tab-btn');
-            tabButtons.forEach(btn => {
+            // Language Switcher Events
+            document.getElementById('btnLangEN').addEventListener('click', () => applyLanguage('en'));
+            document.getElementById('btnLangFR').addEventListener('click', () => applyLanguage('fr'));
+
+            // Umrah Banner Click -> Switches to Holiday Package & Fills Umrah
+            document.getElementById('umrahBanner').addEventListener('click', () => {
+                activateTab('Holiday');
+                document.getElementById('holiday_dest').value = 'Umrah Package (Makkah & Madinah)';
+                document.getElementById('holiday_duration').value = '10 - 15 Days';
+                document.getElementById('holiday_dest').focus();
+            });
+
+            // 1. Service Tab Click Listeners
+            document.querySelectorAll('.service-tab-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
-                    const selected = btn.getAttribute('data-service');
-                    activeService = selected;
-
-                    tabButtons.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-
-                    // Hide all 4 form containers
-                    document.getElementById('form-flight').style.display = 'none';
-                    document.getElementById('form-visa').style.display = 'none';
-                    document.getElementById('form-hotel').style.display = 'none';
-                    document.getElementById('form-holiday').style.display = 'none';
-
-                    // Show selected form container
-                    if (selected === 'Flight') document.getElementById('form-flight').style.display = 'block';
-                    if (selected === 'Visa') document.getElementById('form-visa').style.display = 'block';
-                    if (selected === 'Hotel') document.getElementById('form-hotel').style.display = 'block';
-                    if (selected === 'Holiday') document.getElementById('form-holiday').style.display = 'block';
+                    activateTab(btn.getAttribute('data-service'));
                 });
             });
 
-            // 2. Flight Sub-tabs (One Way, Round Trip, Multi-City)
-            const tripTypeRadios = document.querySelectorAll('input[name="flight_trip_type"]');
-            tripTypeRadios.forEach(radio => {
+            // 2. Flight Sub-tabs
+            document.querySelectorAll('input[name="flight_trip_type"]').forEach(radio => {
                 radio.addEventListener('change', () => {
                     const val = document.querySelector('input[name="flight_trip_type"]:checked').value;
                     const standardBox = document.getElementById('standard-flight-box');
@@ -1152,7 +1492,7 @@
                 });
             });
 
-            // 3. Destination Card Click Listeners (All 6 cards)
+            // 3. Destination Card Click Listeners
             document.querySelectorAll('.dest-card').forEach(card => {
                 card.addEventListener('click', () => {
                     const key = card.getAttribute('data-dest');
@@ -1178,7 +1518,6 @@
                 });
             });
 
-            // Modal Close Events
             document.getElementById('modalCloseBtn').addEventListener('click', () => {
                 document.getElementById('destModal').style.display = 'none';
             });
@@ -1186,7 +1525,6 @@
                 if (e.target.id === 'destModal') document.getElementById('destModal').style.display = 'none';
             });
 
-            // Modal "Book for this destination" button
             document.getElementById('btnModalApply').addEventListener('click', () => {
                 document.getElementById('destModal').style.display = 'none';
                 const cleanName = currentModalAutoFill.split('(')[0].trim();
@@ -1204,11 +1542,11 @@
                 document.querySelector('.center-column').scrollIntoView({ behavior: 'smooth' });
             });
 
-            // Autocomplete Binding
+            // Autocomplete
             setupAutocomplete(document.getElementById('flight_dep'), document.getElementById('sug-f-dep'));
             setupAutocomplete(document.getElementById('flight_des'), document.getElementById('sug-f-des'));
 
-            // Multi City add leg
+            // Multi City Add Leg
             let legCounter = 2;
             document.getElementById('btnAddLeg').addEventListener('click', () => {
                 legCounter++;
@@ -1299,7 +1637,7 @@
                     const date = document.getElementById('holiday_date').value;
                     const pax = document.getElementById('holiday_people').value.trim();
 
-                    details += `🛎️ *Service:* Holiday Package (Séjour)\n🏖️ *Holiday Destination:* ${dest}\n⏳ *Duration:* ${dur}\n`;
+                    details += `🛎️ *Service:* Holiday / Umrah Package\n🏖️ *Destination:* ${dest}\n⏳ *Duration:* ${dur}\n`;
                     if (date) details += `📅 *Preferred Travel Date:* ${date}\n`;
                     if (pax) details += `👥 *Travelers:* ${pax}\n`;
                 }
