@@ -160,6 +160,7 @@
 
         .form-group {
             margin-bottom: 15px;
+            position: relative;
         }
 
         label {
@@ -194,6 +195,51 @@
 
         #return-date-container {
             display: none;
+        }
+
+        /* Airport Autocomplete Dropdown */
+        .suggestions-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #FFFFFF;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 10px;
+            margin-top: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            display: none;
+        }
+
+        .suggestion-item {
+            padding: 10px 14px;
+            font-size: 13px;
+            cursor: pointer;
+            border-bottom: 1px solid #F1F5F9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .suggestion-item:hover, .suggestion-item:active {
+            background-color: #F8FAFC;
+            color: var(--accent-magenta);
+        }
+
+        .suggestion-code {
+            font-weight: 700;
+            background: #EEF2F6;
+            color: var(--primary);
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-size: 11px;
         }
 
         .btn-submit {
@@ -270,12 +316,14 @@
 
                 <div class="grid-2">
                     <div class="form-group">
-                        <label>Departure City</label>
-                        <input type="text" id="departure" placeholder="e.g. Dakar" required>
+                        <label>Departure</label>
+                        <input type="text" id="departure" placeholder="Code, City, Country" autocomplete="off" required oninput="searchAirport(this, 'dep-suggestions')">
+                        <div id="dep-suggestions" class="suggestions-list"></div>
                     </div>
                     <div class="form-group">
-                        <label>Destination City</label>
-                        <input type="text" id="destination" placeholder="e.g. Paris, Dubai" required>
+                        <label>Destination</label>
+                        <input type="text" id="destination" placeholder="Code, City, Country" autocomplete="off" required oninput="searchAirport(this, 'des-suggestions')">
+                        <div id="des-suggestions" class="suggestions-list"></div>
                     </div>
                 </div>
 
@@ -301,6 +349,114 @@
     </div>
 
     <script>
+        // Airport Database (Codes, Cities, Countries)
+        const airports = [
+            // Senegal & West Africa
+            { code: "DSS", city: "Dakar (Blaise Diagne)", country: "Senegal" },
+            { code: "DKR", city: "Dakar (Yoff)", country: "Senegal" },
+            { code: "ABJ", city: "Abidjan", country: "Ivory Coast" },
+            { code: "ACC", city: "Accra", country: "Ghana" },
+            { code: "LOS", city: "Lagos", country: "Nigeria" },
+            { code: "BJL", city: "Banjul", country: "Gambia" },
+            { code: "CKY", city: "Conakry", country: "Guinea" },
+            { code: "BKO", city: "Bamako", country: "Mali" },
+            { code: "LFW", city: "Lome", country: "Togo" },
+            { code: "COO", city: "Cotonou", country: "Benin" },
+            { code: "CMN", city: "Casablanca", country: "Morocco" },
+
+            // India Major Airports
+            { code: "DEL", city: "New Delhi (Indira Gandhi)", country: "India" },
+            { code: "BOM", city: "Mumbai (Chhatrapati Shivaji)", country: "India" },
+            { code: "BLR", city: "Bengaluru (Kempegowda)", country: "India" },
+            { code: "MAA", city: "Chennai", country: "India" },
+            { code: "CCU", city: "Kolkata", country: "India" },
+            { code: "HYD", city: "Hyderabad (Rajiv Gandhi)", country: "India" },
+            { code: "AMD", city: "Ahmedabad (SVP)", country: "India" },
+            { code: "COK", city: "Kochi", country: "India" },
+            { code: "GOI", city: "Goa (Dabolim)", country: "India" },
+            { code: "GOX", city: "Goa (Mopa)", country: "India" },
+            { code: "JAI", city: "Jaipur", country: "India" },
+            { code: "JDH", city: "Jodhpur", country: "India" },
+            { code: "UDR", city: "Udaipur", country: "India" },
+            { code: "LKO", city: "Lucknow", country: "India" },
+            { code: "ATQ", city: "Amritsar", country: "India" },
+            { code: "TRV", city: "Thiruvananthapuram", country: "India" },
+
+            // Middle East
+            { code: "DXB", city: "Dubai", country: "UAE" },
+            { code: "DWC", city: "Dubai Al Maktoum", country: "UAE" },
+            { code: "AUH", city: "Abu Dhabi", country: "UAE" },
+            { code: "SHJ", city: "Sharjah", country: "UAE" },
+            { code: "DOH", city: "Doha", country: "Qatar" },
+            { code: "JED", city: "Jeddah", country: "Saudi Arabia" },
+            { code: "RUH", city: "Riyadh", country: "Saudi Arabia" },
+            { code: "MED", city: "Medina", country: "Saudi Arabia" },
+            { code: "BAH", city: "Bahrain", country: "Bahrain" },
+            { code: "KWI", city: "Kuwait City", country: "Kuwait" },
+            { code: "MCT", city: "Muscat", country: "Oman" },
+
+            // Europe & Americas & Asia
+            { code: "CDG", city: "Paris (Charles de Gaulle)", country: "France" },
+            { code: "ORY", city: "Paris (Orly)", country: "France" },
+            { code: "LHR", city: "London (Heathrow)", country: "United Kingdom" },
+            { code: "LGW", city: "London (Gatwick)", country: "United Kingdom" },
+            { code: "IST", city: "Istanbul", country: "Turkey" },
+            { code: "MAD", city: "Madrid (Barajas)", country: "Spain" },
+            { code: "LPA", city: "Gran Canaria", country: "Spain" },
+            { code: "LIS", city: "Lisbon", country: "Portugal" },
+            { code: "FRA", city: "Frankfurt", country: "Germany" },
+            { code: "FCO", city: "Rome (Fiumicino)", country: "Italy" },
+            { code: "JFK", city: "New York (JFK)", country: "United States" },
+            { code: "YYZ", city: "Toronto (Pearson)", country: "Canada" },
+            { code: "MNL", city: "Manila", country: "Philippines" },
+            { code: "CEB", city: "Cebu", country: "Philippines" },
+            { code: "BKK", city: "Bangkok (Suvarnabhumi)", country: "Thailand" },
+            { code: "SIN", city: "Singapore (Changi)", country: "Singapore" }
+        ];
+
+        function searchAirport(input, listId) {
+            const query = input.value.trim().toLowerCase();
+            const list = document.getElementById(listId);
+            list.innerHTML = '';
+
+            if (query.length === 0) {
+                list.style.display = 'none';
+                return;
+            }
+
+            const matches = airports.filter(item => 
+                item.code.toLowerCase().includes(query) ||
+                item.city.toLowerCase().includes(query) ||
+                item.country.toLowerCase().includes(query)
+            );
+
+            if (matches.length === 0) {
+                list.style.display = 'none';
+                return;
+            }
+
+            matches.slice(0, 7).forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'suggestion-item';
+                div.innerHTML = `<span><strong>${item.city}</strong>, ${item.country}</span> <span class="suggestion-code">${item.code}</span>`;
+                div.onclick = function() {
+                    input.value = `${item.city} (${item.code})`;
+                    list.style.display = 'none';
+                };
+                list.appendChild(div);
+            });
+
+            list.style.display = 'block';
+        }
+
+        // Close suggestion lists when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.form-group')) {
+                document.getElementById('dep-suggestions').style.display = 'none';
+                document.getElementById('des-suggestions').style.display = 'none';
+            }
+        });
+
         function toggleReturnDate() {
             const isRoundTrip = document.querySelector('input[name="trip_type"]:checked').value === "Round Trip";
             const returnContainer = document.getElementById('return-date-container');
