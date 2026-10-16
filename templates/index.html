@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cinderella Travel - Voyages & Tourisme</title>
+    <title>Cinderella Travel Dakar - Voyages & Tourisme</title>
     <link rel="icon" href="/static/logo.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1A365D;       /* Royal Blue */
-            --accent-cyan: #00D4FF;    /* Cyan */
-            --accent-magenta: #E91E63; /* Pink */
+            --primary: #1A365D;
+            --accent-cyan: #00D4FF;
+            --accent-magenta: #E91E63;
+            --whatsapp-green: #25D366;
             --bg-light: #F8FAFC;
             --card-bg: #FFFFFF;
             --text-dark: #1E293B;
@@ -29,6 +30,8 @@
             background-color: var(--bg-light);
             color: var(--text-dark);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* Header */
@@ -40,6 +43,9 @@
             align-items: center;
             border-bottom: 2px solid #E2E8F0;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .brand-container {
@@ -67,6 +73,23 @@
             font-weight: 600;
         }
 
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lang-switch {
+            background: #EEF2F6;
+            border: 1px solid #CBD5E1;
+            border-radius: 8px;
+            padding: 5px 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
         .contact-badge {
             font-size: 13px;
             font-weight: 600;
@@ -91,7 +114,7 @@
         /* Hero */
         .hero {
             text-align: center;
-            padding: 28px 16px 18px;
+            padding: 26px 16px 14px;
         }
 
         .hero h1 {
@@ -106,14 +129,65 @@
             font-size: 14px;
         }
 
-        /* Container & Card */
+        /* Container */
         .container {
             width: 100%;
-            max-width: 520px;
-            margin: 0 auto 35px;
+            max-width: 600px;
+            margin: 0 auto 30px;
             padding: 0 16px;
+            flex: 1;
         }
 
+        /* Popular Offers */
+        .offers-section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .offer-card {
+            background: #FFFFFF;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .offer-card:hover {
+            border-color: var(--accent-magenta);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(233, 30, 99, 0.15);
+        }
+
+        .offer-card .route {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .offer-card .tag {
+            font-size: 10px;
+            color: var(--accent-magenta);
+            font-weight: 600;
+        }
+
+        /* Booking Card */
         .booking-card {
             background: var(--card-bg);
             border-radius: 20px;
@@ -124,8 +198,8 @@
 
         .trip-type-selector {
             display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
+            gap: 6px;
+            margin-bottom: 18px;
             background: #E2E8F0;
             padding: 4px;
             border-radius: 12px;
@@ -134,7 +208,7 @@
         .trip-type-selector label {
             flex: 1;
             text-align: center;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
             margin: 0;
@@ -146,7 +220,7 @@
 
         .trip-type-selector span {
             display: block;
-            padding: 9px 0;
+            padding: 8px 0;
             border-radius: 9px;
             color: var(--text-muted);
             transition: all 0.2s ease;
@@ -165,24 +239,29 @@
 
         label {
             display: block;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             margin-bottom: 6px;
             color: var(--primary);
         }
 
-        input, select {
+        input, select, textarea {
             width: 100%;
-            padding: 12px 14px;
+            padding: 11px 13px;
             border: 1.5px solid #CBD5E1;
             border-radius: 10px;
-            font-size: 14px;
+            font-size: 13px;
             outline: none;
             background: #F8FAFC;
             transition: border-color 0.2s;
         }
 
-        input:focus, select:focus {
+        textarea {
+            resize: vertical;
+            height: 70px;
+        }
+
+        input:focus, select:focus, textarea:focus {
             border-color: var(--accent-cyan);
             background: #FFFFFF;
         }
@@ -193,11 +272,33 @@
             gap: 12px;
         }
 
-        #return-date-container {
-            display: none;
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
         }
 
-        /* Airport Autocomplete Dropdown */
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+            cursor: pointer;
+        }
+
+        .checkbox-row input {
+            width: auto;
+            accent-color: var(--accent-magenta);
+            cursor: pointer;
+        }
+
+        .checkbox-row span {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        /* Suggestions Dropdown */
         .suggestions-list {
             position: absolute;
             top: 100%;
@@ -216,7 +317,7 @@
 
         .suggestion-item {
             padding: 10px 14px;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             border-bottom: 1px solid #F1F5F9;
             display: flex;
@@ -228,7 +329,7 @@
             border-bottom: none;
         }
 
-        .suggestion-item:hover, .suggestion-item:active {
+        .suggestion-item:hover {
             background-color: #F8FAFC;
             color: var(--accent-magenta);
         }
@@ -239,17 +340,48 @@
             color: var(--primary);
             padding: 2px 6px;
             border-radius: 6px;
-            font-size: 11px;
+            font-size: 10px;
         }
 
+        /* Multi-City Leg Block */
+        .multi-leg {
+            background: #F8FAFC;
+            border: 1px dashed #CBD5E1;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .multi-leg-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent-magenta);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .btn-add-leg {
+            background: #EEF2F6;
+            border: 1.5px dashed var(--primary);
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 8px;
+            width: 100%;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        /* Submit Button */
         .btn-submit {
             width: 100%;
-            padding: 15px;
-            margin-top: 10px;
+            padding: 14px;
             background: linear-gradient(135deg, var(--accent-magenta) 0%, #C2185B 100%);
             border: none;
             color: white;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             border-radius: 12px;
             cursor: pointer;
@@ -261,11 +393,67 @@
             transform: scale(0.98);
         }
 
+        /* Floating WhatsApp Button */
+        .floating-wa {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--whatsapp-green);
+            color: white;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+            z-index: 999;
+            text-decoration: none;
+            font-size: 28px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* Footer */
+        footer {
+            background: #FFFFFF;
+            border-top: 1px solid #E2E8F0;
+            padding: 24px 20px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: auto;
+        }
+
+        footer strong {
+            color: var(--primary);
+        }
+
+        .footer-links {
+            margin: 8px 0;
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        .footer-links a {
+            color: var(--accent-magenta);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
         @media (max-width: 480px) {
-            .brand-logo { height: 40px; }
-            .brand-title { font-size: 18px; }
-            .contact-badge { font-size: 11px; padding: 5px 10px; }
-            .grid-2 { grid-template-columns: 1fr; gap: 12px; }
+            .brand-logo { height: 38px; }
+            .brand-title { font-size: 16px; }
+            .contact-badge { font-size: 10px; padding: 5px 8px; }
+            .offers-grid { grid-template-columns: 1fr 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .grid-3 { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -276,82 +464,201 @@
             <img src="/static/logo.png" alt="Cinderella Travel" class="brand-logo" onerror="this.style.display='none'">
             <div class="brand-title">Cinderella <span>Travel Dakar</span></div>
         </div>
-        <a href="tel:+221781840000" class="contact-badge">📞 +221 78 184 00 00</a>
+        <div class="header-actions">
+            <select id="langSwitcher" class="lang-switch" onchange="switchLanguage(this.value)">
+                <option value="en">EN</option>
+                <option value="fr">FR</option>
+            </select>
+            <a href="tel:+221781840000" class="contact-badge">📞 +221 78 184 00 00</a>
+        </div>
     </header>
 
     <section class="hero">
-        <h1>Travel Booking & Inquiries</h1>
-        <p>Flights, Visas, Hotels & Holiday Packages</p>
+        <h1 id="txt-hero-title">Travel Booking & Inquiries</h1>
+        <p id="txt-hero-sub">Flights, Visas, Hotels & Custom Holiday Packages</p>
     </section>
 
     <div class="container">
+        
+        <!-- Popular Deals Section -->
+        <div class="offers-section">
+            <div class="section-title">🔥 <span id="txt-popular">Popular Routes from Dakar</span></div>
+            <div class="offers-grid">
+                <div class="offer-card" onclick="quickFill('DSS', 'CDG')">
+                    <div class="route">DSS ➔ Paris (CDG)</div>
+                    <div class="tag" id="txt-direct1">Direct / Transit</div>
+                </div>
+                <div class="offer-card" onclick="quickFill('DSS', 'DXB')">
+                    <div class="route">DSS ➔ Dubai (DXB)</div>
+                    <div class="tag">Top Holiday</div>
+                </div>
+                <div class="offer-card" onclick="quickFill('DSS', 'CMN')">
+                    <div class="route">DSS ➔ Casablanca</div>
+                    <div class="tag">Daily Flights</div>
+                </div>
+            </div>
+        </div>
+
         <div class="booking-card">
             <form id="bookingForm" onsubmit="sendToWhatsApp(event)">
                 
+                <!-- Trip Type Tabs -->
                 <div class="trip-type-selector">
                     <label>
-                        <input type="radio" name="trip_type" value="One Way" checked onchange="toggleReturnDate()">
-                        <span>One Way</span>
+                        <input type="radio" name="trip_type" value="One Way" checked onchange="handleTripTypeChange()">
+                        <span id="tab-oneway">One Way</span>
                     </label>
                     <label>
-                        <input type="radio" name="trip_type" value="Round Trip" onchange="toggleReturnDate()">
-                        <span>Round Trip</span>
+                        <input type="radio" name="trip_type" value="Round Trip" onchange="handleTripTypeChange()">
+                        <span id="tab-round">Round Trip</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="trip_type" value="Multi-City" onchange="handleTripTypeChange()">
+                        <span id="tab-multi">Multi-City</span>
                     </label>
                 </div>
 
                 <div class="form-group">
-                    <label>Full Name</label>
+                    <label id="lbl-fullname">Full Name</label>
                     <input type="text" id="full_name" placeholder="Enter your full name" required>
                 </div>
 
-                <div class="form-group">
-                    <label>Service Required</label>
-                    <select id="service_type">
-                        <option value="Flight Ticket">Flight Ticket</option>
-                        <option value="Visa Assistance">Visa Assistance</option>
-                        <option value="Hotel Reservation">Hotel Reservation</option>
-                        <option value="Holiday Package">Holiday Package</option>
-                    </select>
-                </div>
-
                 <div class="grid-2">
                     <div class="form-group">
-                        <label>Departure</label>
-                        <input type="text" id="departure" placeholder="Code, City, Country" autocomplete="off" required oninput="searchAirport(this, 'dep-suggestions')">
-                        <div id="dep-suggestions" class="suggestions-list"></div>
+                        <label id="lbl-service">Service Required</label>
+                        <select id="service_type" onchange="handleServiceChange()">
+                            <option value="Flight Ticket">Flight Ticket</option>
+                            <option value="Visa Assistance">Visa Assistance</option>
+                            <option value="Hotel Reservation">Hotel Reservation</option>
+                            <option value="Holiday Package">Holiday Package</option>
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <label>Destination</label>
-                        <input type="text" id="destination" placeholder="Code, City, Country" autocomplete="off" required oninput="searchAirport(this, 'des-suggestions')">
-                        <div id="des-suggestions" class="suggestions-list"></div>
-                    </div>
-                </div>
-
-                <div class="grid-2">
-                    <div class="form-group">
-                        <label>Departure Date</label>
-                        <input type="date" id="departure_date" required>
-                    </div>
-                    <div class="form-group" id="return-date-container">
-                        <label>Return Date</label>
-                        <input type="date" id="return_date">
+                    <div class="form-group" id="cabin-class-container">
+                        <label id="lbl-class">Travel Class</label>
+                        <select id="cabin_class">
+                            <option value="Economy">Economy</option>
+                            <option value="Premium Economy">Premium Economy</option>
+                            <option value="Business Class">Business Class</option>
+                            <option value="First Class">First Class</option>
+                        </select>
                     </div>
                 </div>
 
+                <!-- Standard Flights (One Way & Round Trip) -->
+                <div id="standard-flight-section">
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label id="lbl-dep">Departure City / Airport</label>
+                            <input type="text" id="departure" placeholder="Code, City, Country" autocomplete="off" required oninput="searchAirport(this, 'dep-suggestions')">
+                            <div id="dep-suggestions" class="suggestions-list"></div>
+                        </div>
+                        <div class="form-group">
+                            <label id="lbl-des">Destination City / Airport</label>
+                            <input type="text" id="destination" placeholder="Code, City, Country" autocomplete="off" required oninput="searchAirport(this, 'des-suggestions')">
+                            <div id="des-suggestions" class="suggestions-list"></div>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label id="lbl-depdate">Departure Date</label>
+                            <input type="date" id="departure_date" required>
+                        </div>
+                        <div class="form-group" id="return-date-container" style="display: none;">
+                            <label id="lbl-retdate">Return Date</label>
+                            <input type="date" id="return_date">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Multi-City Flight Section -->
+                <div id="multicity-section" style="display: none;">
+                    <div id="multi-legs-container">
+                        <div class="multi-leg">
+                            <div class="multi-leg-title">Flight 1</div>
+                            <div class="grid-2">
+                                <div class="form-group">
+                                    <input type="text" class="multi-from" placeholder="From (e.g. DSS)" oninput="searchAirport(this, 'multi-sug-1')">
+                                    <div id="multi-sug-1" class="suggestions-list"></div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="multi-to" placeholder="To (e.g. CDG)" oninput="searchAirport(this, 'multi-sug-2')">
+                                    <div id="multi-sug-2" class="suggestions-list"></div>
+                                </div>
+                            </div>
+                            <input type="date" class="multi-date">
+                        </div>
+                        <div class="multi-leg">
+                            <div class="multi-leg-title">Flight 2</div>
+                            <div class="grid-2">
+                                <div class="form-group">
+                                    <input type="text" class="multi-from" placeholder="From (e.g. CDG)" oninput="searchAirport(this, 'multi-sug-3')">
+                                    <div id="multi-sug-3" class="suggestions-list"></div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="multi-to" placeholder="To (e.g. DXB)" oninput="searchAirport(this, 'multi-sug-4')">
+                                    <div id="multi-sug-4" class="suggestions-list"></div>
+                                </div>
+                            </div>
+                            <input type="date" class="multi-date">
+                        </div>
+                    </div>
+                    <button type="button" class="btn-add-leg" onclick="addFlightLeg()">+ Add Another Flight</button>
+                </div>
+
+                <!-- Passenger Breakdown -->
                 <div class="form-group">
-                    <label>Number of Passengers</label>
-                    <input type="number" id="passengers" value="1" min="1" max="50" required>
+                    <label id="lbl-pax-title">Passengers Breakdown</label>
+                    <div class="grid-3">
+                        <div>
+                            <span style="font-size: 11px; color: var(--text-muted);">Adults (12y+)</span>
+                            <input type="number" id="pax_adults" value="1" min="1" max="20" required>
+                        </div>
+                        <div>
+                            <span style="font-size: 11px; color: var(--text-muted);">Children (2-11y)</span>
+                            <input type="number" id="pax_children" value="0" min="0" max="10">
+                        </div>
+                        <div>
+                            <span style="font-size: 11px; color: var(--text-muted);">Infants (&lt;2y)</span>
+                            <input type="number" id="pax_infants" value="0" min="0" max="5">
+                        </div>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn-submit">Inquire on WhatsApp 💬</button>
+                <!-- Direct Flights Only Checkbox -->
+                <label class="checkbox-row" id="direct-flight-row">
+                    <input type="checkbox" id="direct_flights_only">
+                    <span id="txt-direct-only">Prefer Direct / Non-Stop Flights only</span>
+                </label>
+
+                <!-- Special Requests / Notes -->
+                <div class="form-group">
+                    <label id="lbl-notes">Special Requests / Airline Preferences</label>
+                    <textarea id="special_notes" placeholder="e.g. Prefer Emirates, Extra luggage 2x23kg, Vegetarian meal..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit" id="btn-submit">Inquire on WhatsApp 💬</button>
             </form>
         </div>
     </div>
 
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/221781840000?text=Hello%20Cinderella%20Travel,%20I%20have%20an%20inquiry." target="_blank" class="floating-wa" title="Chat on WhatsApp">💬</a>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>Cinderella Travel Dakar</strong> — Voyages & Tourisme</p>
+        <p>📍 Dakar, Senegal | 📞 +221 78 184 00 00</p>
+        <div class="footer-links">
+            <a href="tel:+221781840000">Direct Call</a> • 
+            <a href="https://wa.me/221781840000" target="_blank">WhatsApp</a>
+        </div>
+        <p style="margin-top: 6px; font-size: 11px;">Mon - Sat: 09:00 AM - 07:00 PM</p>
+    </footer>
+
     <script>
-        // Airport Database (Codes, Cities, Countries)
+        // Airport Database (West Africa, Europe, Middle East, India, World)
         const airports = [
-            // Senegal & West Africa
             { code: "DSS", city: "Dakar (Blaise Diagne)", country: "Senegal" },
             { code: "DKR", city: "Dakar (Yoff)", country: "Senegal" },
             { code: "ABJ", city: "Abidjan", country: "Ivory Coast" },
@@ -363,57 +670,102 @@
             { code: "LFW", city: "Lome", country: "Togo" },
             { code: "COO", city: "Cotonou", country: "Benin" },
             { code: "CMN", city: "Casablanca", country: "Morocco" },
-
-            // India Major Airports
             { code: "DEL", city: "New Delhi (Indira Gandhi)", country: "India" },
-            { code: "BOM", city: "Mumbai (Chhatrapati Shivaji)", country: "India" },
-            { code: "BLR", city: "Bengaluru (Kempegowda)", country: "India" },
-            { code: "MAA", city: "Chennai", country: "India" },
-            { code: "CCU", city: "Kolkata", country: "India" },
-            { code: "HYD", city: "Hyderabad (Rajiv Gandhi)", country: "India" },
-            { code: "AMD", city: "Ahmedabad (SVP)", country: "India" },
-            { code: "COK", city: "Kochi", country: "India" },
-            { code: "GOI", city: "Goa (Dabolim)", country: "India" },
-            { code: "GOX", city: "Goa (Mopa)", country: "India" },
+            { code: "BOM", city: "Mumbai (CSMIA)", country: "India" },
+            { code: "BLR", city: "Bengaluru", country: "India" },
+            { code: "HYD", city: "Hyderabad", country: "India" },
+            { code: "AMD", city: "Ahmedabad", country: "India" },
             { code: "JAI", city: "Jaipur", country: "India" },
             { code: "JDH", city: "Jodhpur", country: "India" },
-            { code: "UDR", city: "Udaipur", country: "India" },
-            { code: "LKO", city: "Lucknow", country: "India" },
-            { code: "ATQ", city: "Amritsar", country: "India" },
-            { code: "TRV", city: "Thiruvananthapuram", country: "India" },
-
-            // Middle East
             { code: "DXB", city: "Dubai", country: "UAE" },
-            { code: "DWC", city: "Dubai Al Maktoum", country: "UAE" },
             { code: "AUH", city: "Abu Dhabi", country: "UAE" },
-            { code: "SHJ", city: "Sharjah", country: "UAE" },
             { code: "DOH", city: "Doha", country: "Qatar" },
             { code: "JED", city: "Jeddah", country: "Saudi Arabia" },
-            { code: "RUH", city: "Riyadh", country: "Saudi Arabia" },
             { code: "MED", city: "Medina", country: "Saudi Arabia" },
-            { code: "BAH", city: "Bahrain", country: "Bahrain" },
-            { code: "KWI", city: "Kuwait City", country: "Kuwait" },
-            { code: "MCT", city: "Muscat", country: "Oman" },
-
-            // Europe & Americas & Asia
             { code: "CDG", city: "Paris (Charles de Gaulle)", country: "France" },
             { code: "ORY", city: "Paris (Orly)", country: "France" },
             { code: "LHR", city: "London (Heathrow)", country: "United Kingdom" },
-            { code: "LGW", city: "London (Gatwick)", country: "United Kingdom" },
             { code: "IST", city: "Istanbul", country: "Turkey" },
-            { code: "MAD", city: "Madrid (Barajas)", country: "Spain" },
+            { code: "MAD", city: "Madrid", country: "Spain" },
             { code: "LPA", city: "Gran Canaria", country: "Spain" },
             { code: "LIS", city: "Lisbon", country: "Portugal" },
-            { code: "FRA", city: "Frankfurt", country: "Germany" },
-            { code: "FCO", city: "Rome (Fiumicino)", country: "Italy" },
-            { code: "JFK", city: "New York (JFK)", country: "United States" },
-            { code: "YYZ", city: "Toronto (Pearson)", country: "Canada" },
-            { code: "MNL", city: "Manila", country: "Philippines" },
-            { code: "CEB", city: "Cebu", country: "Philippines" },
-            { code: "BKK", city: "Bangkok (Suvarnabhumi)", country: "Thailand" },
-            { code: "SIN", city: "Singapore (Changi)", country: "Singapore" }
+            { code: "JFK", city: "New York (JFK)", country: "USA" },
+            { code: "MNL", city: "Manila", country: "Philippines" }
         ];
 
+        // Language Dictionary
+        const translations = {
+            en: {
+                heroTitle: "Travel Booking & Inquiries",
+                heroSub: "Flights, Visas, Hotels & Custom Holiday Packages",
+                popular: "Popular Routes from Dakar",
+                tabOneWay: "One Way",
+                tabRound: "Round Trip",
+                tabMulti: "Multi-City",
+                fullName: "Full Name",
+                service: "Service Required",
+                travelClass: "Travel Class",
+                dep: "Departure City / Airport",
+                des: "Destination City / Airport",
+                depDate: "Departure Date",
+                retDate: "Return Date",
+                paxTitle: "Passengers Breakdown",
+                directOnly: "Prefer Direct / Non-Stop Flights only",
+                notes: "Special Requests / Airline Preferences",
+                submit: "Inquire on WhatsApp 💬"
+            },
+            fr: {
+                heroTitle: "Réservations & Informations Voyages",
+                heroSub: "Billets d'avion, Visas, Hôtels & Séjours sur mesure",
+                popular: "Destinations Populaires au départ de Dakar",
+                tabOneWay: "Aller Simple",
+                tabRound: "Aller-Retour",
+                tabMulti: "Multi-Destinations",
+                fullName: "Nom et Prénom",
+                service: "Service Demandé",
+                travelClass: "Classe de Voyage",
+                dep: "Ville / Aéroport de Départ",
+                des: "Ville / Aéroport d'Arrivée",
+                depDate: "Date de Départ",
+                retDate: "Date de Retour",
+                paxTitle: "Nombre de Passagers",
+                directOnly: "Vols directs sans escale uniquement",
+                notes: "Demandes particulières / Préférences de compagnie",
+                submit: "Demander sur WhatsApp 💬"
+            }
+        };
+
+        function switchLanguage(lang) {
+            const t = translations[lang];
+            document.getElementById('txt-hero-title').innerText = t.heroTitle;
+            document.getElementById('txt-hero-sub').innerText = t.heroSub;
+            document.getElementById('txt-popular').innerText = t.popular;
+            document.getElementById('tab-oneway').innerText = t.tabOneWay;
+            document.getElementById('tab-round').innerText = t.tabRound;
+            document.getElementById('tab-multi').innerText = t.tabMulti;
+            document.getElementById('lbl-fullname').innerText = t.fullName;
+            document.getElementById('lbl-service').innerText = t.service;
+            document.getElementById('lbl-class').innerText = t.travelClass;
+            document.getElementById('lbl-dep').innerText = t.dep;
+            document.getElementById('lbl-des').innerText = t.des;
+            document.getElementById('lbl-depdate').innerText = t.depDate;
+            document.getElementById('lbl-retdate').innerText = t.retDate;
+            document.getElementById('lbl-pax-title').innerText = t.paxTitle;
+            document.getElementById('txt-direct-only').innerText = t.directOnly;
+            document.getElementById('lbl-notes').innerText = t.notes;
+            document.getElementById('btn-submit').innerText = t.submit;
+        }
+
+        // Quick Fill Route from promo cards
+        function quickFill(originCode, destCode) {
+            const orig = airports.find(a => a.code === originCode);
+            const dest = airports.find(a => a.code === destCode);
+            if (orig) document.getElementById('departure').value = `${orig.city} (${orig.code})`;
+            if (dest) document.getElementById('destination').value = `${dest.city} (${dest.code})`;
+            window.scrollTo({ top: 220, behavior: 'smooth' });
+        }
+
+        // Search Autocomplete
         function searchAirport(input, listId) {
             const query = input.value.trim().toLowerCase();
             const list = document.getElementById(listId);
@@ -435,10 +787,10 @@
                 return;
             }
 
-            matches.slice(0, 7).forEach(item => {
+            matches.slice(0, 6).forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'suggestion-item';
-                div.innerHTML = `<span><strong>${item.city}</strong>, ${item.country}</span> <span class="suggestion-code">${item.code}</span>`;
+                div.innerHTML = `<span><strong>${item.city}</strong>,${item.country}</span> <span class="suggestion-code">\${item.code}</span>`;
                 div.onclick = function() {
                     input.value = `${item.city} (${item.code})`;
                     list.style.display = 'none';
@@ -449,57 +801,133 @@
             list.style.display = 'block';
         }
 
-        // Close suggestion lists when clicking outside
+        // Close dropdowns on outside click
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.form-group')) {
-                document.getElementById('dep-suggestions').style.display = 'none';
-                document.getElementById('des-suggestions').style.display = 'none';
+                document.querySelectorAll('.suggestions-list').forEach(el => el.style.display = 'none');
             }
         });
 
-        function toggleReturnDate() {
-            const isRoundTrip = document.querySelector('input[name="trip_type"]:checked').value === "Round Trip";
-            const returnContainer = document.getElementById('return-date-container');
-            const returnInput = document.getElementById('return_date');
-            
-            if (isRoundTrip) {
-                returnContainer.style.display = 'block';
-                returnInput.required = true;
+        // Trip Type handler
+        function handleTripTypeChange() {
+            const type = document.querySelector('input[name="trip_type"]:checked').value;
+            const standardSec = document.getElementById('standard-flight-section');
+            const multiSec = document.getElementById('multicity-section');
+            const retCont = document.getElementById('return-date-container');
+            const retInput = document.getElementById('return_date');
+
+            if (type === 'Multi-City') {
+                standardSec.style.display = 'none';
+                multiSec.style.display = 'block';
+                document.getElementById('departure').required = false;
+                document.getElementById('destination').required = false;
+                document.getElementById('departure_date').required = false;
+                retInput.required = false;
             } else {
-                returnContainer.style.display = 'none';
-                returnInput.required = false;
-                returnInput.value = '';
+                standardSec.style.display = 'block';
+                multiSec.style.display = 'none';
+                document.getElementById('departure').required = true;
+                document.getElementById('destination').required = true;
+                document.getElementById('departure_date').required = true;
+
+                if (type === 'Round Trip') {
+                    retCont.style.display = 'block';
+                    retInput.required = true;
+                } else {
+                    retCont.style.display = 'none';
+                    retInput.required = false;
+                    retInput.value = '';
+                }
             }
         }
 
+        // Multi City add leg
+        let legCount = 2;
+        function addFlightLeg() {
+            legCount++;
+            const container = document.getElementById('multi-legs-container');
+            const newLeg = document.createElement('div');
+            newLeg.className = 'multi-leg';
+            newLeg.innerHTML = `
+                <div class="multi-leg-title">Flight \${legCount}</div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <input type="text" class="multi-from" placeholder="From (Airport)" oninput="searchAirport(this, 'multi-sug-\${legCount}-a')">
+                        <div id="multi-sug-\${legCount}-a" class="suggestions-list"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="multi-to" placeholder="To (Airport)" oninput="searchAirport(this, 'multi-sug-\${legCount}-b')">
+                        <div id="multi-sug-\${legCount}-b" class="suggestions-list"></div>
+                    </div>
+                </div>
+                <input type="date" class="multi-date">
+            `;
+            container.appendChild(newLeg);
+        }
+
+        function handleServiceChange() {
+            const service = document.getElementById('service_type').value;
+            const cabin = document.getElementById('cabin-class-container');
+            const direct = document.getElementById('direct-flight-row');
+            if (service !== 'Flight Ticket') {
+                cabin.style.display = 'none';
+                direct.style.display = 'none';
+            } else {
+                cabin.style.display = 'block';
+                direct.style.display = 'flex';
+            }
+        }
+
+        // Send formatted WhatsApp message
         function sendToWhatsApp(e) {
             e.preventDefault();
             
             const name = document.getElementById('full_name').value.trim();
             const service = document.getElementById('service_type').value;
+            const cabinClass = document.getElementById('cabin_class').value;
             const tripType = document.querySelector('input[name="trip_type"]:checked').value;
-            const dep = document.getElementById('departure').value.trim();
-            const des = document.getElementById('destination').value.trim();
-            const depDate = document.getElementById('departure_date').value;
-            const retDate = document.getElementById('return_date').value;
-            const pax = document.getElementById('passengers').value;
+            const directOnly = document.getElementById('direct_flights_only').checked ? "Yes (Non-Stop)" : "No preference";
+            
+            const adults = document.getElementById('pax_adults').value;
+            const children = document.getElementById('pax_children').value;
+            const infants = document.getElementById('pax_infants').value;
+            const notes = document.getElementById('special_notes').value.trim();
 
-            let dateMsg = `📅 *Departure:* ${depDate}`;
-            if (tripType === 'Round Trip' && retDate) {
-                dateMsg += `\n📅 *Return:* ${retDate}`;
+            let itineraryText = "";
+            if (tripType === 'Multi-City') {
+                const legs = document.querySelectorAll('.multi-leg');
+                legs.forEach((leg, index) => {
+                    const from = leg.querySelector('.multi-from').value.trim();
+                    const to = leg.querySelector('.multi-to').value.trim();
+                    const date = leg.querySelector('.multi-date').value;
+                    if (from && to) {
+                        itineraryText += `\n✈️ *Leg ${index + 1}:*${from} ➔ ${to} (${date || 'Open Date'})`;
+                    }
+                });
+            } else {
+                const dep = document.getElementById('departure').value.trim();
+                const des = document.getElementById('destination').value.trim();
+                const depDate = document.getElementById('departure_date').value;
+                const retDate = document.getElementById('return_date').value;
+
+                itineraryText = `🛫 *From:* ${dep}\n🛬 *To:* ${des}\n📅 *Departure Date:* \${depDate}`;
+                if (tripType === 'Round Trip' && retDate) {
+                    itineraryText += `\n📅 *Return Date:* \${retDate}`;
+                }
             }
 
             const message = 
-                `✈️ *Cinderella Travel Inquiry*\n` +
-                `---------------------------\n` +
-                `👤 *Name:* ${name}\n` +
-                `🛎️ *Service:* ${service}\n` +
-                `🔄 *Trip Type:* ${tripType}\n` +
-                `🛫 *From:* ${dep}\n` +
-                `🛬 *To:* ${des}\n` +
-                `${dateMsg}\n` +
-                `👥 *Passengers:* ${pax}\n` +
-                `---------------------------`;
+                `🌟 *Cinderella Travel Dakar - New Inquiry*\n` +
+                `===============================\n` +
+                `👤 *Client Name:* \${name}\n` +
+                `🛎️ *Service:* \${service}\n` +
+                `🎫 *Travel Class:* \${cabinClass}\n` +
+                `🔄 *Trip Type:* \${tripType}\n` +
+                `\${itineraryText}\n` +
+                `👥 *Pax:* \${adults} Adult(s), ${children} Child(ren),${infants} Infant(s)\n` +
+                `⚡ *Direct Flight Only:* \${directOnly}\n` +
+                (notes ? `📝 *Notes/Preferences:* \${notes}\n` : ``) +
+                `===============================`;
 
             const phone = "221781840000";
             const encoded = encodeURIComponent(message);
