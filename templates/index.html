@@ -509,11 +509,22 @@
             border: 1.5px solid #CBD5E1;
             border-radius: 10px;
             margin-top: 4px;
-            max-height: 220px;
+            max-height: 280px;
             overflow-y: auto;
             z-index: 1000;
             box-shadow: 0 8px 20px rgba(0,0,0,0.12);
             display: none;
+        }
+
+        .suggestion-header {
+            padding: 6px 14px;
+            font-size: 10.5px;
+            font-weight: 700;
+            background: #F1F5F9;
+            color: var(--accent-purple);
+            border-bottom: 1px solid #E2E8F0;
+            position: sticky;
+            top: 0;
         }
 
         .suggestion-item {
@@ -1077,8 +1088,8 @@
                                     <div id="sug-f-dep" class="suggestions-list"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label id="lbl-f-des">Destination City / Airport</label>
-                                    <input type="text" id="flight_des" placeholder="e.g. Paris or CDG" autocomplete="off">
+                                    <label id="lbl-f-des">Destination City / Country / Airport</label>
+                                    <input type="text" id="flight_des" placeholder="e.g. Morocco, India, Bombay, CDG" autocomplete="off">
                                     <div id="sug-f-des" class="suggestions-list"></div>
                                 </div>
                             </div>
@@ -1387,8 +1398,8 @@
                 optBiz: "Business Class",
                 optFirst: "First Class",
                 fDep: "Departure City / Airport",
-                fDes: "Destination City / Airport",
-                phFDes: "e.g. Paris or CDG",
+                fDes: "Destination City / Country / Airport",
+                phFDes: "e.g. Morocco, India, Bombay, CDG",
                 fDepDate: "Departure Date",
                 fRetDate: "Return Date",
                 directOnly: "Prefer Direct / Non-Stop Flights only",
@@ -1457,8 +1468,8 @@
                 optBiz: "Classe Affaires",
                 optFirst: "Première Classe",
                 fDep: "Ville / Aéroport de Départ",
-                fDes: "Ville / Aéroport d'Arrivée",
-                phFDes: "ex. Paris ou CDG",
+                fDes: "Ville / Pays / Aéroport d'Arrivée",
+                phFDes: "ex. Maroc, Inde, Bombay, CDG",
                 fDepDate: "Date de Départ",
                 fRetDate: "Date de Retour",
                 directOnly: "Vols directs sans escale uniquement",
@@ -1654,48 +1665,156 @@
             }
         };
 
-        // Instant fallback airports (works even offline while global 7,000+ airport database loads)
+        // Country ISO2 to Full Country Name & Aliases (English + French)
+        const countryCodeMap = {
+            "AF": "Afghanistan", "AL": "Albania", "DZ": "Algeria Algérie", "AO": "Angola", "AR": "Argentina",
+            "AM": "Armenia", "AU": "Australia", "AT": "Austria", "AZ": "Azerbaijan", "BH": "Bahrain",
+            "BD": "Bangladesh", "BY": "Belarus", "BE": "Belgium Belgique", "BJ": "Benin Bénin", "BO": "Bolivia",
+            "BA": "Bosnia", "BW": "Botswana", "BR": "Brazil Brésil", "BN": "Brunei", "BG": "Bulgaria",
+            "BF": "Burkina Faso", "BI": "Burundi", "KH": "Cambodia", "CM": "Cameroon Cameroun", "CA": "Canada",
+            "CV": "Cape Verde Cap-Vert", "CF": "Central African Republic", "TD": "Chad Tchad", "CL": "Chile",
+            "CN": "China Chine", "CO": "Colombia", "KM": "Comoros", "CG": "Congo", "CD": "DR Congo",
+            "CR": "Costa Rica", "CI": "Ivory Coast Côte d'Ivoire", "HR": "Croatia", "CU": "Cuba", "CY": "Cyprus",
+            "CZ": "Czech Republic", "DK": "Denmark", "DJ": "Djibouti", "DO": "Dominican Republic", "EC": "Ecuador",
+            "EG": "Egypt Égypte", "SV": "El Salvador", "GQ": "Equatorial Guinea", "ER": "Eritrea", "EE": "Estonia",
+            "ET": "Ethiopia Éthiopie", "FI": "Finland", "FR": "France", "GA": "Gabon", "GM": "Gambia Gambie",
+            "GE": "Georgia", "DE": "Germany Allemagne", "GH": "Ghana", "GR": "Greece Grèce", "GT": "Guatemala",
+            "GN": "Guinea Guinée", "GW": "Guinea-Bissau", "GY": "Guyana", "HT": "Haiti", "HN": "Honduras",
+            "HK": "Hong Kong", "HU": "Hungary", "IS": "Iceland", "IN": "India Inde Bharat Hindustan",
+            "ID": "Indonesia", "IR": "Iran", "IQ": "Iraq", "IE": "Ireland", "IL": "Israel", "IT": "Italy Italie",
+            "JM": "Jamaica", "JP": "Japan Japon", "JO": "Jordan", "KZ": "Kazakhstan", "KE": "Kenya",
+            "KW": "Kuwait", "KG": "Kyrgyzstan", "LA": "Laos", "LV": "Latvia", "LB": "Lebanon Liban",
+            "LR": "Liberia", "LY": "Libya", "LT": "Lithuania", "LU": "Luxembourg", "MO": "Macau",
+            "MG": "Madagascar", "MW": "Malawi", "MY": "Malaysia Malaisie", "MV": "Maldives", "ML": "Mali",
+            "MT": "Malta", "MR": "Mauritania Mauritanie", "MU": "Mauritius Maurice", "MX": "Mexico Mexique",
+            "MD": "Moldova", "MC": "Monaco", "MN": "Mongolia", "ME": "Montenegro", "MA": "Morocco Maroc",
+            "MZ": "Mozambique", "MM": "Myanmar", "NA": "Namibia", "NP": "Nepal", "NL": "Netherlands Holland Pays-Bas",
+            "NZ": "New Zealand", "NI": "Nicaragua", "NE": "Niger", "NG": "Nigeria", "NO": "Norway",
+            "OM": "Oman", "PK": "Pakistan", "PA": "Panama", "PY": "Paraguay", "PE": "Peru",
+            "PH": "Philippines", "PL": "Poland", "PT": "Portugal", "QA": "Qatar", "RO": "Romania",
+            "RU": "Russia Russie", "RW": "Rwanda", "SA": "Saudi Arabia Arabie Saoudite KSA",
+            "SN": "Senegal Sénégal", "RS": "Serbia", "SC": "Seychelles", "SL": "Sierra Leone", "SG": "Singapore",
+            "SK": "Slovakia", "SI": "Slovenia", "SO": "Somalia", "ZA": "South Africa Afrique du Sud",
+            "KR": "South Korea Corée", "SS": "South Sudan", "ES": "Spain Espagne", "LK": "Sri Lanka",
+            "SD": "Sudan", "SE": "Sweden Suède", "CH": "Switzerland Suisse", "SY": "Syria", "TW": "Taiwan",
+            "TJ": "Tajikistan", "TZ": "Tanzania", "TH": "Thailand Thaïlande", "TG": "Togo", "TN": "Tunisia Tunisie",
+            "TR": "Turkey Türkiye Turquie", "TM": "Turkmenistan", "UG": "Uganda", "UA": "Ukraine",
+            "AE": "United Arab Emirates UAE Emirates Émirats", "GB": "United Kingdom UK Britain England",
+            "US": "United States USA America", "UY": "Uruguay", "UZ": "Uzbekistan", "VE": "Venezuela",
+            "VN": "Vietnam", "YE": "Yemen", "ZM": "Zambia", "ZW": "Zimbabwe"
+        };
+
+        // City historical / alternate aliases (e.g., Bombay -> Mumbai, Madras -> Chennai, etc.)
+        const cityAliases = {
+            "mumbai": "bombay",
+            "chennai": "madras",
+            "kolkata": "calcutta",
+            "bengaluru": "bangalore",
+            "kochi": "cochin",
+            "thiruvananthapuram": "trivandrum",
+            "varanasi": "banaras benares",
+            "pune": "poona",
+            "beijing": "peking",
+            "ho chi minh city": "saigon",
+            "istanbul": "constantinople",
+            "jeddah": "makkah mecca umrah",
+            "medina": "madinah umrah",
+            "madinah": "medina umrah",
+            "casablanca": "casa",
+            "marrakech": "marrakesh",
+            "fez": "fes",
+            "tangier": "tanger",
+            "agadir": "al massira",
+            "rabat": "sale",
+            "dakar": "diass blaise diagne"
+        };
+
+        // Instant fallback airports including Navi Mumbai (NMI), Morocco & India hubs
         let globalAirports = [
-            { code: "DSS", city: "Dakar", name: "Blaise Diagne International", country: "Senegal" },
-            { code: "CSK", city: "Cap Skirring", name: "Cap Skirring Airport", country: "Senegal" },
-            { code: "ZIG", city: "Ziguinchor", name: "Ziguinchor Airport", country: "Senegal" },
-            { code: "CMN", city: "Casablanca", name: "Mohammed V International", country: "Morocco" },
-            { code: "CDG", city: "Paris", name: "Charles de Gaulle", country: "France" },
-            { code: "ORY", city: "Paris", name: "Paris Orly", country: "France" },
-            { code: "DXB", city: "Dubai", name: "Dubai International", country: "UAE" },
-            { code: "AUH", city: "Abu Dhabi", name: "Zayed International", country: "UAE" },
-            { code: "DOH", city: "Doha", name: "Hamad International", country: "Qatar" },
-            { code: "IST", city: "Istanbul", name: "Istanbul Airport", country: "Turkey" },
-            { code: "JED", city: "Jeddah", name: "King Abdulaziz International", country: "Saudi Arabia" },
-            { code: "MED", city: "Madinah", name: "Prince Mohammad Bin Abdulaziz", country: "Saudi Arabia" },
-            { code: "CAN", city: "Guangzhou", name: "Baiyun International", country: "China" },
-            { code: "DEL", city: "New Delhi", name: "Indira Gandhi International", country: "India" },
-            { code: "BOM", city: "Mumbai", name: "Chhatrapati Shivaji Maharaj", country: "India" },
-            { code: "LHR", city: "London", name: "Heathrow Airport", country: "UK" },
-            { code: "JFK", city: "New York", name: "John F. Kennedy", country: "USA" },
-            { code: "ABJ", city: "Abidjan", name: "Félix-Houphouët-Boigny", country: "Ivory Coast" },
-            { code: "BKO", city: "Bamako", name: "Modibo Keita International", country: "Mali" },
-            { code: "CKY", city: "Conakry", name: "Ahmed Sékou Touré", country: "Guinea" },
-            { code: "BJL", city: "Banjul", name: "Banjul International", country: "Gambia" },
-            { code: "NKC", city: "Nouakchott", name: "Oumtounsy International", country: "Mauritania" }
+            { code: "DSS", city: "Dakar", name: "Blaise Diagne International", country: "Senegal", searchCountry: "Senegal Sénégal", aliases: "diass" },
+            { code: "CSK", city: "Cap Skirring", name: "Cap Skirring Airport", country: "Senegal", searchCountry: "Senegal Sénégal", aliases: "" },
+            { code: "ZIG", city: "Ziguinchor", name: "Ziguinchor Airport", country: "Senegal", searchCountry: "Senegal Sénégal", aliases: "" },
+            { code: "CMN", city: "Casablanca", name: "Mohammed V International", country: "Morocco", searchCountry: "Morocco Maroc", aliases: "casa" },
+            { code: "RAK", city: "Marrakech", name: "Menara Airport", country: "Morocco", searchCountry: "Morocco Maroc", aliases: "marrakesh" },
+            { code: "AGA", city: "Agadir", name: "Al Massira Airport", country: "Morocco", searchCountry: "Morocco Maroc", aliases: "" },
+            { code: "FEZ", city: "Fez", name: "Fès–Saïs Airport", country: "Morocco", searchCountry: "Morocco Maroc", aliases: "fes" },
+            { code: "TNG", city: "Tangier", name: "Ibn Battouta Airport", country: "Morocco", searchCountry: "Morocco Maroc", aliases: "tanger" },
+            { code: "RBA", city: "Rabat", name: "Rabat–Salé Airport", country: "Morocco", searchCountry: "Morocco Maroc", aliases: "sale" },
+            { code: "NDR", city: "Nador", name: "Nador International", country: "Morocco", searchCountry: "Morocco Maroc", aliases: "" },
+            { code: "OUD", city: "Oujda", name: "Angads Airport", country: "Morocco", searchCountry: "Morocco Maroc", aliases: "" },
+            { code: "BOM", city: "Mumbai", name: "Chhatrapati Shivaji Maharaj International", country: "India", searchCountry: "India Inde Bharat", aliases: "bombay" },
+            { code: "NMI", city: "Navi Mumbai (Mumbai)", name: "Navi Mumbai International Airport", country: "India", searchCountry: "India Inde Bharat", aliases: "bombay mumbai" },
+            { code: "DEL", city: "New Delhi", name: "Indira Gandhi International", country: "India", searchCountry: "India Inde Bharat", aliases: "delhi" },
+            { code: "BLR", city: "Bengaluru", name: "Kempegowda International", country: "India", searchCountry: "India Inde Bharat", aliases: "bangalore" },
+            { code: "MAA", city: "Chennai", name: "Chennai International", country: "India", searchCountry: "India Inde Bharat", aliases: "madras" },
+            { code: "CCU", city: "Kolkata", name: "Netaji Subhas Chandra Bose International", country: "India", searchCountry: "India Inde Bharat", aliases: "calcutta" },
+            { code: "HYD", city: "Hyderabad", name: "Rajiv Gandhi International", country: "India", searchCountry: "India Inde Bharat", aliases: "" },
+            { code: "AMD", city: "Ahmedabad", name: "Sardar Vallabhbhai Patel International", country: "India", searchCountry: "India Inde Bharat", aliases: "" },
+            { code: "JAI", city: "Jaipur", name: "Jaipur International", country: "India", searchCountry: "India Inde Bharat", aliases: "" },
+            { code: "DED", city: "Dehradun", name: "Jolly Grant Airport", country: "India", searchCountry: "India Inde Bharat", aliases: "uttarakhand" },
+            { code: "JDH", city: "Jodhpur", name: "Jodhpur Airport", country: "India", searchCountry: "India Inde Bharat", aliases: "marwar pali" },
+            { code: "CDG", city: "Paris", name: "Charles de Gaulle", country: "France", searchCountry: "France", aliases: "" },
+            { code: "ORY", city: "Paris", name: "Paris Orly", country: "France", searchCountry: "France", aliases: "" },
+            { code: "DXB", city: "Dubai", name: "Dubai International", country: "United Arab Emirates", searchCountry: "United Arab Emirates UAE", aliases: "" },
+            { code: "DWC", city: "Dubai", name: "Al Maktoum International", country: "United Arab Emirates", searchCountry: "United Arab Emirates UAE", aliases: "" },
+            { code: "AUH", city: "Abu Dhabi", name: "Zayed International", country: "United Arab Emirates", searchCountry: "United Arab Emirates UAE", aliases: "" },
+            { code: "DOH", city: "Doha", name: "Hamad International", country: "Qatar", searchCountry: "Qatar", aliases: "" },
+            { code: "IST", city: "Istanbul", name: "Istanbul Airport", country: "Turkey", searchCountry: "Turkey Turquie", aliases: "" },
+            { code: "SAW", city: "Istanbul", name: "Sabiha Gökçen International", country: "Turkey", searchCountry: "Turkey Turquie", aliases: "" },
+            { code: "JED", city: "Jeddah", name: "King Abdulaziz International", country: "Saudi Arabia", searchCountry: "Saudi Arabia KSA", aliases: "makkah mecca umrah" },
+            { code: "MED", city: "Madinah", name: "Prince Mohammad Bin Abdulaziz", country: "Saudi Arabia", searchCountry: "Saudi Arabia KSA", aliases: "medina umrah" },
+            { code: "CAN", city: "Guangzhou", name: "Baiyun International", country: "China", searchCountry: "China Chine", aliases: "canton" },
+            { code: "LHR", city: "London", name: "Heathrow Airport", country: "United Kingdom", searchCountry: "United Kingdom UK", aliases: "" },
+            { code: "LGW", city: "London", name: "Gatwick Airport", country: "United Kingdom", searchCountry: "United Kingdom UK", aliases: "" },
+            { code: "JFK", city: "New York", name: "John F. Kennedy", country: "United States", searchCountry: "United States USA", aliases: "" },
+            { code: "EWR", city: "New York / Newark", name: "Newark Liberty International", country: "United States", searchCountry: "United States USA", aliases: "" },
+            { code: "ABJ", city: "Abidjan", name: "Félix-Houphouët-Boigny", country: "Ivory Coast", searchCountry: "Ivory Coast Côte d'Ivoire", aliases: "" },
+            { code: "BKO", city: "Bamako", name: "Modibo Keita International", country: "Mali", searchCountry: "Mali", aliases: "" },
+            { code: "CKY", city: "Conakry", name: "Ahmed Sékou Touré", country: "Guinea", searchCountry: "Guinea Guinée", aliases: "" },
+            { code: "BJL", city: "Banjul", name: "Banjul International", country: "Gambia", searchCountry: "Gambia Gambie", aliases: "" },
+            { code: "NKC", city: "Nouakchott", name: "Oumtounsy International", country: "Mauritania", searchCountry: "Mauritania Mauritanie", aliases: "" }
         ];
 
-        // Load ALL 7,000+ worldwide airports with IATA codes automatically
+        // Load ALL 7,000+ worldwide airports and map full country names + aliases
         async function loadAllWorldAirports() {
             try {
                 const response = await fetch('https://raw.githubusercontent.com/mwgg/Airports/master/airports.json');
                 if (!response.ok) return;
                 const data = await response.json();
                 const parsedList = [];
+                const seenCodes = new Set();
+
+                // Add custom entries first (e.g., Navi Mumbai NMI)
+                globalAirports.forEach(item => {
+                    if (item.code === "NMI") {
+                        parsedList.push(item);
+                        seenCodes.add("NMI");
+                    }
+                });
 
                 for (const key in data) {
                     const ap = data[key];
                     if (ap && ap.iata && ap.iata.length === 3) {
+                        const code = ap.iata.toUpperCase();
+                        if (seenCodes.has(code)) continue;
+                        seenCodes.add(code);
+
+                        const rawCountry = (ap.country || "").toUpperCase();
+                        const fullCountrySearch = countryCodeMap[rawCountry] || ap.country || "";
+                        const displayCountry = fullCountrySearch.split(' ')[0] === "United" || fullCountrySearch.split(' ')[0] === "Saudi" || fullCountrySearch.split(' ')[0] === "Ivory" || fullCountrySearch.split(' ')[0] === "South" || fullCountrySearch.split(' ')[0] === "New" || fullCountrySearch.split(' ')[0] === "Sri" || fullCountrySearch.split(' ')[0] === "Costa" || fullCountrySearch.split(' ')[0] === "Cape" || fullCountrySearch.split(' ')[0] === "Burkina"
+                            ? fullCountrySearch.split(' ').slice(0, 2).join(' ')
+                            : (fullCountrySearch.split(' ')[0] || rawCountry);
+
+                        const cityStr = ap.city || ap.name || code;
+                        const alias = cityAliases[cityStr.toLowerCase()] || "";
+
                         parsedList.push({
-                            code: ap.iata.toUpperCase(),
-                            city: ap.city || ap.name || ap.iata,
+                            code: code,
+                            city: cityStr,
                             name: ap.name || "",
-                            country: ap.country || ""
+                            country: displayCountry,
+                            searchCountry: fullCountrySearch,
+                            aliases: alias
                         });
                     }
                 }
@@ -1706,6 +1825,36 @@
             } catch (err) {
                 // Keeps fallback list silently if offline
             }
+        }
+
+        // Levenshtein distance for spelling mistake tolerance (e.g., Moroco, Morrocco, Inda, Bombey)
+        function editDistance(a, b) {
+            if (Math.abs(a.length - b.length) > 2) return 99;
+            const matrix = Array.from({ length: a.length + 1 }, (_, i) => [i]);
+            for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
+            for (let i = 1; i <= a.length; i++) {
+                for (let j = 1; j <= b.length; j++) {
+                    const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+                    matrix[i][j] = Math.min(
+                        matrix[i - 1][j] + 1,
+                        matrix[i][j - 1] + 1,
+                        matrix[i - 1][j - 1] + cost
+                    );
+                }
+            }
+            return matrix[a.length][b.length];
+        }
+
+        function isFuzzyWordMatch(query, targetText) {
+            if (query.length < 4) return false;
+            const words = targetText.toLowerCase().split(/[\s\-(),/]+/);
+            const maxAllowedTypos = query.length >= 6 ? 2 : 1;
+            for (let w of words) {
+                if (w.length >= 4 && editDistance(query, w) <= maxAllowedTypos) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         let activeService = 'Flight';
@@ -1809,7 +1958,6 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Fetch all world airports in the background
             loadAllWorldAirports();
 
             const today = new Date().toISOString().split('T')[0];
@@ -2052,33 +2200,56 @@
                 if (!q) { list.style.display = 'none'; return; }
 
                 const exactCodeMatches = [];
-                const cityStartsMatches = [];
-                const otherMatches = [];
+                const cityOrAliasMatches = [];
+                const countryMatches = [];
+                const fuzzyMatches = [];
 
                 for (let i = 0; i < globalAirports.length; i++) {
                     const item = globalAirports[i];
                     const code = item.code.toLowerCase();
                     const city = item.city.toLowerCase();
                     const name = (item.name || '').toLowerCase();
-                    const country = (item.country || '').toLowerCase();
+                    const country = (item.searchCountry || item.country || '').toLowerCase();
+                    const aliases = (item.aliases || '').toLowerCase();
 
                     if (code === q) {
                         exactCodeMatches.push(item);
-                    } else if (city.startsWith(q) || code.startsWith(q)) {
-                        cityStartsMatches.push(item);
-                    } else if (city.includes(q) || name.includes(q) || country.includes(q)) {
-                        otherMatches.push(item);
+                    } else if (
+                        city.startsWith(q) ||
+                        code.startsWith(q) ||
+                        aliases.includes(q)
+                    ) {
+                        cityOrAliasMatches.push(item);
+                    } else if (
+                        country.includes(q) ||
+                        city.includes(q) ||
+                        name.includes(q)
+                    ) {
+                        countryMatches.push(item);
+                    } else if (
+                        q.length >= 4 &&
+                        (isFuzzyWordMatch(q, city) || isFuzzyWordMatch(q, country) || isFuzzyWordMatch(q, aliases))
+                    ) {
+                        fuzzyMatches.push(item);
                     }
-
-                    // Stop scanning once we have plenty of high-priority matches for instant speed
-                    if (exactCodeMatches.length + cityStartsMatches.length >= 25) break;
                 }
 
-                const results = [...exactCodeMatches, ...cityStartsMatches, ...otherMatches].slice(0, 8);
+                // Combine all matches (allow up to 60 results so full country lists like Morocco / India show completely)
+                const allResults = [...exactCodeMatches, ...cityOrAliasMatches, ...countryMatches, ...fuzzyMatches];
 
-                if (results.length === 0) { list.style.display = 'none'; return; }
+                if (allResults.length === 0) { list.style.display = 'none'; return; }
 
-                results.forEach(item => {
+                // Show count header if multiple airports found (e.g., searching "Morocco" or "India")
+                if (allResults.length > 5) {
+                    const hdr = document.createElement('div');
+                    hdr.className = 'suggestion-header';
+                    hdr.innerText = currentLang === 'fr'
+                        ? `✈️ ${allResults.length} aéroports trouvés (faites défiler)`
+                        : `✈️ ${allResults.length} airports found (scroll to view all)`;
+                    list.appendChild(hdr);
+                }
+
+                allResults.slice(0, 80).forEach(item => {
                     const div = document.createElement('div');
                     div.className = 'suggestion-item';
                     const subText = item.name && item.name !== item.city 
@@ -2101,7 +2272,7 @@
                 list.style.display = 'block';
             });
 
-            // Auto-convert exact 3-letter IATA code on blur/tab (e.g. typing "JED" -> "Jeddah (JED)")
+            // Auto-convert exact 3-letter IATA code on blur/tab
             input.addEventListener('blur', () => {
                 setTimeout(() => {
                     const q = input.value.trim().toUpperCase();
@@ -2112,7 +2283,7 @@
                         }
                     }
                     list.style.display = 'none';
-                }, 150);
+                }, 180);
             });
 
             document.addEventListener('click', (e) => {
