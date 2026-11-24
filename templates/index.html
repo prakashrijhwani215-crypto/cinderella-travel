@@ -44,7 +44,7 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* New Dakar / West Africa Golden Skyline & Ocean Background */
+        /* Default Dakar / Senegal Background (Auto-rotates every 24 hours via JS) */
         body {
             background: linear-gradient(rgba(15, 23, 42, 0.25), rgba(15, 23, 42, 0.38)), 
                         url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1920&auto=format&fit=crop&q=85') no-repeat center center fixed;
@@ -54,6 +54,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            transition: background-image 0.6s ease-in-out;
         }
 
         /* Header - Original Cinderella Pink, Blue & Purple Brand Colors */
@@ -1680,6 +1681,34 @@
     </footer>
 
     <script>
+        // 12 Dakar & Senegal Scenic Backgrounds (Auto-rotates every 24 hours)
+        const dakarBackgrounds = [
+            "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1920&auto=format&fit=crop&q=85",
+            "https://images.unsplash.com/photo-1589553416260-f586c8f1514f?w=1920&auto=format&fit=crop&q=85",
+            "https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=1920&auto=format&fit=crop&q=85",
+            "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=1920&auto=format&fit=crop&q=85",
+            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&auto=format&fit=crop&q=85",
+            "https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=1920&auto=format&fit=crop&q=85",
+            "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1920&auto=format&fit=crop&q=85",
+            "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1920&auto=format&fit=crop&q=85",
+            "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=1920&auto=format&fit=crop&q=85",
+            "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1920&auto=format&fit=crop&q=85",
+            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1920&auto=format&fit=crop&q=85",
+            "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&auto=format&fit=crop&q=85"
+        ];
+
+        function applyDailyBackground() {
+            const msPerDay = 24 * 60 * 60 * 1000;
+            const dayIndex = Math.floor(Date.now() / msPerDay) % dakarBackgrounds.length;
+            const selectedUrl = dakarBackgrounds[dayIndex];
+
+            const imgPreload = new Image();
+            imgPreload.onload = () => {
+                document.body.style.backgroundImage = `linear-gradient(rgba(15, 23, 42, 0.25), rgba(15, 23, 42, 0.38)), url('${selectedUrl}')`;
+            };
+            imgPreload.src = selectedUrl;
+        }
+
         let currentLang = localStorage.getItem('ctd_lang') || 'en';
 
         const i18n = {
@@ -2310,6 +2339,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            applyDailyBackground();
             applyLanguage(currentLang);
             loadAllWorldAirports();
 
