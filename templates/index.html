@@ -228,6 +228,7 @@
 
         .center-column {
             width: 100%;
+            min-width: 0;
         }
 
         /* Umrah Banner */
@@ -266,6 +267,7 @@
             align-items: center;
             justify-content: center;
             border: 1px solid rgba(245, 158, 11, 0.4);
+            flex-shrink: 0;
         }
 
         .umrah-text h4 {
@@ -314,7 +316,7 @@
 
         .routes-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
             gap: 8px;
         }
 
@@ -433,10 +435,47 @@
             box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
         }
 
+        .input-error {
+            border-color: #EF4444 !important;
+            background: #FEF2F2 !important;
+        }
+
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
+        }
+
+        /* Flight Departure / Swap / Destination Row */
+        .flight-route-row {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 8px;
+            align-items: end;
+        }
+
+        .btn-swap {
+            height: 44px;
+            width: 44px;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            border: 1.5px solid #CBD5E1;
+            background: #EEF2F6;
+            color: var(--primary);
+            font-size: 17px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .btn-swap:hover {
+            background: linear-gradient(135deg, var(--accent-magenta), var(--accent-purple));
+            color: #FFFFFF;
+            border-color: transparent;
+            transform: rotate(180deg);
         }
 
         .grid-3 {
@@ -568,12 +607,29 @@
             margin-bottom: 12px;
         }
 
+        .multi-leg-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
         .multi-leg-title {
             font-size: 11px;
             font-weight: 700;
             color: var(--accent-magenta);
-            margin-bottom: 8px;
             text-transform: uppercase;
+        }
+
+        .btn-remove-leg {
+            background: #FEE2E2;
+            color: #DC2626;
+            border: none;
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            cursor: pointer;
         }
 
         .btn-add-leg {
@@ -670,6 +726,37 @@
             display: flex;
             align-items: center;
             gap: 6px;
+        }
+
+        /* Toast Confirmation Banner */
+        .toast-banner {
+            position: fixed;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: #0F172A;
+            color: #FFFFFF;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 12.5px;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border: 1.5px solid var(--whatsapp-green);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .toast-banner.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast-banner.error {
+            border-color: #EF4444;
+            background: #7F1D1D;
         }
 
         .modal-overlay {
@@ -918,10 +1005,38 @@
                 align-self: stretch;
                 text-align: center;
             }
+            /* Swipeable Trending Routes on Mobile */
+            .routes-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 10px;
+                padding-bottom: 4px;
+            }
+            .route-pill {
+                min-width: 210px;
+                flex-shrink: 0;
+                scroll-snap-align: start;
+            }
+            .flight-route-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            .btn-swap {
+                width: 100%;
+                height: 36px;
+                margin-top: -6px;
+                margin-bottom: 12px;
+            }
             .service-tab-btn { font-size: 11px; padding: 8px 2px; }
             .service-tab-btn span.icon { font-size: 17px; }
             .grid-2 { grid-template-columns: 1fr; }
             .grid-3 { grid-template-columns: 1fr; }
+            .toast-banner {
+                max-width: 92vw;
+                white-space: normal;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -1047,10 +1162,10 @@
             </div>
 
             <div class="booking-card">
-                <form id="bookingForm">
+                <form id="bookingForm" novalidate>
                     <div class="form-group">
-                        <label id="lbl-fullname">Your Full Name</label>
-                        <input type="text" id="full_name" placeholder="Enter your full name" required>
+                        <label id="lbl-fullname">Your Full Name *</label>
+                        <input type="text" id="full_name" placeholder="Enter your full name">
                     </div>
 
                     <!-- FLIGHTS -->
@@ -1081,14 +1196,15 @@
                         </div>
 
                         <div id="standard-flight-box">
-                            <div class="grid-2">
+                            <div class="flight-route-row">
                                 <div class="form-group">
-                                    <label id="lbl-f-dep">Departure City / Airport</label>
+                                    <label id="lbl-f-dep">Departure City / Airport *</label>
                                     <input type="text" id="flight_dep" value="Dakar (DSS)" autocomplete="off">
                                     <div id="sug-f-dep" class="suggestions-list"></div>
                                 </div>
+                                <button type="button" class="btn-swap" id="btnSwapAirports" title="Swap Departure & Destination">⇄</button>
                                 <div class="form-group">
-                                    <label id="lbl-f-des">Destination City / Country / Airport</label>
+                                    <label id="lbl-f-des">Destination City / Country / Airport *</label>
                                     <input type="text" id="flight_des" placeholder="e.g. Morocco, India, Bombay, CDG" autocomplete="off">
                                     <div id="sug-f-des" class="suggestions-list"></div>
                                 </div>
@@ -1096,11 +1212,11 @@
 
                             <div class="grid-2">
                                 <div class="form-group">
-                                    <label id="lbl-f-depdate">Departure Date</label>
+                                    <label id="lbl-f-depdate">Departure Date *</label>
                                     <input type="date" id="flight_dep_date">
                                 </div>
                                 <div class="form-group" id="flight-return-container" style="display: none;">
-                                    <label id="lbl-f-retdate">Return Date</label>
+                                    <label id="lbl-f-retdate">Return Date *</label>
                                     <input type="date" id="flight_ret_date">
                                 </div>
                             </div>
@@ -1109,7 +1225,9 @@
                         <div id="multi-flight-box" style="display: none;">
                             <div id="multi-legs-list">
                                 <div class="multi-leg">
-                                    <div class="multi-leg-title">Flight 1</div>
+                                    <div class="multi-leg-header">
+                                        <div class="multi-leg-title">Flight 1</div>
+                                    </div>
                                     <div class="grid-2">
                                         <div class="form-group">
                                             <input type="text" class="m-from" placeholder="From (e.g. DSS)" autocomplete="off">
@@ -1123,7 +1241,9 @@
                                     <input type="date" class="m-date">
                                 </div>
                                 <div class="multi-leg">
-                                    <div class="multi-leg-title">Flight 2</div>
+                                    <div class="multi-leg-header">
+                                        <div class="multi-leg-title">Flight 2</div>
+                                    </div>
                                     <div class="grid-2">
                                         <div class="form-group">
                                             <input type="text" class="m-from" placeholder="From (e.g. CDG)" autocomplete="off">
@@ -1167,8 +1287,9 @@
                     <!-- VISA -->
                     <div id="form-visa" style="display: none;">
                         <div class="form-group">
-                            <label id="lbl-v-country">Destination Country for Visa</label>
-                            <input type="text" id="visa_country" placeholder="e.g. France, UAE, UK, Canada, Saudi Arabia">
+                            <label id="lbl-v-country">Destination Country for Visa *</label>
+                            <input type="text" id="visa_country" placeholder="e.g. France, UAE, UK, Canada, Saudi Arabia" autocomplete="off">
+                            <div id="sug-v-country" class="suggestions-list"></div>
                         </div>
 
                         <div class="grid-2">
@@ -1202,17 +1323,18 @@
                     <!-- HOTEL -->
                     <div id="form-hotel" style="display: none;">
                         <div class="form-group">
-                            <label id="lbl-h-city">City / Location for Hotel</label>
-                            <input type="text" id="hotel_city" placeholder="e.g. Paris, Dubai, Dakar, Makkah">
+                            <label id="lbl-h-city">City / Location for Hotel *</label>
+                            <input type="text" id="hotel_city" placeholder="e.g. Paris, Dubai, Dakar, Makkah" autocomplete="off">
+                            <div id="sug-h-city" class="suggestions-list"></div>
                         </div>
 
                         <div class="grid-2">
                             <div class="form-group">
-                                <label id="lbl-h-in">Check-in Date</label>
+                                <label id="lbl-h-in">Check-in Date *</label>
                                 <input type="date" id="hotel_checkin">
                             </div>
                             <div class="form-group">
-                                <label id="lbl-h-out">Check-out Date</label>
+                                <label id="lbl-h-out">Check-out Date *</label>
                                 <input type="date" id="hotel_checkout">
                             </div>
                         </div>
@@ -1232,8 +1354,9 @@
                     <!-- HOLIDAY -->
                     <div id="form-holiday" style="display: none;">
                         <div class="form-group">
-                            <label id="lbl-hol-dest">Holiday / Package Destination</label>
-                            <input type="text" id="holiday_dest" placeholder="e.g. Dubai, Umrah (Makkah), Turkey, Maldives">
+                            <label id="lbl-hol-dest">Holiday / Package Destination *</label>
+                            <input type="text" id="holiday_dest" placeholder="e.g. Dubai, Umrah (Makkah), Turkey, Maldives" autocomplete="off">
+                            <div id="sug-hol-dest" class="suggestions-list"></div>
                         </div>
 
                         <div class="grid-2">
@@ -1352,6 +1475,9 @@
         </div>
     </div>
 
+    <!-- Toast Notification -->
+    <div id="toastBanner" class="toast-banner"></div>
+
     <a href="https://wa.me/221781840000?text=Hello%20Cinderella%20Travel,%20I%20have%20an%20inquiry." target="_blank" class="floating-wa" title="WhatsApp">💬</a>
 
     <footer>
@@ -1373,7 +1499,7 @@
     </footer>
 
     <script>
-        let currentLang = 'en';
+        let currentLang = localStorage.getItem('ctd_lang') || 'en';
 
         const i18n = {
             en: {
@@ -1387,7 +1513,7 @@
                 tabVisa: "Visa",
                 tabHotel: "Hotels",
                 tabHoliday: "Holidays",
-                fullName: "Your Full Name",
+                fullName: "Your Full Name *",
                 phFullName: "Enter your full name",
                 subOneWay: "One Way",
                 subRound: "Round Trip",
@@ -1397,17 +1523,17 @@
                 optPeco: "Premium Economy",
                 optBiz: "Business Class",
                 optFirst: "First Class",
-                fDep: "Departure City / Airport",
-                fDes: "Destination City / Country / Airport",
+                fDep: "Departure City / Airport *",
+                fDes: "Destination City / Country / Airport *",
                 phFDes: "e.g. Morocco, India, Bombay, CDG",
-                fDepDate: "Departure Date",
-                fRetDate: "Return Date",
+                fDepDate: "Departure Date *",
+                fRetDate: "Return Date *",
                 directOnly: "Prefer Direct / Non-Stop Flights only",
                 fPax: "Passengers",
                 lblAdults: "Adults (12y+)",
                 lblChildren: "Children (2-11y)",
                 lblInfants: "Infants (<2y)",
-                vCountry: "Destination Country for Visa",
+                vCountry: "Destination Country for Visa *",
                 phVCountry: "e.g. France, UAE, UK, Canada, Saudi Arabia",
                 vNat: "Your Nationality / Passport",
                 phVNat: "e.g. Senegalese, Indian, French",
@@ -1418,14 +1544,14 @@
                 vOptStudent: "Student Visa",
                 vDate: "Intended Travel Date",
                 vPax: "Number of Applicants",
-                hCity: "City / Location for Hotel",
+                hCity: "City / Location for Hotel *",
                 phHCity: "e.g. Paris, Dubai, Dakar, Makkah",
-                hIn: "Check-in Date",
-                hOut: "Check-out Date",
+                hIn: "Check-in Date *",
+                hOut: "Check-out Date *",
                 hNat: "Guest Nationality",
                 hRooms: "Total Guests / Rooms",
                 phHRooms: "e.g. 2 Adults, 1 Room",
-                holDest: "Holiday / Package Destination",
+                holDest: "Holiday / Package Destination *",
                 phHolDest: "e.g. Dubai, Umrah (Makkah), Turkey, Maldives",
                 holDur: "Duration (Days / Nights)",
                 phHolDur: "e.g. 7 Days / 6 Nights, 2 Weeks",
@@ -1444,7 +1570,18 @@
                 footerSub: "Travel & Tourism Agency — Ticketing, Visas, Omra, Hotels & Tours",
                 support1: "🕒 24/7 Dedicated Customer Support & Assistance",
                 support2: "Always Here For You",
-                btnAddLeg: "+ Add Another Flight"
+                btnAddLeg: "+ Add Another Flight",
+                toastOpening: "✅ Opening WhatsApp with your booking inquiry...",
+                errName: "⚠️ Please enter your full name.",
+                errDep: "⚠️ Please enter departure city or airport.",
+                errDes: "⚠️ Please enter destination city or airport.",
+                errDepDate: "⚠️ Please select your departure date.",
+                errRetDate: "⚠️ Please select your return date.",
+                errMulti: "⚠️ Please enter at least one valid flight leg (From & To).",
+                errVisa: "⚠️ Please enter the destination country for Visa.",
+                errHotelCity: "⚠️ Please enter the city for your hotel.",
+                errHotelDates: "⚠️ Please select Check-in and Check-out dates.",
+                errHoliday: "⚠️ Please enter your holiday destination."
             },
             fr: {
                 leftTitle: "✨ Destinations Phares",
@@ -1457,7 +1594,7 @@
                 tabVisa: "Visas",
                 tabHotel: "Hôtels",
                 tabHoliday: "Séjours",
-                fullName: "Nom et Prénom",
+                fullName: "Nom et Prénom *",
                 phFullName: "Entrez votre nom complet",
                 subOneWay: "Aller Simple",
                 subRound: "Aller-Retour",
@@ -1467,17 +1604,17 @@
                 optPeco: "Économique Premium",
                 optBiz: "Classe Affaires",
                 optFirst: "Première Classe",
-                fDep: "Ville / Aéroport de Départ",
-                fDes: "Ville / Pays / Aéroport d'Arrivée",
+                fDep: "Ville / Aéroport de Départ *",
+                fDes: "Ville / Pays / Aéroport d'Arrivée *",
                 phFDes: "ex. Maroc, Inde, Bombay, CDG",
-                fDepDate: "Date de Départ",
-                fRetDate: "Date de Retour",
+                fDepDate: "Date de Départ *",
+                fRetDate: "Date de Retour *",
                 directOnly: "Vols directs sans escale uniquement",
                 fPax: "Passagers",
                 lblAdults: "Adultes (12 ans+)",
                 lblChildren: "Enfants (2-11 ans)",
                 lblInfants: "Bébés (<2 ans)",
-                vCountry: "Pays de Destination pour le Visa",
+                vCountry: "Pays de Destination pour le Visa *",
                 phVCountry: "ex. France, EAU, Royaume-Uni, Canada, Arabie Saoudite",
                 vNat: "Votre Nationalité / Passeport",
                 phVNat: "ex. Sénégalaise, Indienne, Française",
@@ -1488,14 +1625,14 @@
                 vOptStudent: "Visa Étudiant",
                 vDate: "Date de Voyage Prévue",
                 vPax: "Nombre de Demandeurs",
-                hCity: "Ville / Emplacement de l'Hôtel",
+                hCity: "Ville / Emplacement de l'Hôtel *",
                 phHCity: "ex. Paris, Dubaï, Dakar, La Mecque",
-                hIn: "Date d'Arrivée (Check-in)",
-                hOut: "Date de Départ (Check-out)",
+                hIn: "Date d'Arrivée (Check-in) *",
+                hOut: "Date de Départ (Check-out) *",
                 hNat: "Nationalité des Clients",
                 hRooms: "Nombre de Voyageurs / Chambres",
                 phHRooms: "ex. 2 Adultes, 1 Chambre",
-                holDest: "Destination Vacances / Séjour",
+                holDest: "Destination Vacances / Séjour *",
                 phHolDest: "ex. Dubaï, Omra (La Mecque), Turquie, Maldives",
                 holDur: "Durée du Séjour (Jours / Nuits)",
                 phHolDur: "ex. 7 Jours / 6 Nuits, 2 Semaines",
@@ -1514,7 +1651,18 @@
                 footerSub: "Agence de Voyages & de Tourisme — Billetterie, Visas, Omra, Hôtels & Séjours",
                 support1: "🕒 Support Client Dédié 24h/24 et 7j/7",
                 support2: "Toujours à Votre Service",
-                btnAddLeg: "+ Ajouter un autre vol"
+                btnAddLeg: "+ Ajouter un autre vol",
+                toastOpening: "✅ Ouverture de WhatsApp avec votre demande...",
+                errName: "⚠️ Veuillez entrer votre nom complet.",
+                errDep: "⚠️ Veuillez indiquer la ville ou l'aéroport de départ.",
+                errDes: "⚠️ Veuillez indiquer la ville ou l'aéroport d'arrivée.",
+                errDepDate: "⚠️ Veuillez choisir une date de départ.",
+                errRetDate: "⚠️ Veuillez choisir une date de retour.",
+                errMulti: "⚠️ Veuillez remplir au moins un vol (Départ et Arrivée).",
+                errVisa: "⚠️ Veuillez indiquer le pays de destination pour le visa.",
+                errHotelCity: "⚠️ Veuillez indiquer la ville pour l'hôtel.",
+                errHotelDates: "⚠️ Veuillez choisir les dates d'arrivée et de départ.",
+                errHoliday: "⚠️ Veuillez indiquer votre destination de séjour."
             }
         };
 
@@ -1665,7 +1813,6 @@
             }
         };
 
-        // Country ISO2 to Full Country Name & Aliases (English + French)
         const countryCodeMap = {
             "AF": "Afghanistan", "AL": "Albania", "DZ": "Algeria Algérie", "AO": "Angola", "AR": "Argentina",
             "AM": "Armenia", "AU": "Australia", "AT": "Austria", "AZ": "Azerbaijan", "BH": "Bahrain",
@@ -1704,7 +1851,6 @@
             "VN": "Vietnam", "YE": "Yemen", "ZM": "Zambia", "ZW": "Zimbabwe"
         };
 
-        // City historical / alternate aliases (e.g., Bombay -> Mumbai, Madras -> Chennai, etc.)
         const cityAliases = {
             "mumbai": "bombay",
             "chennai": "madras",
@@ -1729,7 +1875,6 @@
             "dakar": "diass blaise diagne"
         };
 
-        // Instant fallback airports including Navi Mumbai (NMI), Morocco & India hubs
         let globalAirports = [
             { code: "DSS", city: "Dakar", name: "Blaise Diagne International", country: "Senegal", searchCountry: "Senegal Sénégal", aliases: "diass" },
             { code: "CSK", city: "Cap Skirring", name: "Cap Skirring Airport", country: "Senegal", searchCountry: "Senegal Sénégal", aliases: "" },
@@ -1775,7 +1920,6 @@
             { code: "NKC", city: "Nouakchott", name: "Oumtounsy International", country: "Mauritania", searchCountry: "Mauritania Mauritanie", aliases: "" }
         ];
 
-        // Load ALL 7,000+ worldwide airports and map full country names + aliases
         async function loadAllWorldAirports() {
             try {
                 const response = await fetch('https://raw.githubusercontent.com/mwgg/Airports/master/airports.json');
@@ -1784,7 +1928,6 @@
                 const parsedList = [];
                 const seenCodes = new Set();
 
-                // Add custom entries first (e.g., Navi Mumbai NMI)
                 globalAirports.forEach(item => {
                     if (item.code === "NMI") {
                         parsedList.push(item);
@@ -1822,12 +1965,9 @@
                 if (parsedList.length > 1000) {
                     globalAirports = parsedList;
                 }
-            } catch (err) {
-                // Keeps fallback list silently if offline
-            }
+            } catch (err) {}
         }
 
-        // Levenshtein distance for spelling mistake tolerance (e.g., Moroco, Morrocco, Inda, Bombey)
         function editDistance(a, b) {
             if (Math.abs(a.length - b.length) > 2) return 99;
             const matrix = Array.from({ length: a.length + 1 }, (_, i) => [i]);
@@ -1857,6 +1997,26 @@
             return false;
         }
 
+        let toastTimer = null;
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toastBanner');
+            toast.innerText = message;
+            toast.classList.toggle('error', isError);
+            toast.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
+        }
+
+        function flagFieldError(inputEl, message) {
+            inputEl.classList.add('input-error');
+            inputEl.focus();
+            showToast(message, true);
+            inputEl.addEventListener('input', () => inputEl.classList.remove('input-error'), { once: true });
+            inputEl.addEventListener('change', () => inputEl.classList.remove('input-error'), { once: true });
+        }
+
         let activeService = 'Flight';
         let currentModalAutoFill = '';
 
@@ -1882,6 +2042,7 @@
 
         function applyLanguage(lang) {
             currentLang = lang;
+            localStorage.setItem('ctd_lang', lang);
             const t = i18n[lang];
             document.getElementById('btnLangEN').classList.toggle('active', lang === 'en');
             document.getElementById('btnLangFR').classList.toggle('active', lang === 'fr');
@@ -1957,11 +2118,29 @@
             document.getElementById('btnAddLeg').innerText = t.btnAddLeg;
         }
 
+        function renumberMultiLegs() {
+            const legs = document.querySelectorAll('#multi-legs-list .multi-leg');
+            legs.forEach((leg, idx) => {
+                leg.querySelector('.multi-leg-title').innerText = `Flight ${idx + 1}`;
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
+            // Apply saved language on page load
+            applyLanguage(currentLang);
             loadAllWorldAirports();
 
             const today = new Date().toISOString().split('T')[0];
             document.querySelectorAll('input[type="date"]').forEach(inp => inp.min = today);
+
+            // Swap Departure & Destination airports
+            document.getElementById('btnSwapAirports').addEventListener('click', () => {
+                const depInput = document.getElementById('flight_dep');
+                const desInput = document.getElementById('flight_des');
+                const temp = depInput.value;
+                depInput.value = desInput.value;
+                desInput.value = temp;
+            });
 
             document.getElementById('flight_dep_date').addEventListener('change', function() {
                 const retDate = document.getElementById('flight_ret_date');
@@ -2060,24 +2239,47 @@
                 document.querySelector('.center-column').scrollIntoView({ behavior: 'smooth' });
             });
 
-            setupAutocomplete(document.getElementById('flight_dep'), document.getElementById('sug-f-dep'));
-            setupAutocomplete(document.getElementById('flight_des'), document.getElementById('sug-f-des'));
+            // Setup autocomplete for Flights + Visa + Hotel + Holiday
+            setupAutocomplete(document.getElementById('flight_dep'), document.getElementById('sug-f-dep'), 'airport');
+            setupAutocomplete(document.getElementById('flight_des'), document.getElementById('sug-f-des'), 'airport');
+            setupAutocomplete(document.getElementById('visa_country'), document.getElementById('sug-v-country'), 'country');
+            setupAutocomplete(document.getElementById('hotel_city'), document.getElementById('sug-h-city'), 'city');
+            setupAutocomplete(document.getElementById('holiday_dest'), document.getElementById('sug-hol-dest'), 'city');
 
             document.querySelectorAll('#multi-legs-list .multi-leg').forEach(leg => {
                 const inputs = leg.querySelectorAll('input[type="text"]');
                 const lists = leg.querySelectorAll('.suggestions-list');
-                setupAutocomplete(inputs[0], lists[0]);
-                setupAutocomplete(inputs[1], lists[1]);
+                setupAutocomplete(inputs[0], lists[0], 'airport');
+                setupAutocomplete(inputs[1], lists[1], 'airport');
             });
 
-            let legCounter = 2;
+            // Multi-city leg date ordering
+            document.getElementById('multi-legs-list').addEventListener('change', (e) => {
+                if (e.target.classList.contains('m-date')) {
+                    const dates = Array.from(document.querySelectorAll('#multi-legs-list .m-date'));
+                    const idx = dates.indexOf(e.target);
+                    for (let i = idx + 1; i < dates.length; i++) {
+                        dates[i].min = e.target.value || today;
+                        if (dates[i].value && dates[i].value < e.target.value) {
+                            dates[i].value = '';
+                        }
+                    }
+                }
+            });
+
             document.getElementById('btnAddLeg').addEventListener('click', () => {
-                legCounter++;
                 const list = document.getElementById('multi-legs-list');
+                const currentCount = list.querySelectorAll('.multi-leg').length + 1;
+                const prevDates = list.querySelectorAll('.m-date');
+                const lastDate = prevDates.length > 0 && prevDates[prevDates.length - 1].value ? prevDates[prevDates.length - 1].value : today;
+
                 const div = document.createElement('div');
                 div.className = 'multi-leg';
                 div.innerHTML = `
-                    <div class="multi-leg-title">Flight ${legCounter}</div>
+                    <div class="multi-leg-header">
+                        <div class="multi-leg-title">Flight ${currentCount}</div>
+                        <button type="button" class="btn-remove-leg">✕ Remove</button>
+                    </div>
                     <div class="grid-2">
                         <div class="form-group">
                             <input type="text" class="m-from" placeholder="From (e.g. DSS)" autocomplete="off">
@@ -2088,18 +2290,30 @@
                             <div class="suggestions-list"></div>
                         </div>
                     </div>
-                    <input type="date" class="m-date" min="${today}">
+                    <input type="date" class="m-date" min="${lastDate}">
                 `;
                 list.appendChild(div);
-                setupAutocomplete(div.querySelector('.m-from'), div.querySelectorAll('.suggestions-list')[0]);
-                setupAutocomplete(div.querySelector('.m-to'), div.querySelectorAll('.suggestions-list')[1]);
+                div.querySelector('.btn-remove-leg').addEventListener('click', () => {
+                    div.remove();
+                    renumberMultiLegs();
+                });
+                setupAutocomplete(div.querySelector('.m-from'), div.querySelectorAll('.suggestions-list')[0], 'airport');
+                setupAutocomplete(div.querySelector('.m-to'), div.querySelectorAll('.suggestions-list')[1], 'airport');
             });
 
             document.getElementById('bookingForm').addEventListener('submit', (e) => {
                 e.preventDefault();
 
+                const t = i18n[currentLang];
                 const isFr = currentLang === 'fr';
-                const name = document.getElementById('full_name').value.trim();
+                const nameEl = document.getElementById('full_name');
+                const name = nameEl.value.trim();
+
+                if (!name) {
+                    flagFieldError(nameEl, t.errName);
+                    return;
+                }
+
                 const notes = document.getElementById('special_notes').value.trim();
                 let details = "";
 
@@ -2119,19 +2333,36 @@
 
                     if (tripType === 'Multi-City') {
                         const legs = document.querySelectorAll('.multi-leg');
+                        let validLegs = 0;
                         legs.forEach((leg, i) => {
                             const from = leg.querySelector('.m-from').value.trim();
                             const to = leg.querySelector('.m-to').value.trim();
                             const d = leg.querySelector('.m-date').value;
-                            if (from || to) {
-                                details += `✈️ *${isFr ? 'Vol' : 'Flight'} ${i + 1}:* ${from || 'N/A'} ➔ ${to || 'N/A'} (${d || 'Open'})\n`;
+                            if (from && to) {
+                                validLegs++;
+                                details += `✈️ *${isFr ? 'Vol' : 'Flight'} ${validLegs}:* ${from} ➔ ${to} (${d || 'Open'})\n`;
                             }
                         });
+                        if (validLegs === 0) {
+                            flagFieldError(legs[0].querySelector('.m-from'), t.errMulti);
+                            return;
+                        }
                     } else {
-                        const dep = document.getElementById('flight_dep').value.trim();
-                        const des = document.getElementById('flight_des').value.trim();
-                        const dDate = document.getElementById('flight_dep_date').value;
-                        const rDate = document.getElementById('flight_ret_date').value;
+                        const depEl = document.getElementById('flight_dep');
+                        const desEl = document.getElementById('flight_des');
+                        const dDateEl = document.getElementById('flight_dep_date');
+                        const rDateEl = document.getElementById('flight_ret_date');
+
+                        const dep = depEl.value.trim();
+                        const des = desEl.value.trim();
+                        const dDate = dDateEl.value;
+                        const rDate = rDateEl.value;
+
+                        if (!dep) { flagFieldError(depEl, t.errDep); return; }
+                        if (!des) { flagFieldError(desEl, t.errDes); return; }
+                        if (!dDate) { flagFieldError(dDateEl, t.errDepDate); return; }
+                        if (tripType === 'Round Trip' && !rDate) { flagFieldError(rDateEl, t.errRetDate); return; }
+
                         details += isFr
                             ? `🛫 *Départ:* ${dep}\n🛬 *Destination:* ${des}\n📅 *Date de départ:* ${dDate}\n`
                             : `🛫 *Departure:* ${dep}\n🛬 *Destination:* ${des}\n📅 *Departure Date:* ${dDate}\n`;
@@ -2144,39 +2375,54 @@
                         : `⚡ *Direct Flight Only:* ${isDirect}\n👥 *Passengers:* ${ad} Adult(s), ${ch} Child, ${inf} Infant\n`;
 
                 } else if (activeService === 'Visa') {
-                    const country = document.getElementById('visa_country').value.trim();
+                    const countryEl = document.getElementById('visa_country');
+                    const country = countryEl.value.trim();
+                    if (!country) { flagFieldError(countryEl, t.errVisa); return; }
+
                     const nat = document.getElementById('visa_nationality').value.trim();
                     const vType = document.getElementById('visa_category').value;
                     const date = document.getElementById('visa_travel_date').value;
                     const pax = document.getElementById('visa_applicants').value;
 
                     details += isFr
-                        ? `🛎️ *Service:* Assistance Visa\n🌍 *Pays du Visa:* ${country}\n🪪 *Nationalité:* ${nat}\n📑 *Type de Visa:* ${vType}\n`
-                        : `🛎️ *Service:* Visa Assistance\n🌍 *Visa Country:* ${country}\n🪪 *Applicant Nationality:* ${nat}\n📑 *Visa Type:* ${vType}\n`;
+                        ? `🛎️ *Service:* Assistance Visa\n🌍 *Pays du Visa:* ${country}\n🪪 *Nationalité:* ${nat || 'N/A'}\n📑 *Type de Visa:* ${vType}\n`
+                        : `🛎️ *Service:* Visa Assistance\n🌍 *Visa Country:* ${country}\n🪪 *Applicant Nationality:* ${nat || 'N/A'}\n📑 *Visa Type:* ${vType}\n`;
                     if (date) details += isFr ? `📅 *Date prévue:* ${date}\n` : `📅 *Intended Travel Date:* ${date}\n`;
                     details += isFr ? `👥 *Demandeurs:* ${pax} Personne(s)\n` : `👥 *Applicants:* ${pax} Person(s)\n`;
 
                 } else if (activeService === 'Hotel') {
-                    const city = document.getElementById('hotel_city').value.trim();
-                    const cin = document.getElementById('hotel_checkin').value;
-                    const cout = document.getElementById('hotel_checkout').value;
+                    const cityEl = document.getElementById('hotel_city');
+                    const cinEl = document.getElementById('hotel_checkin');
+                    const coutEl = document.getElementById('hotel_checkout');
+
+                    const city = cityEl.value.trim();
+                    const cin = cinEl.value;
+                    const cout = coutEl.value;
+
+                    if (!city) { flagFieldError(cityEl, t.errHotelCity); return; }
+                    if (!cin) { flagFieldError(cinEl, t.errHotelDates); return; }
+                    if (!cout) { flagFieldError(coutEl, t.errHotelDates); return; }
+
                     const nat = document.getElementById('hotel_nationality').value.trim();
                     const rooms = document.getElementById('hotel_guests_rooms').value.trim();
 
                     details += isFr
-                        ? `🛎️ *Service:* Réservation Hôtel\n🏨 *Ville:* ${city}\n📅 *Arrivée (Check-in):* ${cin}\n📅 *Départ (Check-out):* ${cout}\n🪪 *Nationalité:* ${nat}\n`
-                        : `🛎️ *Service:* Hotel Reservation\n🏨 *Destination/City:* ${city}\n📅 *Check-in Date:* ${cin}\n📅 *Check-out Date:* ${cout}\n🪪 *Guest Nationality:* ${nat}\n`;
+                        ? `🛎️ *Service:* Réservation Hôtel\n🏨 *Ville:* ${city}\n📅 *Arrivée (Check-in):* ${cin}\n📅 *Départ (Check-out):* ${cout}\n🪪 *Nationalité:* ${nat || 'N/A'}\n`
+                        : `🛎️ *Service:* Hotel Reservation\n🏨 *Destination/City:* ${city}\n📅 *Check-in Date:* ${cin}\n📅 *Check-out Date:* ${cout}\n🪪 *Guest Nationality:* ${nat || 'N/A'}\n`;
                     if (rooms) details += isFr ? `👥 *Voyageurs / Chambres:* ${rooms}\n` : `👥 *Guests / Rooms:* ${rooms}\n`;
 
                 } else if (activeService === 'Holiday') {
-                    const dest = document.getElementById('holiday_dest').value.trim();
+                    const destEl = document.getElementById('holiday_dest');
+                    const dest = destEl.value.trim();
+                    if (!dest) { flagFieldError(destEl, t.errHoliday); return; }
+
                     const dur = document.getElementById('holiday_duration').value.trim();
                     const date = document.getElementById('holiday_date').value;
                     const pax = document.getElementById('holiday_people').value.trim();
 
                     details += isFr
-                        ? `🛎️ *Service:* Forfait Séjour / Omra\n🏖️ *Destination:* ${dest}\n⏳ *Durée:* ${dur}\n`
-                        : `🛎️ *Service:* Holiday / Umrah Package\n🏖️ *Destination:* ${dest}\n⏳ *Duration:* ${dur}\n`;
+                        ? `🛎️ *Service:* Forfait Séjour / Omra\n🏖️ *Destination:* ${dest}\n⏳ *Durée:* ${dur || 'Flexible'}\n`
+                        : `🛎️ *Service:* Holiday / Umrah Package\n🏖️ *Destination:* ${dest}\n⏳ *Duration:* ${dur || 'Flexible'}\n`;
                     if (date) details += isFr ? `📅 *Date souhaitée:* ${date}\n` : `📅 *Preferred Travel Date:* ${date}\n`;
                     if (pax) details += isFr ? `👥 *Voyageurs:* ${pax}\n` : `👥 *Travelers:* ${pax}\n`;
                 }
@@ -2187,17 +2433,50 @@
 
                 const msg = `${header}\n===============================\n${clientLbl} ${name}\n${details}` + (notes ? `${notesLbl} ${notes}\n` : '') + `===============================`;
 
+                showToast(t.toastOpening, false);
                 window.open(`https://wa.me/221781840000?text=${encodeURIComponent(msg)}`, '_blank');
             });
         });
 
-        function setupAutocomplete(input, list) {
+        // Unified Autocomplete: mode = 'airport' | 'city' | 'country'
+        function setupAutocomplete(input, list, mode = 'airport') {
             if (!input || !list) return;
 
             input.addEventListener('input', () => {
                 const q = input.value.trim().toLowerCase();
                 list.innerHTML = '';
                 if (!q) { list.style.display = 'none'; return; }
+
+                if (mode === 'country') {
+                    const matchedCountries = [];
+                    const seenNames = new Set();
+                    for (const code in countryCodeMap) {
+                        const full = countryCodeMap[code];
+                        const primaryName = full.split(' ')[0] === "United" || full.split(' ')[0] === "Saudi" || full.split(' ')[0] === "Ivory" || full.split(' ')[0] === "South" || full.split(' ')[0] === "New" || full.split(' ')[0] === "Sri" || full.split(' ')[0] === "Costa" || full.split(' ')[0] === "Cape" || full.split(' ')[0] === "Burkina"
+                            ? full.split(' ').slice(0, 2).join(' ')
+                            : full.split(' ')[0];
+
+                        if (seenNames.has(primaryName)) continue;
+                        if (full.toLowerCase().includes(q) || isFuzzyWordMatch(q, full)) {
+                            seenNames.add(primaryName);
+                            matchedCountries.push({ name: primaryName, code: code });
+                        }
+                    }
+
+                    if (matchedCountries.length === 0) { list.style.display = 'none'; return; }
+                    matchedCountries.slice(0, 15).forEach(c => {
+                        const div = document.createElement('div');
+                        div.className = 'suggestion-item';
+                        div.innerHTML = `<strong>${c.name}</strong> <span class="suggestion-code">${c.code}</span>`;
+                        div.addEventListener('click', () => {
+                            input.value = c.name;
+                            list.style.display = 'none';
+                        });
+                        list.appendChild(div);
+                    });
+                    list.style.display = 'block';
+                    return;
+                }
 
                 const exactCodeMatches = [];
                 const cityOrAliasMatches = [];
@@ -2234,13 +2513,21 @@
                     }
                 }
 
-                // Combine all matches (allow up to 60 results so full country lists like Morocco / India show completely)
-                const allResults = [...exactCodeMatches, ...cityOrAliasMatches, ...countryMatches, ...fuzzyMatches];
+                let allResults = [...exactCodeMatches, ...cityOrAliasMatches, ...countryMatches, ...fuzzyMatches];
+
+                if (mode === 'city') {
+                    const seenCities = new Set();
+                    allResults = allResults.filter(item => {
+                        const key = `${item.city}-${item.country}`;
+                        if (seenCities.has(key)) return false;
+                        seenCities.add(key);
+                        return true;
+                    });
+                }
 
                 if (allResults.length === 0) { list.style.display = 'none'; return; }
 
-                // Show count header if multiple airports found (e.g., searching "Morocco" or "India")
-                if (allResults.length > 5) {
+                if (mode === 'airport' && allResults.length > 5) {
                     const hdr = document.createElement('div');
                     hdr.className = 'suggestion-header';
                     hdr.innerText = currentLang === 'fr'
@@ -2252,19 +2539,19 @@
                 allResults.slice(0, 80).forEach(item => {
                     const div = document.createElement('div');
                     div.className = 'suggestion-item';
-                    const subText = item.name && item.name !== item.city 
-                        ? `${item.name}${item.country ? ', ' + item.country : ''}` 
-                        : item.country;
+                    const subText = mode === 'city'
+                        ? item.country
+                        : (item.name && item.name !== item.city ? `${item.name}${item.country ? ', ' + item.country : ''}` : item.country);
 
                     div.innerHTML = `
                         <div>
                             <strong>${item.city}</strong>
                             <span class="suggestion-sub">${subText}</span>
                         </div>
-                        <span class="suggestion-code">${item.code}</span>
+                        <span class="suggestion-code">${mode === 'city' ? item.country.slice(0, 3).toUpperCase() : item.code}</span>
                     `;
                     div.addEventListener('click', () => {
-                        input.value = `${item.city} (${item.code})`;
+                        input.value = mode === 'city' ? `${item.city}, ${item.country}` : `${item.city} (${item.code})`;
                         list.style.display = 'none';
                     });
                     list.appendChild(div);
@@ -2272,19 +2559,20 @@
                 list.style.display = 'block';
             });
 
-            // Auto-convert exact 3-letter IATA code on blur/tab
-            input.addEventListener('blur', () => {
-                setTimeout(() => {
-                    const q = input.value.trim().toUpperCase();
-                    if (q.length === 3) {
-                        const exactMatch = globalAirports.find(item => item.code === q);
-                        if (exactMatch) {
-                            input.value = `${exactMatch.city} (${exactMatch.code})`;
+            if (mode === 'airport') {
+                input.addEventListener('blur', () => {
+                    setTimeout(() => {
+                        const q = input.value.trim().toUpperCase();
+                        if (q.length === 3) {
+                            const exactMatch = globalAirports.find(item => item.code === q);
+                            if (exactMatch) {
+                                input.value = `${exactMatch.city} (${exactMatch.code})`;
+                            }
                         }
-                    }
-                    list.style.display = 'none';
-                }, 180);
-            });
+                        list.style.display = 'none';
+                    }, 180);
+                });
+            }
 
             document.addEventListener('click', (e) => {
                 if (!input.contains(e.target) && !list.contains(e.target)) {
