@@ -4,21 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cinderella Travel Dakar — Flights, Visas, Umrah, Hotels & Tours</title>
-    <meta name="description" content="Official IATA Accredited Travel Agency in Plateau, Dakar. Book Flights, Visas, Umrah Packages, Hotels & Holidays with 24/7 WhatsApp Support.">
+    <meta name="description" content="Official IATA Accredited Travel Agency in Plateau, Dakar, Senegal. Book Flights, Visas, Umrah Packages, Hotels & Holidays on WhatsApp.">
     
-    <!-- WhatsApp & Social Media Link Preview Banner (Full HTTPS URLs) -->
+    <!-- WhatsApp & Social Media Link Preview with Cinderella Travel Logo -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Cinderella Travel Dakar">
     <meta property="og:url" content="https://cinderella-travel.onrender.com/">
-    <meta property="og:title" content="Cinderella Travel Dakar — Flights, Visas, Umrah & Hotels">
-    <meta property="og:description" content="Official IATA Accredited Travel Agency in Dakar, Senegal. Instant WhatsApp quotes for Flights, Visas, Umrah & Holidays.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1200&h=630&fit=crop&q=85">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Cinderella Travel Dakar — Flights, Visas, Umrah & Hotels">
-    <meta name="twitter:description" content="Official IATA Accredited Travel Agency in Dakar, Senegal. Book Flights, Visas, Umrah & Hotels on WhatsApp.">
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1200&h=630&fit=crop&q=85">
+    <meta property="og:title" content="Cinderella Travel Dakar — Official Travel & Tourism Agency">
+    <meta property="og:description" content="IATA Accredited Agency in Plateau, Dakar. Instant WhatsApp quotes for Flights, Visas, Umrah, Hotels & Holiday Packages.">
+    <meta property="og:image" content="https://cinderella-travel.onrender.com/static/logo.png">
+    <meta property="og:image:secure_url" content="https://cinderella-travel.onrender.com/static/logo.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:alt" content="Cinderella Travel Dakar Logo">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Cinderella Travel Dakar — Official Travel & Tourism Agency">
+    <meta name="twitter:description" content="IATA Accredited Agency in Plateau, Dakar. Book Flights, Visas, Umrah & Hotels on WhatsApp.">
+    <meta name="twitter:image" content="https://cinderella-travel.onrender.com/static/logo.png">
 
     <link rel="icon" href="/static/logo.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -30,11 +31,9 @@
             --accent-purple: #A855F7;
             --gold: #FBBF24;
             --whatsapp-green: #25D366;
-            --glass-bg: rgba(15, 23, 42, 0.52);
-            --glass-bg-light: rgba(255, 255, 255, 0.12);
-            --glass-border: rgba(255, 255, 255, 0.24);
+            --translucent-small: rgba(15, 23, 42, 0.58);
+            --translucent-border: rgba(255, 255, 255, 0.28);
             --text-light: #FFFFFF;
-            --text-soft: #E2E8F0;
         }
 
         * {
@@ -45,9 +44,10 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        /* African Renaissance Monument, Dakar Background - Clear & Unblocked */
         body {
-            background: linear-gradient(rgba(15, 23, 42, 0.35), rgba(15, 23, 42, 0.45)), 
-                        url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1920&auto=format&fit=crop&q=85') no-repeat center center fixed;
+            background: linear-gradient(rgba(15, 23, 42, 0.22), rgba(15, 23, 42, 0.35)), 
+                        url('https://images.unsplash.com/photo-1589553416260-f586c8f1514f?w=1920&auto=format&fit=crop&q=85') no-repeat center center fixed;
             background-size: cover;
             background-color: #0F172A;
             color: var(--text-light);
@@ -56,20 +56,20 @@
             flex-direction: column;
         }
 
-        /* Header - Keep Crisp White so Brand Logo Original Colors Shine */
+        /* Header - Original Cinderella Pink, Blue & Purple Brand Colors */
         header {
             background: rgba(255, 255, 255, 0.94);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 12px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.6);
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.18);
         }
 
         .brand-container {
@@ -162,21 +162,20 @@
             gap: 14px;
         }
 
-        /* Transparent Glass Header for Side Columns */
+        /* Small Title Pill - Translucent */
         .side-title {
             font-size: 12px;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
+            background: var(--translucent-small);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--translucent-border);
             padding: 8px 14px;
             border-radius: 12px;
             color: #FFFFFF;
-            text-shadow: 0 2px 6px rgba(0,0,0,0.6);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 6px rgba(0,0,0,0.8);
             display: flex;
             align-items: center;
             gap: 6px;
@@ -188,7 +187,7 @@
             border-radius: 16px;
             overflow: hidden;
             cursor: pointer;
-            border: 1px solid var(--glass-border);
+            border: 1px solid var(--translucent-border);
             box-shadow: 0 8px 22px rgba(15, 23, 42, 0.35);
             transition: transform 0.25s ease, box-shadow 0.25s ease;
             background: #000;
@@ -231,7 +230,7 @@
             font-size: 14.5px;
             font-weight: 800;
             letter-spacing: 0.5px;
-            text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+            text-shadow: 0 2px 6px rgba(0,0,0,0.85);
         }
 
         .dest-hint {
@@ -258,11 +257,11 @@
             min-width: 0;
         }
 
-        /* Umrah Banner - Semi-Transparent Glass */
+        /* Umrah Banner - Translucent Small Strip */
         .umrah-banner {
-            background: rgba(15, 23, 42, 0.68);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+            background: var(--translucent-small);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border: 1.5px solid #F59E0B;
             border-radius: 16px;
             padding: 12px 16px;
@@ -272,13 +271,13 @@
             align-items: center;
             color: #FFFFFF;
             cursor: pointer;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
             transition: transform 0.2s ease;
         }
 
         .umrah-banner:hover {
             transform: translateY(-2px);
-            background: rgba(15, 23, 42, 0.8);
+            background: rgba(15, 23, 42, 0.75);
         }
 
         .umrah-left {
@@ -305,13 +304,14 @@
             font-weight: 800;
             color: #FBBF24;
             line-height: 1.2;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+            text-shadow: 0 2px 5px rgba(0,0,0,0.85);
         }
 
         .umrah-text p {
             font-size: 11px;
-            color: #F1F5F9;
+            color: #FFFFFF;
             margin-top: 2px;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.85);
         }
 
         .umrah-cta {
@@ -324,24 +324,28 @@
             white-space: nowrap;
         }
 
-        /* Trending Routes - Transparent Frosted Glass */
+        /* BIG BOX 1: Trending Routes Outer Container -> 100% TRANSPARENT */
         .trending-routes {
-            background: var(--glass-bg);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-radius: 16px;
-            padding: 14px 16px;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 4px 0;
             margin-bottom: 16px;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         }
 
         .trending-title {
+            display: inline-block;
             font-size: 12px;
             font-weight: 800;
             text-transform: uppercase;
             color: #FFFFFF;
-            text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+            background: var(--translucent-small);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--translucent-border);
+            padding: 5px 12px;
+            border-radius: 10px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.85);
             margin-bottom: 10px;
             letter-spacing: 0.7px;
         }
@@ -352,19 +356,23 @@
             gap: 8px;
         }
 
+        /* SMALL BOXES: Route Pills -> TRANSLUCENT */
         .route-pill {
-            background: rgba(255, 255, 255, 0.14);
-            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: var(--translucent-small);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--translucent-border);
             border-radius: 12px;
             padding: 9px 12px;
             cursor: pointer;
             transition: all 0.2s;
             text-align: left;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
         }
 
         .route-pill:hover {
             border-color: #FF2A7A;
-            background: rgba(255, 255, 255, 0.24);
+            background: rgba(15, 23, 42, 0.78);
             transform: translateY(-2px);
         }
 
@@ -372,7 +380,7 @@
             font-size: 12.5px;
             font-weight: 800;
             color: #FFFFFF;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+            text-shadow: 0 1px 4px rgba(0,0,0,0.85);
         }
 
         .route-airline {
@@ -380,7 +388,7 @@
             color: #FBBF24;
             font-weight: 700;
             margin-top: 2px;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+            text-shadow: 0 1px 4px rgba(0,0,0,0.85);
         }
 
         .route-duration {
@@ -389,41 +397,42 @@
             margin-top: 1px;
         }
 
-        /* Service Tabs - Transparent Frosted Glass */
+        /* BIG BOX 2: Service Tabs Outer Wrapper -> 100% TRANSPARENT */
         .service-tabs {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
+            gap: 10px;
             margin-bottom: 16px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid var(--glass-border);
-            padding: 6px;
-            border-radius: 16px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-        }
-
-        .service-tab-btn {
             background: transparent;
             border: none;
-            padding: 10px 4px;
+            box-shadow: none;
+            padding: 0;
+        }
+
+        /* SMALL BOXES: Individual Service Tab Buttons -> TRANSLUCENT */
+        .service-tab-btn {
+            background: var(--translucent-small);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--translucent-border);
+            padding: 11px 4px;
             font-size: 12.5px;
             font-weight: 700;
-            border-radius: 12px;
+            border-radius: 14px;
             cursor: pointer;
-            color: #E2E8F0;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+            color: #FFFFFF;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.85);
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 4px;
             transition: all 0.2s ease;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.25);
         }
 
         .service-tab-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #FFFFFF;
+            background: rgba(15, 23, 42, 0.78);
+            border-color: #FF2A7A;
         }
 
         .service-tab-btn span.icon {
@@ -433,19 +442,19 @@
         .service-tab-btn.active {
             background: linear-gradient(135deg, #E91E63, #8B5CF6);
             color: #FFFFFF;
-            box-shadow: 0 4px 14px rgba(233, 30, 99, 0.45);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 6px 18px rgba(233, 30, 99, 0.5);
         }
 
-        /* Booking Card - Transparent Frosted Glass with Highlighted Words */
+        /* BIG BOX 3: Main Booking Card -> 100% TRANSPARENT (No background color, no blur) */
         .booking-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: transparent;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
             border-radius: 20px;
-            padding: 24px 22px;
-            box-shadow: 0 14px 40px rgba(0,0,0,0.3);
-            border: 1px solid var(--glass-border);
-            border-top: 4px solid #FF2A7A;
+            padding: 12px 6px;
+            box-shadow: none;
+            border: none;
         }
 
         .form-group {
@@ -453,31 +462,39 @@
             position: relative;
         }
 
+        /* Highlighted Label Pills so text stays crystal clear over the photo */
         label {
-            display: block;
+            display: inline-block;
             font-size: 12.5px;
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 6px;
             color: #FFFFFF;
             letter-spacing: 0.3px;
-            text-shadow: 0 1px 5px rgba(0,0,0,0.75);
+            background: rgba(15, 23, 42, 0.62);
+            padding: 3px 10px;
+            border-radius: 8px;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.9);
         }
 
+        /* SMALL BOXES: Input Fields -> TRANSLUCENT */
         input, select, textarea {
             width: 100%;
             padding: 12px 14px;
-            border: 1.5px solid rgba(255, 255, 255, 0.32);
+            border: 1.5px solid var(--translucent-border);
             border-radius: 12px;
             font-size: 13.5px;
             font-weight: 600;
             outline: none;
-            background: rgba(255, 255, 255, 0.16);
+            background: var(--translucent-small);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             color: #FFFFFF;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.22);
         }
 
         input::placeholder, textarea::placeholder {
-            color: rgba(255, 255, 255, 0.72);
+            color: rgba(255, 255, 255, 0.78);
             font-weight: 400;
         }
 
@@ -497,13 +514,13 @@
 
         input:focus, select:focus, textarea:focus {
             border-color: #38BDF8;
-            background: rgba(15, 23, 42, 0.65);
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+            background: rgba(15, 23, 42, 0.8);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.3);
         }
 
         .input-error {
             border-color: #FF4D4D !important;
-            background: rgba(220, 38, 38, 0.3) !important;
+            background: rgba(185, 28, 28, 0.65) !important;
         }
 
         .grid-2 {
@@ -524,8 +541,9 @@
             width: 44px;
             margin-bottom: 16px;
             border-radius: 12px;
-            border: 1.5px solid rgba(255, 255, 255, 0.35);
-            background: rgba(255, 255, 255, 0.18);
+            border: 1.5px solid var(--translucent-border);
+            background: var(--translucent-small);
+            backdrop-filter: blur(8px);
             color: #FFFFFF;
             font-size: 17px;
             font-weight: 800;
@@ -534,6 +552,7 @@
             align-items: center;
             justify-content: center;
             transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
         }
 
         .btn-swap:hover {
@@ -549,14 +568,30 @@
             gap: 10px;
         }
 
+        .pax-sub-label {
+            display: inline-block;
+            font-size: 11px;
+            color: #FBBF24;
+            font-weight: 700;
+            background: rgba(15, 23, 42, 0.62);
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-bottom: 4px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+        }
+
+        /* SMALL BOX: Flight Trip Selector -> TRANSLUCENT */
         .flight-type-selector {
             display: flex;
             gap: 6px;
             margin-bottom: 16px;
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: var(--translucent-small);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--translucent-border);
             padding: 4px;
-            border-radius: 10px;
+            border-radius: 12px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.22);
         }
 
         .flight-type-selector label {
@@ -566,6 +601,8 @@
             font-weight: 700;
             cursor: pointer;
             margin: 0;
+            padding: 0;
+            background: transparent;
             text-shadow: none;
         }
 
@@ -584,27 +621,34 @@
             background: linear-gradient(135deg, #E91E63, #8B5CF6);
             color: #FFFFFF;
             font-weight: 700;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
+        /* SMALL BOX: Checkbox Pill -> TRANSLUCENT */
         .checkbox-row {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
             margin-bottom: 14px;
             cursor: pointer;
+            background: var(--translucent-small);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--translucent-border);
+            padding: 7px 14px;
+            border-radius: 10px;
         }
 
         .checkbox-row input {
             width: auto;
             accent-color: #FF2A7A;
+            box-shadow: none;
         }
 
         .checkbox-row span {
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 700;
             color: #FFFFFF;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+            text-shadow: 0 1px 4px rgba(0,0,0,0.85);
         }
 
         .suggestions-list {
@@ -614,13 +658,13 @@
             right: 0;
             background: rgba(15, 23, 42, 0.96);
             backdrop-filter: blur(12px);
-            border: 1.5px solid rgba(255, 255, 255, 0.25);
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
             border-radius: 10px;
             margin-top: 4px;
             max-height: 280px;
             overflow-y: auto;
             z-index: 1000;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.45);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
             display: none;
         }
 
@@ -628,7 +672,7 @@
             padding: 6px 14px;
             font-size: 10.5px;
             font-weight: 700;
-            background: rgba(139, 92, 246, 0.35);
+            background: rgba(139, 92, 246, 0.4);
             color: #FBBF24;
             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
             position: sticky;
@@ -648,7 +692,7 @@
         }
 
         .suggestion-item:hover {
-            background-color: rgba(233, 30, 99, 0.3);
+            background-color: rgba(233, 30, 99, 0.35);
             color: #FFFFFF;
         }
 
@@ -670,9 +714,10 @@
             flex-shrink: 0;
         }
 
+        /* Multi-leg box transparent with dashed border */
         .multi-leg {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px dashed rgba(255, 255, 255, 0.35);
+            background: transparent;
+            border: 1.5px dashed rgba(255, 255, 255, 0.45);
             padding: 12px;
             border-radius: 12px;
             margin-bottom: 12px;
@@ -689,11 +734,14 @@
             font-size: 11px;
             font-weight: 800;
             color: #FBBF24;
+            background: rgba(15, 23, 42, 0.65);
+            padding: 2px 8px;
+            border-radius: 6px;
             text-transform: uppercase;
         }
 
         .btn-remove-leg {
-            background: rgba(239, 68, 68, 0.85);
+            background: rgba(239, 68, 68, 0.9);
             color: #FFFFFF;
             border: none;
             font-size: 10.5px;
@@ -704,8 +752,9 @@
         }
 
         .btn-add-leg {
-            background: rgba(255, 255, 255, 0.14);
-            border: 1.5px dashed rgba(255, 255, 255, 0.45);
+            background: var(--translucent-small);
+            backdrop-filter: blur(8px);
+            border: 1.5px dashed rgba(255, 255, 255, 0.5);
             color: #FFFFFF;
             font-size: 12px;
             font-weight: 700;
@@ -717,7 +766,7 @@
         }
 
         .btn-add-leg:hover {
-            background: rgba(255, 255, 255, 0.24);
+            background: rgba(15, 23, 42, 0.78);
         }
 
         .btn-submit {
@@ -730,22 +779,22 @@
             font-weight: 700;
             border-radius: 12px;
             cursor: pointer;
-            box-shadow: 0 6px 22px rgba(233, 30, 99, 0.45);
+            box-shadow: 0 6px 22px rgba(233, 30, 99, 0.5);
             transition: transform 0.2s;
         }
 
         .btn-submit:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(139, 92, 246, 0.55);
+            box-shadow: 0 8px 28px rgba(139, 92, 246, 0.6);
         }
 
-        /* Transparent Support Banner */
+        /* Small Support Strip -> Translucent */
         .support-banner {
             margin-top: 14px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
+            background: var(--translucent-small);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--translucent-border);
             border-radius: 12px;
             padding: 10px 14px;
             display: flex;
@@ -754,8 +803,7 @@
             font-size: 11.5px;
             color: #FFFFFF;
             font-weight: 600;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.18);
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
         }
 
         .support-banner span {
@@ -764,27 +812,29 @@
             gap: 6px;
         }
 
-        /* Transparent Airlines Section */
+        /* Airlines Section Outer Box -> 100% Transparent, Small Airline Pills -> Translucent */
         .airlines-section {
             margin-top: 14px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 16px;
-            padding: 14px 16px;
-            border: 1px solid var(--glass-border);
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 8px 4px;
             text-align: center;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
         }
 
         .airlines-title {
+            display: inline-block;
             font-size: 11px;
             font-weight: 800;
             text-transform: uppercase;
             color: #FBBF24;
+            background: var(--translucent-small);
+            backdrop-filter: blur(8px);
+            padding: 4px 12px;
+            border-radius: 8px;
             margin-bottom: 10px;
             letter-spacing: 0.7px;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+            text-shadow: 0 1px 4px rgba(0,0,0,0.85);
         }
 
         .airlines-badges {
@@ -795,8 +845,9 @@
         }
 
         .airline-pill {
-            background: rgba(255, 255, 255, 0.14);
-            border: 1px solid rgba(255, 255, 255, 0.28);
+            background: var(--translucent-small);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--translucent-border);
             color: #FFFFFF;
             font-size: 11px;
             font-weight: 700;
@@ -805,7 +856,7 @@
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
         }
 
         .airline-pill.iata {
@@ -814,7 +865,6 @@
             border-color: #38BDF8;
         }
 
-        /* Toast Confirmation Banner */
         .toast-banner {
             position: fixed;
             bottom: 90px;
@@ -998,12 +1048,12 @@
             font-size: 30px;
         }
 
-        /* Transparent Glass Footer */
+        /* Translucent Footer */
         footer {
-            background: rgba(15, 23, 42, 0.78);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-top: 1px solid var(--glass-border);
+            background: rgba(15, 23, 42, 0.72);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-top: 1px solid var(--translucent-border);
             padding: 28px 20px;
             text-align: center;
             font-size: 12.5px;
@@ -1358,15 +1408,15 @@
                             <label id="lbl-f-pax">Passengers</label>
                             <div class="grid-3">
                                 <div>
-                                    <span style="font-size: 11px; color: #F1F5F9; font-weight: 600;" id="lbl-adults">Adults (12y+)</span>
+                                    <span class="pax-sub-label" id="lbl-adults">Adults (12y+)</span>
                                     <input type="number" id="flight_adults" value="1" min="1" max="25">
                                 </div>
                                 <div>
-                                    <span style="font-size: 11px; color: #F1F5F9; font-weight: 600;" id="lbl-children">Children (2-11y)</span>
+                                    <span class="pax-sub-label" id="lbl-children">Children (2-11y)</span>
                                     <input type="number" id="flight_children" value="0" min="0" max="10">
                                 </div>
                                 <div>
-                                    <span style="font-size: 11px; color: #F1F5F9; font-weight: 600;" id="lbl-infants">Infants (&lt;2y)</span>
+                                    <span class="pax-sub-label" id="lbl-infants">Infants (&lt;2y)</span>
                                     <input type="number" id="flight_infants" value="0" min="0" max="5">
                                 </div>
                             </div>
