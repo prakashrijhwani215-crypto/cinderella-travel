@@ -3,29 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cinderella Travel Dakar - Flights, Visas, Umrah, Hotels & Tours</title>
+    <title>Cinderella Travel Dakar — Flights, Visas, Umrah, Hotels & Tours</title>
     <meta name="description" content="Official IATA Accredited Travel Agency in Plateau, Dakar. Book Flights, Visas, Umrah Packages, Hotels & Holidays with 24/7 WhatsApp Support.">
     
-    <!-- WhatsApp & Social Media Link Preview Card (Open Graph) -->
+    <!-- WhatsApp & Social Media Link Preview Banner (Full HTTPS URLs) -->
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Cinderella Travel Dakar">
+    <meta property="og:url" content="https://cinderella-travel.onrender.com/">
     <meta property="og:title" content="Cinderella Travel Dakar — Flights, Visas, Umrah & Hotels">
-    <meta property="og:description" content="IATA Accredited Travel Agency in Dakar, Senegal. Get instant quotes on WhatsApp for Flights, Visas, Umrah Packages & Hotels.">
-    <meta property="og:image" content="/static/logo.png">
+    <meta property="og:description" content="Official IATA Accredited Travel Agency in Dakar, Senegal. Instant WhatsApp quotes for Flights, Visas, Umrah & Holidays.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1200&h=630&fit=crop&q=85">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cinderella Travel Dakar — Flights, Visas, Umrah & Hotels">
+    <meta name="twitter:description" content="Official IATA Accredited Travel Agency in Dakar, Senegal. Book Flights, Visas, Umrah & Hotels on WhatsApp.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1200&h=630&fit=crop&q=85">
 
     <link rel="icon" href="/static/logo.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0F172A;
-            --accent-magenta: #E91E63;
-            --accent-cyan: #0284C7;
-            --accent-purple: #8B5CF6;
-            --gold: #D97706;
+            --accent-magenta: #FF2A7A;
+            --accent-cyan: #38BDF8;
+            --accent-purple: #A855F7;
+            --gold: #FBBF24;
             --whatsapp-green: #25D366;
-            --bg-body: #F8FAFC;
-            --card-bg: #FFFFFF;
-            --text-dark: #0F172A;
-            --text-muted: #64748B;
+            --glass-bg: rgba(15, 23, 42, 0.52);
+            --glass-bg-light: rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.24);
+            --text-light: #FFFFFF;
+            --text-soft: #E2E8F0;
         }
 
         * {
@@ -37,28 +46,30 @@
         }
 
         body {
-            background: linear-gradient(rgba(15, 23, 42, 0.50), rgba(15, 23, 42, 0.50)), 
+            background: linear-gradient(rgba(15, 23, 42, 0.35), rgba(15, 23, 42, 0.45)), 
                         url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1920&auto=format&fit=crop&q=85') no-repeat center center fixed;
             background-size: cover;
-            background-color: var(--bg-body);
-            color: var(--text-dark);
+            background-color: #0F172A;
+            color: var(--text-light);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* Header */
+        /* Header - Keep Crisp White so Brand Logo Original Colors Shine */
         header {
-            background: #FFFFFF;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             padding: 12px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #E2E8F0;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
 
         .brand-container {
@@ -82,7 +93,7 @@
         }
 
         .brand-title span {
-            background: linear-gradient(135deg, var(--accent-magenta), var(--accent-purple));
+            background: linear-gradient(135deg, #E91E63, #8B5CF6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -109,12 +120,12 @@
             font-size: 11px;
             font-weight: 800;
             cursor: pointer;
-            color: var(--text-muted);
+            color: #64748B;
             transition: all 0.2s;
         }
 
         .lang-btn.active {
-            background: linear-gradient(135deg, var(--accent-magenta), var(--accent-purple));
+            background: linear-gradient(135deg, #E91E63, #8B5CF6);
             color: #FFFFFF;
         }
 
@@ -122,7 +133,7 @@
             font-size: 13px;
             font-weight: 700;
             background: #F1F5F9;
-            color: var(--accent-purple);
+            color: #8B5CF6;
             padding: 7px 14px;
             border-radius: 20px;
             border: 1px solid #CBD5E1;
@@ -151,19 +162,24 @@
             gap: 14px;
         }
 
+        /* Transparent Glass Header for Side Columns */
         .side-title {
             font-size: 12px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            background: #FFFFFF;
-            padding: 6px 12px;
-            border-radius: 10px;
-            color: var(--accent-magenta);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            letter-spacing: 0.8px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            padding: 8px 14px;
+            border-radius: 12px;
+            color: #FFFFFF;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
         }
 
         .dest-card {
@@ -172,14 +188,16 @@
             border-radius: 16px;
             overflow: hidden;
             cursor: pointer;
-            box-shadow: 0 6px 18px rgba(15, 23, 42, 0.25);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 22px rgba(15, 23, 42, 0.35);
             transition: transform 0.25s ease, box-shadow 0.25s ease;
             background: #000;
         }
 
         .dest-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 24px rgba(139, 92, 246, 0.35);
+            box-shadow: 0 12px 28px rgba(233, 30, 99, 0.45);
+            border-color: var(--accent-magenta);
         }
 
         .dest-card img {
@@ -197,7 +215,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(15, 23, 42, 0.1) 0%, rgba(15, 23, 42, 0.88) 100%);
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.05) 0%, rgba(15, 23, 42, 0.85) 100%);
         }
 
         .dest-info {
@@ -213,13 +231,13 @@
             font-size: 14.5px;
             font-weight: 800;
             letter-spacing: 0.5px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+            text-shadow: 0 2px 6px rgba(0,0,0,0.8);
         }
 
         .dest-hint {
-            color: #E2E8F0;
+            color: #F1F5F9;
             font-size: 10px;
-            font-weight: 500;
+            font-weight: 600;
             display: flex;
             align-items: center;
             gap: 4px;
@@ -227,12 +245,12 @@
         }
 
         .dest-hint span.badge {
-            background: linear-gradient(135deg, var(--accent-magenta), var(--accent-purple));
+            background: linear-gradient(135deg, #E91E63, #8B5CF6);
             color: #fff;
-            padding: 1px 5px;
+            padding: 1px 6px;
             border-radius: 4px;
             font-size: 8.5px;
-            font-weight: 700;
+            font-weight: 800;
         }
 
         .center-column {
@@ -240,9 +258,11 @@
             min-width: 0;
         }
 
-        /* Umrah Banner */
+        /* Umrah Banner - Semi-Transparent Glass */
         .umrah-banner {
-            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            background: rgba(15, 23, 42, 0.68);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             border: 1.5px solid #F59E0B;
             border-radius: 16px;
             padding: 12px 16px;
@@ -252,12 +272,13 @@
             align-items: center;
             color: #FFFFFF;
             cursor: pointer;
-            box-shadow: 0 6px 18px rgba(217, 119, 6, 0.25);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
             transition: transform 0.2s ease;
         }
 
         .umrah-banner:hover {
             transform: translateY(-2px);
+            background: rgba(15, 23, 42, 0.8);
         }
 
         .umrah-left {
@@ -268,14 +289,14 @@
 
         .umrah-icon {
             font-size: 26px;
-            background: rgba(245, 158, 11, 0.15);
+            background: rgba(245, 158, 11, 0.22);
             width: 44px;
             height: 44px;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(245, 158, 11, 0.4);
+            border: 1px solid rgba(245, 158, 11, 0.5);
             flex-shrink: 0;
         }
 
@@ -284,11 +305,12 @@
             font-weight: 800;
             color: #FBBF24;
             line-height: 1.2;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
         }
 
         .umrah-text p {
             font-size: 11px;
-            color: #E2E8F0;
+            color: #F1F5F9;
             margin-top: 2px;
         }
 
@@ -302,25 +324,26 @@
             white-space: nowrap;
         }
 
-        /* Trending Routes */
+        /* Trending Routes - Transparent Frosted Glass */
         .trending-routes {
-            background: #FFFFFF;
+            background: var(--glass-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             border-radius: 16px;
             padding: 14px 16px;
             margin-bottom: 16px;
-            border: 1px solid #E2E8F0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         }
 
         .trending-title {
-            font-size: 11.5px;
+            font-size: 12px;
             font-weight: 800;
             text-transform: uppercase;
-            background: linear-gradient(135deg, var(--accent-magenta), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #FFFFFF;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.6);
             margin-bottom: 10px;
-            letter-spacing: 0.6px;
+            letter-spacing: 0.7px;
         }
 
         .routes-grid {
@@ -330,9 +353,9 @@
         }
 
         .route-pill {
-            background: #F8FAFC;
-            border: 1.5px solid #E2E8F0;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 12px;
             padding: 9px 12px;
             cursor: pointer;
             transition: all 0.2s;
@@ -340,51 +363,57 @@
         }
 
         .route-pill:hover {
-            border-color: var(--accent-purple);
-            background: #F5F3FF;
+            border-color: #FF2A7A;
+            background: rgba(255, 255, 255, 0.24);
             transform: translateY(-2px);
         }
 
         .route-header {
-            font-size: 12px;
+            font-size: 12.5px;
             font-weight: 800;
-            color: var(--primary);
+            color: #FFFFFF;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
         }
 
         .route-airline {
-            font-size: 10px;
-            color: var(--accent-magenta);
+            font-size: 10.5px;
+            color: #FBBF24;
             font-weight: 700;
             margin-top: 2px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
         }
 
         .route-duration {
             font-size: 10px;
-            color: var(--text-muted);
+            color: #E2E8F0;
             margin-top: 1px;
         }
 
-        /* Service Tabs */
+        /* Service Tabs - Transparent Frosted Glass */
         .service-tabs {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 8px;
             margin-bottom: 16px;
-            background: #E2E8F0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--glass-border);
             padding: 6px;
             border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         }
 
         .service-tab-btn {
             background: transparent;
             border: none;
             padding: 10px 4px;
-            font-size: 12px;
+            font-size: 12.5px;
             font-weight: 700;
             border-radius: 12px;
             cursor: pointer;
-            color: var(--text-muted);
+            color: #E2E8F0;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -392,23 +421,31 @@
             transition: all 0.2s ease;
         }
 
+        .service-tab-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #FFFFFF;
+        }
+
         .service-tab-btn span.icon {
             font-size: 19px;
         }
 
         .service-tab-btn.active {
-            background: linear-gradient(135deg, var(--primary), #1E293B);
+            background: linear-gradient(135deg, #E91E63, #8B5CF6);
             color: #FFFFFF;
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25);
-            border-bottom: 3px solid var(--accent-magenta);
+            box-shadow: 0 4px 14px rgba(233, 30, 99, 0.45);
         }
 
+        /* Booking Card - Transparent Frosted Glass with Highlighted Words */
         .booking-card {
-            background: var(--card-bg);
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-radius: 20px;
             padding: 24px 22px;
-            box-shadow: 0 12px 35px rgba(0,0,0,0.18);
-            border-top: 5px solid var(--accent-magenta);
+            box-shadow: 0 14px 40px rgba(0,0,0,0.3);
+            border: 1px solid var(--glass-border);
+            border-top: 4px solid #FF2A7A;
         }
 
         .form-group {
@@ -418,20 +455,39 @@
 
         label {
             display: block;
-            font-size: 12px;
+            font-size: 12.5px;
             font-weight: 700;
             margin-bottom: 6px;
-            color: var(--primary);
+            color: #FFFFFF;
+            letter-spacing: 0.3px;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.75);
         }
 
         input, select, textarea {
             width: 100%;
             padding: 12px 14px;
-            border: 1.5px solid #CBD5E1;
+            border: 1.5px solid rgba(255, 255, 255, 0.32);
             border-radius: 12px;
             font-size: 13.5px;
+            font-weight: 600;
             outline: none;
-            background: #F8FAFC;
+            background: rgba(255, 255, 255, 0.16);
+            color: #FFFFFF;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.72);
+            font-weight: 400;
+        }
+
+        select option {
+            background: #0F172A;
+            color: #FFFFFF;
+        }
+
+        input[type="date"] {
+            color-scheme: dark;
         }
 
         textarea {
@@ -440,14 +496,14 @@
         }
 
         input:focus, select:focus, textarea:focus {
-            border-color: var(--accent-purple);
-            background: #FFFFFF;
-            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+            border-color: #38BDF8;
+            background: rgba(15, 23, 42, 0.65);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
         }
 
         .input-error {
-            border-color: #EF4444 !important;
-            background: #FEF2F2 !important;
+            border-color: #FF4D4D !important;
+            background: rgba(220, 38, 38, 0.3) !important;
         }
 
         .grid-2 {
@@ -468,9 +524,9 @@
             width: 44px;
             margin-bottom: 16px;
             border-radius: 12px;
-            border: 1.5px solid #CBD5E1;
-            background: #EEF2F6;
-            color: var(--primary);
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.18);
+            color: #FFFFFF;
             font-size: 17px;
             font-weight: 800;
             cursor: pointer;
@@ -481,7 +537,7 @@
         }
 
         .btn-swap:hover {
-            background: linear-gradient(135deg, var(--accent-magenta), var(--accent-purple));
+            background: linear-gradient(135deg, #E91E63, #8B5CF6);
             color: #FFFFFF;
             border-color: transparent;
             transform: rotate(180deg);
@@ -497,7 +553,8 @@
             display: flex;
             gap: 6px;
             margin-bottom: 16px;
-            background: #EEF2F6;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             padding: 4px;
             border-radius: 10px;
         }
@@ -509,6 +566,7 @@
             font-weight: 700;
             cursor: pointer;
             margin: 0;
+            text-shadow: none;
         }
 
         .flight-type-selector input {
@@ -519,14 +577,14 @@
             display: block;
             padding: 8px 0;
             border-radius: 8px;
-            color: var(--text-muted);
+            color: #E2E8F0;
         }
 
         .flight-type-selector input:checked + span {
-            background: #FFFFFF;
-            color: var(--accent-magenta);
+            background: linear-gradient(135deg, #E91E63, #8B5CF6);
+            color: #FFFFFF;
             font-weight: 700;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
         }
 
         .checkbox-row {
@@ -539,13 +597,14 @@
 
         .checkbox-row input {
             width: auto;
-            accent-color: var(--accent-magenta);
+            accent-color: #FF2A7A;
         }
 
         .checkbox-row span {
             font-size: 12px;
             font-weight: 600;
-            color: var(--text-dark);
+            color: #FFFFFF;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.7);
         }
 
         .suggestions-list {
@@ -553,14 +612,15 @@
             top: 100%;
             left: 0;
             right: 0;
-            background: #FFFFFF;
-            border: 1.5px solid #CBD5E1;
+            background: rgba(15, 23, 42, 0.96);
+            backdrop-filter: blur(12px);
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
             border-radius: 10px;
             margin-top: 4px;
             max-height: 280px;
             overflow-y: auto;
             z-index: 1000;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.45);
             display: none;
         }
 
@@ -568,9 +628,9 @@
             padding: 6px 14px;
             font-size: 10.5px;
             font-weight: 700;
-            background: #F1F5F9;
-            color: var(--accent-purple);
-            border-bottom: 1px solid #E2E8F0;
+            background: rgba(139, 92, 246, 0.35);
+            color: #FBBF24;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
             position: sticky;
             top: 0;
         }
@@ -579,29 +639,31 @@
             padding: 10px 14px;
             font-size: 12px;
             cursor: pointer;
-            border-bottom: 1px solid #F1F5F9;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 8px;
+            color: #FFFFFF;
         }
 
         .suggestion-item:hover {
-            background-color: #F8FAFC;
-            color: var(--accent-magenta);
+            background-color: rgba(233, 30, 99, 0.3);
+            color: #FFFFFF;
         }
 
         .suggestion-sub {
             display: block;
             font-size: 10px;
-            color: var(--text-muted);
+            color: #CBD5E1;
             font-weight: 400;
         }
 
         .suggestion-code {
-            font-weight: 700;
-            background: #EEF2F6;
-            color: var(--primary);
+            font-weight: 800;
+            background: rgba(56, 189, 248, 0.2);
+            color: #38BDF8;
+            border: 1px solid rgba(56, 189, 248, 0.4);
             padding: 3px 7px;
             border-radius: 6px;
             font-size: 10.5px;
@@ -609,8 +671,8 @@
         }
 
         .multi-leg {
-            background: #F8FAFC;
-            border: 1px dashed #CBD5E1;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px dashed rgba(255, 255, 255, 0.35);
             padding: 12px;
             border-radius: 12px;
             margin-bottom: 12px;
@@ -625,14 +687,14 @@
 
         .multi-leg-title {
             font-size: 11px;
-            font-weight: 700;
-            color: var(--accent-magenta);
+            font-weight: 800;
+            color: #FBBF24;
             text-transform: uppercase;
         }
 
         .btn-remove-leg {
-            background: #FEE2E2;
-            color: #DC2626;
+            background: rgba(239, 68, 68, 0.85);
+            color: #FFFFFF;
             border: none;
             font-size: 10.5px;
             font-weight: 700;
@@ -642,9 +704,9 @@
         }
 
         .btn-add-leg {
-            background: #EEF2F6;
-            border: 1.5px dashed var(--primary);
-            color: var(--primary);
+            background: rgba(255, 255, 255, 0.14);
+            border: 1.5px dashed rgba(255, 255, 255, 0.45);
+            color: #FFFFFF;
             font-size: 12px;
             font-weight: 700;
             padding: 9px 12px;
@@ -654,42 +716,75 @@
             margin-bottom: 15px;
         }
 
+        .btn-add-leg:hover {
+            background: rgba(255, 255, 255, 0.24);
+        }
+
         .btn-submit {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, var(--accent-magenta), var(--accent-purple));
+            background: linear-gradient(135deg, #E91E63, #8B5CF6);
             border: none;
             color: #FFFFFF;
             font-size: 15px;
             font-weight: 700;
             border-radius: 12px;
             cursor: pointer;
-            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.35);
+            box-shadow: 0 6px 22px rgba(233, 30, 99, 0.45);
             transition: transform 0.2s;
         }
 
         .btn-submit:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 8px 28px rgba(139, 92, 246, 0.55);
         }
 
+        /* Transparent Support Banner */
+        .support-banner {
+            margin-top: 14px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 11.5px;
+            color: #FFFFFF;
+            font-weight: 600;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.18);
+        }
+
+        .support-banner span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Transparent Airlines Section */
         .airlines-section {
-            margin-top: 18px;
-            background: #FFFFFF;
+            margin-top: 14px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-radius: 16px;
             padding: 14px 16px;
-            border: 1px solid #E2E8F0;
+            border: 1px solid var(--glass-border);
             text-align: center;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
         }
 
         .airlines-title {
             font-size: 11px;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
-            color: var(--text-muted);
+            color: #FBBF24;
             margin-bottom: 10px;
-            letter-spacing: 0.6px;
+            letter-spacing: 0.7px;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.7);
         }
 
         .airlines-badges {
@@ -700,9 +795,9 @@
         }
 
         .airline-pill {
-            background: #F8FAFC;
-            border: 1px solid #CBD5E1;
-            color: var(--primary);
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            color: #FFFFFF;
             font-size: 11px;
             font-weight: 700;
             padding: 5px 11px;
@@ -710,33 +805,13 @@
             display: inline-flex;
             align-items: center;
             gap: 5px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
         }
 
         .airline-pill.iata {
-            background: #0F172A;
+            background: rgba(15, 23, 42, 0.85);
             color: #38BDF8;
-            border-color: #0F172A;
-        }
-
-        .support-banner {
-            margin-top: 14px;
-            background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%);
-            border: 1px solid #DDD6FE;
-            border-radius: 12px;
-            padding: 10px 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 11.5px;
-            color: #5B21B6;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-        }
-
-        .support-banner span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            border-color: #38BDF8;
         }
 
         /* Toast Confirmation Banner */
@@ -751,7 +826,7 @@
             border-radius: 30px;
             font-size: 12.5px;
             font-weight: 600;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.45);
             border: 1.5px solid var(--whatsapp-green);
             z-index: 2000;
             opacity: 0;
@@ -773,8 +848,8 @@
         .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(4px);
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(6px);
             display: none;
             align-items: center;
             justify-content: center;
@@ -788,10 +863,11 @@
             max-width: 520px;
             width: 100%;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.35);
             max-height: 90vh;
             display: flex;
             flex-direction: column;
+            color: #0F172A;
         }
 
         .modal-header-img {
@@ -848,7 +924,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary);
+            color: #0F172A;
         }
 
         .modal-body {
@@ -856,7 +932,7 @@
             overflow-y: auto;
             font-size: 13px;
             line-height: 1.5;
-            color: var(--text-dark);
+            color: #0F172A;
         }
 
         .modal-section {
@@ -867,7 +943,7 @@
             font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
-            color: var(--accent-magenta);
+            color: #E91E63;
             margin-bottom: 6px;
         }
 
@@ -879,7 +955,7 @@
 
         .spots-tags span {
             background: #EEF2F6;
-            color: var(--primary);
+            color: #0F172A;
             padding: 4px 10px;
             border-radius: 8px;
             font-size: 11px;
@@ -895,7 +971,7 @@
         .btn-modal-select {
             width: 100%;
             padding: 12px;
-            background: linear-gradient(135deg, var(--accent-magenta), var(--accent-purple));
+            background: linear-gradient(135deg, #E91E63, #8B5CF6);
             color: #FFFFFF;
             border: none;
             border-radius: 10px;
@@ -916,19 +992,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.55);
             z-index: 999;
             text-decoration: none;
             font-size: 30px;
         }
 
+        /* Transparent Glass Footer */
         footer {
-            background: #FFFFFF;
-            border-top: 1px solid #E2E8F0;
+            background: rgba(15, 23, 42, 0.78);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-top: 1px solid var(--glass-border);
             padding: 28px 20px;
             text-align: center;
             font-size: 12.5px;
-            color: var(--text-muted);
+            color: #E2E8F0;
             margin-top: auto;
             line-height: 1.6;
         }
@@ -936,12 +1015,12 @@
         .footer-brand {
             font-size: 16px;
             font-weight: 800;
-            color: var(--primary);
+            color: #FFFFFF;
             margin-bottom: 4px;
         }
 
         .footer-address {
-            color: var(--text-dark);
+            color: #FBBF24;
             font-weight: 600;
             margin: 8px auto 12px;
             max-width: 620px;
@@ -951,9 +1030,9 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: #EEF2F6;
-            color: var(--primary);
-            border: 1.5px solid #CBD5E1;
+            background: rgba(255, 255, 255, 0.14);
+            color: #FFFFFF;
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
             padding: 8px 16px;
             border-radius: 25px;
             font-size: 12px;
@@ -964,9 +1043,9 @@
         }
 
         .btn-google-maps:hover {
-            background: var(--accent-purple);
+            background: linear-gradient(135deg, #E91E63, #8B5CF6);
             color: #FFFFFF;
-            border-color: var(--accent-purple);
+            border-color: transparent;
         }
 
         .footer-contact {
@@ -978,7 +1057,7 @@
         }
 
         .footer-contact a {
-            color: var(--accent-magenta);
+            color: #38BDF8;
             text-decoration: none;
             font-weight: 700;
         }
@@ -1279,15 +1358,15 @@
                             <label id="lbl-f-pax">Passengers</label>
                             <div class="grid-3">
                                 <div>
-                                    <span style="font-size: 11px; color: var(--text-muted);" id="lbl-adults">Adults (12y+)</span>
+                                    <span style="font-size: 11px; color: #F1F5F9; font-weight: 600;" id="lbl-adults">Adults (12y+)</span>
                                     <input type="number" id="flight_adults" value="1" min="1" max="25">
                                 </div>
                                 <div>
-                                    <span style="font-size: 11px; color: var(--text-muted);" id="lbl-children">Children (2-11y)</span>
+                                    <span style="font-size: 11px; color: #F1F5F9; font-weight: 600;" id="lbl-children">Children (2-11y)</span>
                                     <input type="number" id="flight_children" value="0" min="0" max="10">
                                 </div>
                                 <div>
-                                    <span style="font-size: 11px; color: var(--text-muted);" id="lbl-infants">Infants (&lt;2y)</span>
+                                    <span style="font-size: 11px; color: #F1F5F9; font-weight: 600;" id="lbl-infants">Infants (&lt;2y)</span>
                                     <input type="number" id="flight_infants" value="0" min="0" max="5">
                                 </div>
                             </div>
@@ -1398,7 +1477,7 @@
             <!-- 24/7 Support Banner -->
             <div class="support-banner">
                 <span id="txt-support-1">🕒 24/7 Dedicated Customer Support & Assistance</span>
-                <span style="font-weight: 800;" id="txt-support-2">Always Here For You</span>
+                <span style="font-weight: 800; color: #FBBF24;" id="txt-support-2">Always Here For You</span>
             </div>
 
             <div class="airlines-section">
@@ -1476,7 +1555,7 @@
                 </div>
                 <div class="modal-section">
                     <div class="modal-section-title" id="modal-sec-3">🗓️ Travel Tips & Visa Info</div>
-                    <p id="modalTravelTips" style="color: var(--text-muted); font-size: 12px;"></p>
+                    <p id="modalTravelTips" style="color: #64748B; font-size: 12px;"></p>
                 </div>
             </div>
             <div class="modal-actions">
